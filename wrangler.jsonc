@@ -4,6 +4,10 @@
   "assets": {
     "directory": "./dist",
   },
+  "var": {
+    "PUBLIC_APP_NAME": "firstdate 2026 (test wrangler.jsonc)",
+    "PUBLIC_API_BASE_URL": "http://localhost:3000",
+  },
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
