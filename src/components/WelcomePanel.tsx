@@ -21,6 +21,14 @@ export function WelcomePanel({ appName }: WelcomePanelProps) {
       <button type="button" onClick={() => setIsReady((value) => !value)}>
         {isReady ? "Ready" : "Check React"}
       </button>
+      <button
+        type="button"
+        onClick={() => {
+          console.log(appName);
+        }}
+      >
+        Print ENV
+      </button>
     </section>
   );
 }
