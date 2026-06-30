@@ -4,6 +4,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { appConfig } from "@lib/env";
 ---
 
-<BaseLayout title={appConfig.appName}>
-  <WelcomePanel appName={appConfig.appName} client:load />
+<BaseLayout title={appConfig.appName} apiBaseUrl={appConfig.apiBaseUrl}>
+  <WelcomePanel
+    appName={appConfig.appName}
+    apiBaseUrl={appConfig.apiBaseUrl}
+    client:load
+  />
 </BaseLayout>

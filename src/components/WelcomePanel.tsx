@@ -2,9 +2,10 @@ import { useState } from "react";
 
 type WelcomePanelProps = {
   appName: string;
+  apiBaseUrl: string;
 };
 
-export function WelcomePanel({ appName }: WelcomePanelProps) {
+export function WelcomePanel({ appName, apiBaseUrl }: WelcomePanelProps) {
   const [isReady, setIsReady] = useState(false);
 
   return (
@@ -18,17 +19,19 @@ export function WelcomePanel({ appName }: WelcomePanelProps) {
         </p>
       </div>
 
-      <button type="button" onClick={() => setIsReady((value) => !value)}>
-        {isReady ? "Ready" : "Check React"}
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          console.log(appName);
-        }}
-      >
-        Print ENV
-      </button>
+      <div className="flex gap-2">
+        <button type="button" onClick={() => setIsReady((value) => !value)}>
+          {isReady ? "React's Ready" : "Check React"}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            alert(`API URL: ${apiBaseUrl}`);
+          }}
+        >
+          View API URL
+        </button>
+      </div>
     </section>
   );
 }
