@@ -4,6 +4,8 @@ set -euo pipefail
 prettier_bin="./node_modules/.bin/prettier"
 eslint_bin="./node_modules/.bin/eslint"
 
+echo "pre-commit: checking for Prettier and ESLint..."
+
 if [ ! -x "$prettier_bin" ]; then
   echo "pre-commit: missing Prettier. Run bun install first."
   exit 1
