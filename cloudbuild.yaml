@@ -1,43 +1,43 @@
 steps:
   # Install dependencies with Bun
-  - name: 'oven/bun:1'
+  - name: "oven/bun:1"
     entrypoint: bun
-    args: ['install', '--frozen-lockfile']
+    args: ["install", "--frozen-lockfile"]
 
   # Build the Astro site
-  - name: 'oven/bun:1'
+  - name: "oven/bun:1"
     entrypoint: bun
     env:
-      - 'BASE_URL=${_BUCKET_NAME}'
-    args: ['run', 'build']
+      - "BASE_URL=${_BASE_URL}"
+    args: ["run", "build"]
 
   # Sync build output to GCS bucket
-  - name: 'gcr.io/cloud-builders/gsutil'
+  - name: "gcr.io/cloud-builders/gsutil"
     args:
-      - '-m'
-      - 'rsync'
-      - '-r'
-      - '-d'
-      - './dist'
-      - 'gs://${_BUCKET_NAME}'
+      - "-m"
+      - "rsync"
+      - "-r"
+      - "-d"
+      - "./dist"
+      - "gs://${_BUCKET_NAME}"
 
   # Set long cache for hashed assets (Astro fingerprints these)
-  - name: 'gcr.io/cloud-builders/gsutil'
+  - name: "gcr.io/cloud-builders/gsutil"
     args:
-      - '-m'
-      - 'setmeta'
-      - '-h'
-      - 'Cache-Control:public, max-age=31536000, immutable'
-      - 'gs://${_BUCKET_NAME}/_astro/**'
+      - "-m"
+      - "setmeta"
+      - "-h"
+      - "Cache-Control:public, max-age=31536000, immutable"
+      - "gs://${_BUCKET_NAME}/_astro/**"
 
   # Short/no cache for HTML so updates show immediately
-  - name: 'gcr.io/cloud-builders/gsutil'
+  - name: "gcr.io/cloud-builders/gsutil"
     args:
-      - '-m'
-      - 'setmeta'
-      - '-h'
-      - 'Cache-Control:public, max-age=0, must-revalidate'
-      - 'gs://${_BUCKET_NAME}/**/*.html'
+      - "-m"
+      - "setmeta"
+      - "-h"
+      - "Cache-Control:public, max-age=0, must-revalidate"
+      - "gs://${_BUCKET_NAME}/**/*.html"
 
   # Invalidate CDN cache (skip this step if not using Cloud CDN)
   # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -53,6 +53,7 @@ steps:
 
 substitutions:
   _BUCKET_NAME: isd-fe-fd
+  _BASE_URL: isd-fe-fd
   # _URL_MAP_NAME: your-url-map-name
 
 options:
