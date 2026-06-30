@@ -7,8 +7,8 @@ steps:
   # Build the Astro site
   - name: 'oven/bun:1'
     entrypoint: bun
-    environment:
-      BASE_URL: "${_BUCKET_NAME}"
+    env:
+      - 'BASE_URL=${_BUCKET_NAME}'
     args: ['run', 'build']
 
   # Sync build output to GCS bucket
