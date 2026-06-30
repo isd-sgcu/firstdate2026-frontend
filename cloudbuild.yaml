@@ -38,20 +38,20 @@ steps:
       - 'gs://${_BUCKET_NAME}/**/*.html'
 
   # Invalidate CDN cache (skip this step if not using Cloud CDN)
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'compute'
-      - 'url-maps'
-      - 'invalidate-cdn-cache'
-      - '${_URL_MAP_NAME}'
-      - '--path'
-      - '/*'
-      - '--async'
+  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #   entrypoint: gcloud
+  #   args:
+  #     - 'compute'
+  #     - 'url-maps'
+  #     - 'invalidate-cdn-cache'
+  #     - '${_URL_MAP_NAME}'
+  #     - '--path'
+  #     - '/*'
+  #     - '--async'
 
 substitutions:
-  _BUCKET_NAME: your-bucket-name
-  _URL_MAP_NAME: your-url-map-name
+  _BUCKET_NAME: isd-fe-fd
+  # _URL_MAP_NAME: your-url-map-name
 
 options:
   logging: CLOUD_LOGGING_ONLY
