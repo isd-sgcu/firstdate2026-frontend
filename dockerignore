@@ -1,0 +1,22 @@
+# Dependencies – reinstalled inside the image
+node_modules
+
+# Build output – produced inside the image
+dist
+
+# Local env files – never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Dev / editor noise
+.git
+.gitignore
+.prettierignore
+.prettierrc
+eslint.config.js
+README.md
+
+# OS noise
+.DS_Store
+Thumbs.db
