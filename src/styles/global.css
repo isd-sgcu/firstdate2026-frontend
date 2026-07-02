@@ -46,19 +46,26 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-tertrary: #faefd1; /* FD/Beige */
+  --color-tertrary-foreground: var(--foreground);
+  --color-primary-alt: #aa1d40; /* สีแดง primary ใน figma */
+  --color-primary-alt-foreground: oklch(0.984 0.014 343.198);
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #fdfaf3; /* FD/White */
+  --foreground: #200b0f; /* FD/Black */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+
+  --primary: #e36a89; /* ใช้บ่อยสุด สีชมพูไม่มี label อันที่วางไว้ข้างสีแดง primary ใน figma */
+  --primary-foreground: oklch(0.984 0.014 343.198);
+  --secondary: #e2c368; /* จาก figma */
+  --secondary-foreground: var(--foreground);
+
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -72,7 +79,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.5rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
