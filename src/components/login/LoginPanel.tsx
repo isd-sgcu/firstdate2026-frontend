@@ -1,17 +1,29 @@
+import { Button } from "@components/ui/button";
+
 export function LoginPanel() {
   return (
-    <section>
-      <h1>Sample Login</h1>
-      <form method="post">
-        <label>
+    <section className="grid gap-6 rounded-lg bg-white p-6">
+      <h1 className="text-4xl font-bold">Sample Login</h1>
+      <form method="post" className="flex flex-col gap-4">
+        <label className="flex flex-col gap-1">
           Email
-          <input type="email" name="email" required />
+          <input
+            className="rounded-xl border px-3 py-2"
+            type="email"
+            name="email"
+            required
+          />
         </label>
-        <label>
+        <label className="flex flex-col gap-1">
           Password
-          <input type="password" name="password" required />
+          <input
+            type="password"
+            className="rounded-xl border px-3 py-2"
+            name="password"
+            required
+          />
         </label>
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </section>
   );
