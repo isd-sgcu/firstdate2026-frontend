@@ -1,5 +1,9 @@
 ---
 import "@styles/global.css";
+import kanigaRegular from "../assets/fonts/kaniga.ttf";
+import kanigaBold from "../assets/fonts/kaniga_bold.ttf";
+import kanigaItalic from "../assets/fonts/kaniga_italic.ttf";
+import kanigaBoldItalic from "../assets/fonts/kaniga_bold_italic.ttf";
 
 type Props = {
   title: string;
@@ -16,6 +20,36 @@ const { title, description = "firstdate 2026 frontend application" } =
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+
+    <!-- font preloading -->
+    <link
+      rel="preload"
+      href={kanigaRegular}
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={kanigaBold}
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={kanigaItalic}
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={kanigaBoldItalic}
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
   </head>
   <body class="min-h-screen bg-[#f7f4ee] text-[#172026] font-sans">
     <main class="grid min-h-screen place-items-center p-8">

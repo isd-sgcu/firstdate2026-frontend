@@ -1,6 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Checkbox } from "./ui/checkbox";
-import { Field } from "./ui/field";
+import { Field, FieldTitle, FieldDescription } from "./ui/field";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupChoiceCard } from "./ui/radio-group";
@@ -17,12 +17,12 @@ import {
 
 export function ComponentDemo() {
   return (
-    <section className="grid gap-4 rounded-lg bg-background p-6 border w-full">
+    <section className="grid gap-4 rounded-lg bg-background p-6 border w-full text-foreground">
       <h1 className="text-xl font-bold font-mono"> Components </h1>
 
       <h2 className="text-lg font-bold font-mono"> Button </h2>
       <Button type="button" size="rpkm">
-        sjdfhiugy
+        ตกลง
       </Button>
       <Button type="button" variant="secondary" size="rpkm">
         jhukj,
@@ -31,30 +31,31 @@ export function ComponentDemo() {
 
       <h2 className="text-lg font-bold font-mono"> Input </h2>
       <Field>
-        <Label> Default </Label>
-        <Input placeholder="正しくない" />
+        <Label className="font-bold"> Default </Label>
+        <Input placeholder="えま" />
       </Field>
 
       <Field>
-        <Label> Outlined </Label>
+        <Label className="font-bold"> Outlined </Label>
         <Input variant="outline" placeholder="แคนาดา" />
       </Field>
 
       <hr />
 
-      <Field>
-        <div className="flex gap-2">
+      <Label>
+        <div className="flex gap-2 items-center">
           <Checkbox />
-          <Label>Checkbox</Label>
+          Checkbox
         </div>
-      </Field>
+      </Label>
 
-      <Field>
-        <div className="flex gap-2">
+      <Label>
+        <div className="flex gap-2 items-center">
           <Switch />
-          <Label>Switch</Label>
+          Switch
         </div>
-      </Field>
+      </Label>
+
       <hr />
 
       <div className="space-y-2">
@@ -72,11 +73,16 @@ export function ComponentDemo() {
       </div>
       <RadioGroup defaultValue="plus" className="">
         <RadioGroupChoiceCard value="plus" className="w-12">
-          No indicator
+          ช้าง
         </RadioGroupChoiceCard>
 
-        <RadioGroupChoiceCard value="aljdfihiugs" showIndicator>
-          With indicator
+        <RadioGroupChoiceCard value="aljdfihiugs">
+          <FieldTitle>ม้า</FieldTitle>
+          <FieldDescription>description</FieldDescription>
+        </RadioGroupChoiceCard>
+
+        <RadioGroupChoiceCard value="ok" showIndicator>
+          showIndicator
         </RadioGroupChoiceCard>
       </RadioGroup>
       <hr />
