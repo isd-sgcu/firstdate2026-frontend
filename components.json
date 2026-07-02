@@ -13,10 +13,10 @@
   "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
-    "components": "@components/components",
-    "utils": "@components/lib/utils",
+    "components": "@components",
+    "utils": "@lib/utils",
     "ui": "@components/ui",
-    "lib": "@components/lib",
+    "lib": "@lib",
     "hooks": "@components/hooks"
   },
   "menuColor": "default",
