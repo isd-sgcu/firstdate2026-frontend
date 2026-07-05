@@ -12,7 +12,7 @@ const inputVariants = cva(
         default:
           "rounded-md bg-tertrary focus-visible:ring-secondary/50 placeholder:text-amber-900/30",
         outline:
-          "rounded-md border border-foreground bg-transparent file:bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80 placeholder:text-muted-foreground",
+          "rounded-md border bg-transparent file:bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80 placeholder:text-muted-foreground",
         shadcn:
           "rounded-lg border border-input bg-transparent file:bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80 placeholder:text-muted-foreground",
       },

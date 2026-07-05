@@ -35,7 +35,7 @@ const selectTriggerVariants = cva(
     variants: {
       variant: {
         outline:
-          "rounded-md border border-black bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80",
+          "rounded-md border bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80",
         shadcn:
           "rounded-lg border border-input bg-transparent dark:bg-input/30 dark:hover:bg-input/50",
       },

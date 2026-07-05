@@ -1,30 +1,64 @@
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@lib/utils";
+
+const switchVariants = cva(
+  "peer relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-disabled:cursor-not-allowed data-disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default:
+          "data-checked:bg-primary data-unchecked:bg-muted-foreground dark:data-unchecked:bg-muted",
+        secondary:
+          "data-checked:bg-secondary data-unchecked:bg-tertrary dark:data-unchecked:bg-input/80",
+      },
+      size: {
+        default: "h-[18.8px] w-[32px]",
+        sm: "h-[14px] w-[24px]",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+);
+
+const switchThumbVariants = cva(
+  "pointer-events-none block rounded-full bg-background ring-0 transition-transform dark:data-checked:bg-secondary dark:data-unchecked:bg-foreground shadow",
+  {
+    variants: {
+      size: {
+        default:
+          "size-4 data-checked:translate-x-[calc(100%-2px)] data-unchecked:translate-x-[0.4px]",
+        sm: "size-3 data-checked:translate-x-[calc(100%-2px)] data-unchecked:translate-x-0",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
 
 function Switch({
   className,
   size = "default",
+  variant = "default",
   ...props
-}: SwitchPrimitive.Root.Props & {
-  size?: "sm" | "default";
-}) {
+}: SwitchPrimitive.Root.Props & VariantProps<typeof switchVariants>) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
-      data-size={size}
-      className={cn(
-        "peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-[size=default]:h-[18.8px] data-[size=default]:w-[32px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:bg-secondary data-unchecked:bg-tertrary dark:data-unchecked:bg-input/80 data-disabled:cursor-not-allowed data-disabled:opacity-50",
-        className,
-      )}
+      className={cn(switchVariants({ variant, size, className }))}
       {...props}
     >
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
-        className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] dark:data-checked:bg-secondary group-data-[size=default]/switch:data-unchecked:translate-x-[0.4px] group-data-[size=sm]/switch:data-unchecked:translate-x-0 dark:data-unchecked:bg-foreground shadow"
+        className={switchThumbVariants({ size })}
       />
     </SwitchPrimitive.Root>
   );
 }
 
-export { Switch };
+export { Switch, switchVariants };

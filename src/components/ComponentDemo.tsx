@@ -3,7 +3,11 @@ import { Checkbox } from "./ui/checkbox";
 import { Field, FieldTitle, FieldDescription } from "./ui/field";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { RadioGroup, RadioGroupChoiceCard } from "./ui/radio-group";
+import {
+  RadioGroup,
+  RadioGroupChoiceCard,
+  RadioGroupItem,
+} from "./ui/radio-group";
 import { Switch } from "./ui/switch";
 import {
   Select,
@@ -21,12 +25,17 @@ export function ComponentDemo() {
       <h1 className="text-xl font-bold font-mono"> Components </h1>
 
       <h2 className="text-lg font-bold font-mono"> Button </h2>
-      <Button type="button" size="rpkm">
-        ตกลง
-      </Button>
-      <Button type="button" variant="secondary" size="rpkm">
-        jhukj,
-      </Button>
+      <div className="flex gap-3 items-center">
+        <Button type="button" size="xl">
+          ตกลง xl
+        </Button>
+        <Button type="button" variant="secondary" size="md">
+          Secondary md
+        </Button>
+        <Button type="button" variant="ghost">
+          Ghost
+        </Button>
+      </div>
       <hr />
 
       <h2 className="text-lg font-bold font-mono"> Input </h2>
@@ -36,7 +45,7 @@ export function ComponentDemo() {
       </Field>
 
       <Field>
-        <Label className="font-bold"> Outlined </Label>
+        <Label className="font-bold"> Outline </Label>
         <Input variant="outline" placeholder="แคนาดา" />
       </Field>
 
@@ -54,6 +63,19 @@ export function ComponentDemo() {
           <Switch />
           Switch
         </div>
+      </Label>
+
+      <Label>
+        <RadioGroup value="default">
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="default" id="r1" />
+            <Label htmlFor="r1">Default</Label>
+          </div>
+          <div className="flex items-center gap-3">
+            <RadioGroupItem value="comfortable" id="r2" />
+            <Label htmlFor="r2">Comfortable</Label>
+          </div>
+        </RadioGroup>
       </Label>
 
       <hr />
