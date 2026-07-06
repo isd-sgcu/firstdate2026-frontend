@@ -9,9 +9,9 @@ const switchVariants = cva(
     variants: {
       variant: {
         default:
-          "data-checked:bg-primary data-unchecked:bg-muted-foreground dark:data-unchecked:bg-muted",
+          "data-checked:bg-primary data-unchecked:bg-border dark:data-unchecked:bg-muted",
         secondary:
-          "data-checked:bg-secondary data-unchecked:bg-tertrary dark:data-unchecked:bg-input/80",
+          "data-checked:bg-secondary data-unchecked:bg-muted dark:data-unchecked:bg-input/80",
       },
       size: {
         default: "h-[18.8px] w-[32px]",

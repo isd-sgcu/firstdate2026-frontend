@@ -10,7 +10,7 @@ const inputVariants = cva(
     variants: {
       variant: {
         default:
-          "rounded-md bg-tertrary focus-visible:ring-secondary/50 placeholder:text-amber-900/30",
+          "rounded-md bg-muted focus-visible:ring-secondary/50 placeholder:text-amber-900/30",
         outline:
           "rounded-md border bg-transparent file:bg-transparent disabled:bg-input/50 dark:bg-input/30 dark:disabled:bg-input/80 placeholder:text-muted-foreground",
         shadcn:

@@ -9,6 +9,7 @@
   --font-heading: var(--font-sans);
   /* --font-sans: "Geist Variable", sans-serif; */
   --font-sans: var(--font-kaniga), "Geist Variable", sans-serif;
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -22,24 +23,31 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
+
   --color-ring: var(--ring);
   --color-input: var(--input);
-  --color-border: var(--border);
+  --color-border: var(--fd-grey);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
+
+  --color-muted-foreground: var(--fd-grey);
+  --color-muted: var(--fd-beige);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
+  --color-secondary: var(--fd-red);
+
+  /* it was actually named `secondary` in the design but we use it the most  */
+  --color-primary: var(--fd-pink);
+  --color-primary-foreground: var(--fd-white);
+
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
+
+  --color-foreground: var(--fd-black);
+  --color-background: var(--fd-white);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -48,47 +56,52 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --color-tertrary: #faefd1;
-  /* FD/Beige */
-  --color-tertrary-foreground: var(--foreground);
-  --color-primary-alt: #aa1d40;
+  --color-fd-red: var(--fd-red);
   /* สีแดง primary ใน figma */
-  --color-primary-alt-foreground: oklch(0.984 0.014 343.198);
+  --color-fd-lightpink: var(--fd-lightpink);
 
   --font-kaniga: "TEPC KaniGa";
 }
 
 :root {
-  --background: #fdfaf3;
-  /* FD/White */
-  --foreground: #200b0f;
-  /* FD/Black */
+  /* background */
+  --fd-white: #fdfaf3;
+
+  /* text */
+  --fd-black: #200b0f;
+
+  /* muted */
+  --fd-beige: #faefd1;
+  --fd-red: #aa1d40;
+  --fd-pink: #e36a89;
+  --fd-lightpink: #f8c4d1;
+  --fd-grey: #a1a1a1;
+
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --primary: #e36a89;
-  /* ใช้บ่อยสุด สีชมพูไม่มี label อันที่วางไว้ข้างสีแดง primary ใน figma */
   --primary-foreground: oklch(0.984 0.014 343.198);
-  --secondary: #e2c368;
-  /* จาก figma */
-  --secondary-foreground: var(--foreground);
-
   --muted: oklch(0.97 0 0);
-  --muted-foreground: #a1a1a1; /* FD/Grey */
+  /* FD/Grey */
+
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #a1a1a1; /* FD/Grey */
+
+  --radius: 0.5rem;
+
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.5rem;
+
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -97,40 +110,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
