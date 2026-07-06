@@ -1,13 +1,9 @@
 import { Button } from "@components/ui/button";
 import { Checkbox } from "./ui/checkbox";
-import { Field, FieldDescription, FieldTitle } from "./ui/field";
+import { Field } from "./ui/field";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import {
-  RadioGroup,
-  RadioGroupChoiceCard,
-  RadioGroupItem,
-} from "./ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -77,35 +73,6 @@ export function ComponentDemo() {
         </RadioGroup>
       </Label>
 
-      <hr />
-
-      <div className="space-y-2">
-        <h2 className="text-lg font-bold font-mono"> Radio Choice Card </h2>
-        <p className="text-sm">
-          pls see{" "}
-          <a
-            href="https://ui.shadcn.com/docs/components/radix/radio-group#choice-card"
-            className="text-primary underline"
-          >
-            {" "}
-            shadcn ui radio group{" "}
-          </a>
-        </p>
-      </div>
-      <RadioGroup defaultValue="plus" className="">
-        <RadioGroupChoiceCard value="plus" className="w-12">
-          ช้าง
-        </RadioGroupChoiceCard>
-
-        <RadioGroupChoiceCard value="aljdfihiugs">
-          <FieldTitle>ม้า</FieldTitle>
-          <FieldDescription>description</FieldDescription>
-        </RadioGroupChoiceCard>
-
-        <RadioGroupChoiceCard value="ok" showIndicator>
-          showIndicator
-        </RadioGroupChoiceCard>
-      </RadioGroup>
       <hr />
 
       <h2 className="text-lg font-bold font-mono"> Select </h2>
