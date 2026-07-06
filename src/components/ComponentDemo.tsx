@@ -1,6 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Checkbox } from "./ui/checkbox";
-import { Field, FieldTitle, FieldDescription } from "./ui/field";
+import { Field, FieldDescription, FieldTitle } from "./ui/field";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import {
@@ -8,7 +8,6 @@ import {
   RadioGroupChoiceCard,
   RadioGroupItem,
 } from "./ui/radio-group";
-import { Switch } from "./ui/switch";
 import {
   Select,
   SelectContent,
@@ -18,22 +17,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Switch } from "./ui/switch";
 
 export function ComponentDemo() {
   return (
-    <section className="grid gap-4 rounded-lg bg-background p-6 border w-full text-foreground">
+    <section className="grid gap-4 p-6 w-full">
       <h1 className="text-xl font-bold font-mono"> Components </h1>
 
       <h2 className="text-lg font-bold font-mono"> Button </h2>
       <div className="flex gap-3 items-center">
-        <Button type="button" size="xl">
-          ตกลง xl
-        </Button>
+        <Button type="button">Default</Button>
         <Button type="button" variant="secondary" size="md">
           Secondary md
         </Button>
-        <Button type="button" variant="ghost">
-          Ghost
+        <Button type="button" variant="ghost" size="sm">
+          Ghost sm
         </Button>
       </div>
       <hr />
@@ -66,7 +64,7 @@ export function ComponentDemo() {
       </Label>
 
       <Label>
-        <RadioGroup value="default">
+        <RadioGroup defaultValue="default">
           <div className="flex items-center gap-3">
             <RadioGroupItem value="default" id="r1" />
             <Label htmlFor="r1">Default</Label>
@@ -126,7 +124,6 @@ export function ComponentDemo() {
           </SelectGroup>
         </SelectContent>
       </Select>
-
       <hr />
     </section>
   );

@@ -1,0 +1,35 @@
+---
+import PanelFrameShape from "@components/PanelFrameShape.astro";
+
+export interface Props {
+  /** Inset the content within the safe area between the caps. */
+  safeInset?: boolean;
+}
+
+const { safeInset = false } = Astro.props;
+---
+
+<div class="relative w-full min-h-160 frameContainer">
+  <div class="absolute inset-0 z-[-2]">
+    <PanelFrameShape />
+  </div>
+  <div class="absolute inset-x-5 inset-y-6 z-[-1]">
+    <PanelFrameShape variant="stroke" strokeWidth={1} color="var(--primary)" />
+  </div>
+
+  {/* really depends on width */}
+  <div class:list={{ safeInset }}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .frameContainer {
+    container-type: inline-size;
+  }
+
+  .safeInset {
+    padding: 31.35cqw 1.25em;
+    /* cqm = fraction of parent conatiner width. */
+  }
+</style>
