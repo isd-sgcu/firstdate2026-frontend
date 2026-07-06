@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Switch } from "./ui/switch";
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 export function ComponentDemo() {
   return (
@@ -124,6 +125,18 @@ export function ComponentDemo() {
           </SelectGroup>
         </SelectContent>
       </Select>
+      <hr />
+
+      <h2 className="text-lg font-bold font-mono"> Tabs </h2>
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="reports">Reports</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+      </Tabs>
       <hr />
     </section>
   );
