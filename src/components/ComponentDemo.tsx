@@ -23,7 +23,9 @@ export function ComponentDemo() {
 
       <h2 className="text-lg font-bold font-mono"> Button </h2>
       <div className="flex gap-3 items-center">
-        <Button type="button">Default</Button>
+        <Button type="button" size="lg">
+          Default lg
+        </Button>
         <Button type="button" variant="secondary" size="md">
           Secondary md
         </Button>
@@ -36,12 +38,7 @@ export function ComponentDemo() {
       <h2 className="text-lg font-bold font-mono"> Input </h2>
       <Field>
         <Label className="font-bold"> Default </Label>
-        <Input placeholder="えま" />
-      </Field>
-
-      <Field>
-        <Label className="font-bold"> Outline </Label>
-        <Input variant="outline" placeholder="แคนาดา" />
+        <Input placeholder="แคนาดา" />
       </Field>
 
       <hr />

@@ -40,8 +40,8 @@
   --color-primary: var(--fd-pink);
   --color-primary-foreground: var(--fd-white);
 
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
+  --color-popover: var(--fd-white);
+  --color-popover-foreground: var(--fd-black);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
@@ -79,16 +79,8 @@
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-
-  --primary-foreground: oklch(0.984 0.014 343.198);
-  --muted: oklch(0.97 0 0);
-  /* FD/Grey */
-
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(94.699% 0.01548 86.4);
   --accent-foreground: oklch(0.205 0 0);
-
   --destructive: oklch(0.577 0.245 27.325);
 
   --radius: 0.5rem;
