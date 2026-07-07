@@ -1,13 +1,8 @@
 ---
 import PanelFrameShape from "@components/shared/PanelFrameShape.astro";
 import { Sidebar } from "@components/shared/Sidebar";
-
-export interface Props {
-  /** Inset the content within the safe area between the caps. */
-  safeInset?: boolean;
-}
-
-const { safeInset = false } = Astro.props;
+import Image from "astro/components/Image.astro";
+import logo from "../assets/images/logo_horizontal.png";
 ---
 
 <div class="relative w-full min-h-160 frameContainer">
@@ -22,13 +17,17 @@ const { safeInset = false } = Astro.props;
     />
   </div>
 
-  <div class="absolute left-4 right-4 navInset h-12 flex justify-between">
+  <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
+    <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
+  </div>
+
+  <div class="absolute left-4 right-4 top-[5cqw] h-12 flex justify-between">
     <button> back </button>
     <Sidebar client:load />
   </div>
 
   {/* really depends on width */}
-  <div class:list={{ safeInset }}>
+  <div class="py-[31.35cqw] px-[1.25em]">
     <slot />
   </div>
 </div>
@@ -36,14 +35,5 @@ const { safeInset = false } = Astro.props;
 <style>
   .frameContainer {
     container-type: inline-size;
-  }
-
-  .safeInset {
-    padding: 31.35cqw 1.25em;
-    /* cqm = fraction of parent conatiner width. */
-  }
-
-  .navInset {
-    top: 8cqw;
   }
 </style>
