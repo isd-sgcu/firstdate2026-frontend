@@ -1,6 +1,5 @@
 ---
 import "@styles/global.css";
-import FontPreload from "@components/shared/FontPreload.astro";
 
 type Props = {
   title: string;
@@ -17,9 +16,6 @@ const { title, description = "firstdate 2026 frontend application" } =
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-
-    <!-- font preloading -->
-    <FontPreload />
   </head>
   <body class="min-h-screen bg-primary text-foreground font-sans">
     <main

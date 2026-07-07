@@ -22,13 +22,20 @@ export function ComponentDemo() {
       <h1 className="text-xl font-bold font-mono"> Components </h1>
 
       <h2 className="text-lg font-bold font-mono"> Button </h2>
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-center flex-wrap">
         <Button type="button" size="lg">
           Default lg
         </Button>
         <Button type="button" variant="secondary" size="md">
           Secondary md
         </Button>
+        <Button type="button" variant="primaryOutline" size="md">
+          outline md
+        </Button>
+        <Button type="button" variant="red" size="md">
+          red md
+        </Button>
+
         <Button type="button" variant="ghost" size="sm">
           Ghost sm
         </Button>
