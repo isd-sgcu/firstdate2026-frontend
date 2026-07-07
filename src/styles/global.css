@@ -120,7 +120,7 @@
 
 @font-face {
   font-family: "TEPC KaniGa";
-  src: url("../assets/fonts/kaniga.ttf");
+  src: url("../assets/fonts/kaniga_regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   size-adjust: 140%;
@@ -128,7 +128,7 @@
 
 @font-face {
   font-family: "TEPC KaniGa";
-  src: url("../assets/fonts/kaniga_bold.ttf");
+  src: url("../assets/fonts/kaniga_bold.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
   size-adjust: 140%;
@@ -136,7 +136,7 @@
 
 @font-face {
   font-family: "TEPC KaniGa";
-  src: url("../assets/fonts/kaniga_bold_italic.ttf");
+  src: url("../assets/fonts/kaniga_bold_italic.woff2") format("woff2");
   font-weight: 700;
   font-display: swap;
   font-style: italic;
@@ -145,7 +145,7 @@
 
 @font-face {
   font-family: "TEPC KaniGa";
-  src: url("../assets/fonts/kaniga_italic.ttf");
+  src: url("../assets/fonts/kaniga_italic.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: italic;

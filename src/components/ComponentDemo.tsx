@@ -21,6 +21,20 @@ export function ComponentDemo() {
     <section className="grid gap-4 p-6 w-full">
       <h1 className="text-xl font-bold font-mono"> Components </h1>
 
+      <h2 className="text-lg font-bold font-mono"> Typography </h2>
+      <div className="grid gap-1">
+        <p className="font-sans font-normal">Regular - สวัสดีครับ Hello</p>
+        <p className="font-sans font-bold">Bold - สวัสดีครับ Hello</p>
+        <p className="font-sans italic">Italic - สวัสดีครับ Hello</p>
+        <p className="font-sans font-bold italic">
+          Bold Italic - สวัสดีครับ Hello
+        </p>
+        <p className="font-heading text-2xl font-bold">
+          Heading - สวัสดีครับ Hello
+        </p>
+      </div>
+      <hr />
+
       <h2 className="text-lg font-bold font-mono"> Button </h2>
       <div className="flex gap-3 items-center flex-wrap">
         <Button type="button" size="lg">
