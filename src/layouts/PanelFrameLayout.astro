@@ -1,0 +1,39 @@
+---
+import PanelFrameShape from "@components/shared/PanelFrameShape.astro";
+import { Sidebar } from "@components/shared/Sidebar";
+import Image from "astro/components/Image.astro";
+import logo from "../assets/images/logo_horizontal.png";
+---
+
+<div class="relative w-full min-h-160 frameContainer">
+  <div class="absolute inset-0 z-[-2]">
+    <PanelFrameShape />
+  </div>
+  <div class="absolute inset-x-5 inset-y-6 z-[-1]">
+    <PanelFrameShape
+      variant="stroke"
+      strokeWidth={1}
+      color="var(--color-primary)"
+    />
+  </div>
+
+  <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
+    <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
+  </div>
+
+  <div class="absolute left-4 right-4 top-[5cqw] h-12 flex justify-between">
+    <button> back </button>
+    <Sidebar client:load />
+  </div>
+
+  {/* really depends on width */}
+  <div class="py-[31.35cqw] px-[1.25em]">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .frameContainer {
+    container-type: inline-size;
+  }
+</style>
