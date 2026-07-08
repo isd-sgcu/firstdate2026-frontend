@@ -1,8 +1,10 @@
 ---
 import Calendar from "@components/home/information/calendar/Calendar";
 import Map from "@components/home/information/map/Map";
+import rpkm from "../../../assets/images/rpkm_logo.png";
 import { buttonVariants } from "@components/ui/button";
 import { cn } from "@lib/utils";
+import Image from "astro/components/Image.astro";
 ---
 
 <div class="w-full flex flex-col items-center gap-8">
@@ -13,7 +15,7 @@ import { cn } from "@lib/utils";
   <Map />
   <Calendar />
 
-  <!-- TODO: i18n -->
+  <!-- TODO: i18n + Show when users are participant not staff -->
   <a
     href="/emergency"
     class={cn(
@@ -23,4 +25,11 @@ import { cn } from "@lib/utils";
   >
     ติดต่อฉุกเฉิน
   </a>
+
+  <!-- TODO: Don't forget to change to RPKM Detail when it's time to deploy RPKM -->
+  <div class="w-full flex flex-col items-center gap-4">
+    <Image src={rpkm} alt="RPKM Logo" class="w-full max-w-25" />
+    <!-- TODO: i18n -->
+    <p class="text-2xl text-primary font-bold">Coming Soon</p>
+  </div>
 </div>
