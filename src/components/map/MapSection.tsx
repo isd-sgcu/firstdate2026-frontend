@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
-// import sectionData from "./section.json";
+import sectionData from "./section.json";
 
 type SectionTabProps = {
   value: string;
@@ -7,16 +7,61 @@ type SectionTabProps = {
   nameEn: string;
 };
 
-const sectionTabs: SectionTabProps[] = [
-  { value: "AtoD", nameTh: "ชมรม A-D", nameEn: "Club A-D" },
-  { value: "E", nameTh: "องค์กร E", nameEn: "Organization E" },
-  { value: "F", nameTh: "องค์กร F", nameEn: "Organization F" },
-];
+const sectionTabs: SectionTabProps[] = Object.entries(sectionData).map(
+  ([value, section]) => ({
+    value,
+    nameTh: section.tabNameTh,
+    nameEn: section.tabNameEn,
+  }),
+);
+
+const DataSectionAtoD = () => {
+  const data = sectionData.AtoD.data;
+
+  return (
+    <div className="grid grid-flow-col grid-rows-8 gap-x-1 gap-y-2">
+      {data.map((item) => (
+        <div
+          key={item.code}
+          className={`flex min-w-0 flex-col text-center text-secondary ${
+            item.code.startsWith("A")
+              ? "mr-3"
+              : item.code.startsWith("D")
+                ? "ml-3"
+                : ""
+          }`}
+        >
+          <span className="w-full py-4 font-bold bg-[#97E3EF]">
+            {item.code}
+          </span>
+          {/* TODO: i18n */}
+          <span className="text-sm break-all">{item.nameTh}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const DataSectionE = () => {
+  //   const data = sectionData.E.data;
+  return <div>Content Section E</div>;
+};
+
+const DataSectionF = () => {
+  //   const data = sectionData.F.data;
+  return <div>Content Section F</div>;
+};
+
+const sectionContent: Record<string, () => React.JSX.Element> = {
+  AtoD: DataSectionAtoD,
+  E: DataSectionE,
+  F: DataSectionF,
+};
 
 const MapSection = () => {
   return (
     <Tabs defaultValue={sectionTabs[0].value}>
-      <TabsList className="w-full">
+      <TabsList className="w-full mb-4">
         {sectionTabs.map((tab) => (
           // TODO: i18n
           <TabsTrigger key={tab.value} value={tab.value}>
@@ -24,9 +69,14 @@ const MapSection = () => {
           </TabsTrigger>
         ))}
       </TabsList>
-      <TabsContent value={sectionTabs[0].value}>Content A-D</TabsContent>
-      <TabsContent value={sectionTabs[1].value}>Content E</TabsContent>
-      <TabsContent value={sectionTabs[2].value}>Content F</TabsContent>
+      {sectionTabs.map((tab) => {
+        const Content = sectionContent[tab.value];
+        return (
+          <TabsContent key={tab.value} value={tab.value}>
+            <Content />
+          </TabsContent>
+        );
+      })}
     </Tabs>
   );
 };
