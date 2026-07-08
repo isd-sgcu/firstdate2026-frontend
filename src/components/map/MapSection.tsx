@@ -43,8 +43,34 @@ const DataSectionAtoD = () => {
 };
 
 const DataSectionE = () => {
-  //   const data = sectionData.E.data;
-  return <div>Content Section E</div>;
+  const data = sectionData.E.data;
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="grid grid-flow-col grid-rows-1 gap-x-1">
+        {data.map((item) => (
+          <span
+            key={item.code}
+            className="w-auto text-muted py-2 text-center font-bold bg-[#ff716d]"
+          >
+            {item.code}
+          </span>
+        ))}
+      </div>
+
+      {/* Name */}
+      <div className="flex flex-col gap-4">
+        {data.map((item) => {
+          return (
+            <div className="flex gap-4" key={item.code}>
+              <span className="font-bold text-secondary">{item.code}</span>
+              {/* TODO: i18n */}
+              <span className="text-secondary">{item.nameTh}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 const DataSectionF = () => {
