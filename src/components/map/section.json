@@ -1,0 +1,270 @@
+{
+  "AtoD": {
+    "tabNameTh": "ชมรม A-D",
+    "tabNameEn": "Clubs A-D",
+    "data": [
+      {
+        "code": "A1",
+        "nameTh": "ชมรมค่ายอาสาสมัครสโมสรนิสิต",
+        "nameEn": "Chulalongkorn University Student Volunteer Club"
+      },
+      {
+        "code": "A2",
+        "nameTh": "ชมรมอนุรักษ์สภาพแวดล้อม",
+        "nameEn": "Environmental Conservation Club"
+      },
+      {
+        "code": "A3",
+        "nameTh": "ชมรมจุฬาฯ สู่ชุมชน",
+        "nameEn": "Chula Community Club"
+      },
+      {
+        "code": "A4",
+        "nameTh": "ชมรมบริการโลหิต และสังคมสงเคราะห์ในพระบรมราชินูปถัมภ์",
+        "nameEn": "Blood Donation and Social Welfare Club"
+      },
+      {
+        "code": "A5",
+        "nameTh": "สตาฟ",
+        "nameEn": "Staff"
+      },
+      {
+        "code": "A6",
+        "nameTh": "สตาฟ",
+        "nameEn": "Staff"
+      },
+      {
+        "code": "A7",
+        "nameTh": "ชมรมอาสาพัฒนา เพื่อเด็กด้อยโอกาส",
+        "nameEn": "Volunteer Club for Underprivileged Children"
+      },
+      {
+        "code": "A8",
+        "nameTh": "ชมรมอาสาพัฒนาชาวไทยภูเขา",
+        "nameEn": "Hill Tribe Development Volunteer Club"
+      },
+      {
+        "code": "B1",
+        "nameTh": "ชมรมพุทธศาสตร์และประเพณี",
+        "nameEn": "Buddhist Studies and Traditions Club"
+      },
+      {
+        "code": "B2",
+        "nameTh": "ชมรมคริสเตียน",
+        "nameEn": "Christian Club"
+      },
+      {
+        "code": "B3",
+        "nameTh": "ชมรมศาสนศึกษา แผนกอิสลาม",
+        "nameEn": "Islamic Club"
+      },
+      {
+        "code": "B4",
+        "nameTh": "ชมรมทูตเยาวชนนานาชาติและสันติภาพสากล (iGen)",
+        "nameEn": "International Youth Ambassadors and Global Peace Club (iGen)"
+      },
+      {
+        "code": "B5",
+        "nameTh": "ชมรมนักลงทุนเน้นคุณค่า",
+        "nameEn": "Value Investors Club"
+      },
+      {
+        "code": "B6",
+        "nameTh": "ชมรมพัฒนาความฉลาดทางอารมณ์",
+        "nameEn": "Emotional Intelligence Development Club"
+      },
+      {
+        "code": "B7",
+        "nameTh": "ชมรมโรตาแรคท์",
+        "nameEn": "Rotaract Club"
+      },
+      {
+        "code": "B8",
+        "nameTh": "ชมรมไอเซค",
+        "nameEn": "AIESEC Club"
+      },
+      {
+        "code": "C1",
+        "nameTh": "ชมรมภาพยนตร์",
+        "nameEn": "Film Club"
+      },
+      {
+        "code": "C2",
+        "nameTh": "ชมรมศิลปะการถ่ายภาพ",
+        "nameEn": "Photography Club"
+      },
+      {
+        "code": "C3",
+        "nameTh": "ชมรมศิลปวัฒนธรรมล้านนา",
+        "nameEn": "Lanna Arts and Culture Club"
+      },
+      {
+        "code": "C4",
+        "nameTh": "ชมรมศิลปวัฒนธรรมอีสาน",
+        "nameEn": "Isan Arts and Culture Club"
+      },
+      {
+        "code": "C5",
+        "nameTh": "ชมรมศิลปะป้องกันตัวและอาวุธไทย",
+        "nameEn": "Thai Martial Arts and Weapons Club"
+      },
+      {
+        "code": "C6",
+        "nameTh": "ชมรมไอคิโด",
+        "nameEn": "Aikido Club"
+      },
+      {
+        "code": "C7",
+        "nameTh": "ชมรมเทเบิลเทนนิส",
+        "nameEn": "Table Tennis Club"
+      },
+      {
+        "code": "C8",
+        "nameTh": "ชมรมแบดมินตัน",
+        "nameEn": "Badminton Club"
+      },
+      {
+        "code": "D1",
+        "nameTh": "ชมรมกีฬายิงปืน",
+        "nameEn": "Shooting Club"
+      },
+      {
+        "code": "D2",
+        "nameTh": "ชมรมฮอกกี้",
+        "nameEn": "Chula Hockey Club"
+      },
+      {
+        "code": "D3",
+        "nameTh": "ชมรมยูโด",
+        "nameEn": "Chula Judo Club"
+      },
+      {
+        "code": "D4",
+        "nameTh": "ชมรมดาบไทย",
+        "nameEn": "Thai Sword Club"
+      },
+      {
+        "code": "D5",
+        "nameTh": "ชมรมกีฬาอีสปอร์ต",
+        "nameEn": "Esports Club"
+      },
+      {
+        "code": "D6",
+        "nameTh": "ชมรมเรือใบและเรือพาย",
+        "nameEn": "Sailing and Rowing Club"
+      },
+      {
+        "code": "D7",
+        "nameTh": "ชมรมลีลาศ",
+        "nameEn": "Ballroom Dancing Club"
+      },
+      {
+        "code": "D8",
+        "nameTh": "ชมรมกอล์ฟ",
+        "nameEn": "Golf Club"
+      }
+    ]
+  },
+  "E": {
+    "tabNameTh": "องค์กร E",
+    "tabNameEn": "Organizations E",
+    "data": [
+      {
+        "code": "E1",
+        "nameTh": "อบจ.69",
+        "nameEn": "SGCU 69"
+      },
+      {
+        "code": "E2",
+        "nameTh": "ฝ่ายสวัสดิการและสุขภาวะนิสิต อบจ.",
+        "nameEn": "Student Welfare and Wellness Division"
+      },
+      {
+        "code": "E3",
+        "nameTh": "Chula Zero Waste",
+        "nameEn": "Chula Zero Waste"
+      },
+      {
+        "code": "E4",
+        "nameTh": "Thinc.",
+        "nameEn": "Thinc"
+      },
+      {
+        "code": "E5",
+        "nameTh": "ฝ่ายส่งเสริมสุขภาวะนิสิต",
+        "nameEn": "Chula Student Wellness"
+      },
+      {
+        "code": "E6",
+        "nameTh": "ชมรมสื่อสารสังสรรค์เพื่อสังคม",
+        "nameEn": "Communication for Society Club"
+      },
+      {
+        "code": "E7",
+        "nameTh": "สาราณียกร",
+        "nameEn": "Saraniyakorn"
+      },
+      {
+        "code": "E8",
+        "nameTh": "ชมรมบาสเกตบอลอินทาเนีย",
+        "nameEn": "Intania Basketball Club"
+      },
+      {
+        "code": "E9",
+        "nameTh": "ชมรมที่ปรึกษาธุรกิจ จุฬาลงกรณ์มหาวิทยาลัย",
+        "nameEn": "Chula Consulting Club (CUCC)"
+      }
+    ]
+  },
+  "F": {
+    "tabNameTh": "องค์กร F",
+    "tabNameEn": "Organizations F",
+    "data": [
+      {
+        "code": "F1",
+        "nameTh": "Chula Initiative for Public and International Affairs",
+        "nameEn": "Chula Initiative for Public and International Affairs"
+      },
+      {
+        "code": "F2",
+        "nameTh": "ชมรม CU Gavel",
+        "nameEn": "CU Gavel Club"
+      },
+      {
+        "code": "F3",
+        "nameTh": "Chula WISE Mentoring",
+        "nameEn": "Chula WISE Mentoring"
+      },
+      {
+        "code": "F4",
+        "nameTh": "Coach by CBAF",
+        "nameEn": "Coach by CBAF (CBC)"
+      },
+      {
+        "code": "F5",
+        "nameTh": "Fem Samyan",
+        "nameEn": "Fem Samyan"
+      },
+      {
+        "code": "F6",
+        "nameTh": "ชมรมนวัตกรรมเปิดอินทาเนีย",
+        "nameEn": "Intania Open Innovation Club"
+      },
+      {
+        "code": "F7",
+        "nameTh": "CU Startup Thailand League",
+        "nameEn": "CU Startup Thailand League"
+      },
+      {
+        "code": "F8",
+        "nameTh": "AHR Chula",
+        "nameEn": "AHR Chula"
+      },
+      {
+        "code": "F9",
+        "nameTh": "ชมรมจำลองสหประชาชาติ จุฬาลงกรณ์มหาวิทยาลัย",
+        "nameEn": "Chula Model United Nations"
+      }
+    ]
+  }
+}
