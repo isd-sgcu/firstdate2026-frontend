@@ -1,5 +1,36 @@
 import { cn } from "@lib/utils";
-import { Flower2 } from "lucide-react";
+import { PinIcon } from "lucide-react";
+import activities from "./activities.json";
+
+const MONTHS: Record<number, string> = {
+  1: "January",
+  2: "February",
+  3: "March",
+  4: "April",
+  5: "May",
+  6: "June",
+  7: "July",
+  8: "August",
+  9: "September",
+  10: "October",
+  11: "November",
+  12: "December",
+};
+
+const activityImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*",
+  { eager: true },
+);
+
+function getActivityImageUrl(filename: string) {
+  const entry = Object.entries(activityImages).find(([path]) =>
+    path.endsWith(`/${filename}`),
+  );
+  return entry?.[1].default.src;
+}
+
+const activityByDate = new Map(activities.map((a) => [a.date, a.image]));
+const pad = (n: number) => String(n).padStart(2, "0");
 
 const getThaiToday = () => {
   const parts = new Intl.DateTimeFormat("en", {
@@ -37,38 +68,73 @@ const Calendar = () => {
   }
 
   return (
-    <table className="w-full table-fixed border-collapse">
-      <tbody>
-        {weeks.map((week, weekIndex) => (
-          <tr key={weekIndex}>
-            {week.map((day, dayIndex) => (
-              <td
-                key={dayIndex}
-                className={cn(
-                  "h-16 border border-primary p-0 text-center",
-                  weekIndex === 0 && "border-t-0",
-                  weekIndex === weeks.length - 1 && "border-b-0",
-                  dayIndex === 0 && "border-l-0",
-                  dayIndex === week.length - 1 && "border-r-0",
-                )}
-              >
-                {day === today ? (
-                  <div className="flex h-full w-full flex-col items-end justify-center bg-primary pr-1 text-muted">
-                    {day}
-                    <Flower2 className="size-6" />
-                  </div>
-                ) : (
-                  <div className="flex h-full w-full flex-col items-end justify-center pr-1 text-primary">
-                    {day}
-                    <Flower2 className="size-6 opacity-0" />
-                  </div>
-                )}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      {/* Header */}
+      <div className="flex justify-between">
+        <h1 className="text-3xl text-primary whitespace-pre-line">{year}</h1>
+        <h1 className="text-3xl text-primary whitespace-pre-line">
+          {MONTHS[month]}
+        </h1>
+      </div>
+
+      <table className="w-full table-fixed border-collapse">
+        <tbody>
+          {weeks.map((week, weekIndex) => (
+            <tr key={weekIndex}>
+              {week.map((day, dayIndex) => (
+                <td
+                  key={dayIndex}
+                  className={cn(
+                    "h-16 border border-primary p-0 text-center",
+                    weekIndex === 0 && "border-t-0",
+                    weekIndex === weeks.length - 1 && "border-b-0",
+                    dayIndex === 0 && "border-l-0",
+                    dayIndex === week.length - 1 && "border-r-0",
+                  )}
+                >
+                  {day &&
+                    (() => {
+                      const dateStr = `${year}-${pad(month)}-${pad(day)}`;
+                      const filename = activityByDate.get(dateStr);
+                      const imageUrl = filename
+                        ? getActivityImageUrl(filename)
+                        : undefined;
+
+                      return (
+                        <div
+                          className={cn(
+                            "flex h-full w-full flex-col items-end justify-center pr-1",
+                            day === today
+                              ? "bg-primary text-muted"
+                              : "text-primary",
+                          )}
+                        >
+                          {day}
+                          {imageUrl ? (
+                            <img
+                              src={imageUrl}
+                              alt={filename}
+                              className="size-[clamp(1.75rem,8vw,2.5rem)] object-contain"
+                            />
+                          ) : day == today ? (
+                            <img
+                              src="src/assets/images/flower_1.png"
+                              alt="Today"
+                              className="size-[clamp(1.4rem,6.4vw,2rem)] rotate-45 object-contain"
+                            />
+                          ) : (
+                            <PinIcon className="size-[clamp(1.75rem,8vw,2.5rem)] opacity-0" />
+                          )}
+                        </div>
+                      );
+                    })()}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
