@@ -1,4 +1,6 @@
 import locatorsData from "./locators.json";
+import string1 from "../../assets/images/string_1.png";
+import key7 from "../../assets/images/key_7.png";
 
 const MapAndLocator = () => {
   const locatorRows = Math.ceil(locatorsData.length / 2);
@@ -26,13 +28,10 @@ const MapAndLocator = () => {
         {/* String + Key */}
         <div className="absolute left-0 bottom-0 translate-y-4/5 w-[45vw] sm:w-50 -translate-x-4/10">
           <img
-            src="src/assets/images/string_1.png"
+            src={string1.src}
             className="absolute bottom-0 scale-110 w-full h-auto translate-y-3/4 -rotate-30 translate-x-9/10"
           />
-          <img
-            src="src/assets/images/key_7.png"
-            className="w-full h-auto rotate-240"
-          />
+          <img src={key7.src} className="w-full h-auto rotate-240" />
         </div>
       </div>
     </div>
