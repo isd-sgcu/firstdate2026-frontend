@@ -1,9 +1,11 @@
 ---
-import LandingPanel from "@components/landing/LandingPanel.astro";
+import { SamplePanel } from "@components/SamplePanel";
+import { WelcomePanel } from "@components/WelcomePanel";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { appConfig } from "@lib/env";
 ---
 
 <BaseLayout title={appConfig.appName}>
-  <LandingPanel />
+  <WelcomePanel appName={appConfig.appName} client:load />
+  <SamplePanel client:load />
 </BaseLayout>

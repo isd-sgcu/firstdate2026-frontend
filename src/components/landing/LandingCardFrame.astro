@@ -4,18 +4,12 @@ import type { HTMLAttributes } from "astro/types";
 import { cn } from "@lib/utils";
 
 /**
- * The landing "ticket" card frame (distinct from PanelFrameShape, which is used
- * on inner pages). This is the Figma vector for the Home screen: a pink card
- * body, a cream interior, a red hairline inner frame, and four corner sparkles
- * — all baked into one SVG.
+ * The landing "ticket" card frame (Figma vector for the Landing screen), with the
+ * slot rendered inside the cream safe area.
  *
- * The vector is fixed-aspect (432x646). The wrapper locks that aspect ratio and
- * exposes `container-type: inline-size`, so slotted content can be sized in
- * `cqw`. The default slot renders inside the cream safe area (inside the red
- * frame), so just drop the card content in and it lands in the right place.
- *
- * Colours map to design tokens: card=--color-primary, interior=--color-background,
- * inner frame + sparkles are the fixed FD red/white from the source art.
+ * The 432x646 aspect ratio is a *minimum*: taller content stretches the card
+ * (and the SVG) instead of overflowing, and the fr rows keep the safe area
+ * proportional to the stretched height, so content never paints over the frame.
  */
 
 type Props = HTMLAttributes<"div">;
@@ -24,13 +18,24 @@ const { class: className, ...props } = Astro.props;
 
 <div
   data-slot="landing-card-frame"
-  class={cn("relative w-full", className)}
-  style="aspect-ratio: 432 / 646; container-type: inline-size;"
+  class={cn(
+    "relative grid w-full grid-cols-[minmax(0,1fr)] grid-rows-[9.7fr_75.3fr_15fr]",
+    className,
+  )}
+  style="container-type: inline-size;"
   {...props}
 >
+  <div
+    class="col-start-1 row-span-full row-start-1 w-full"
+    style="aspect-ratio: 432 / 646;"
+    aria-hidden="true"
+  >
+  </div>
+
   <svg
     class="absolute inset-0 h-full w-full"
     viewBox="0 0 432 646"
+    preserveAspectRatio="none"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
@@ -106,8 +111,7 @@ const { class: className, ...props } = Astro.props;
     </defs>
   </svg>
 
-  {/* Cream safe area (inside the red inner frame). Content is slotted here. */}
-  <div class="absolute inset-x-[22%] top-[14.5%] bottom-[15%]">
+  <div class="relative z-10 col-start-1 row-start-2 px-[17%]">
     <slot />
   </div>
 </div>
