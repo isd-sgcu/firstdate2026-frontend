@@ -1,1 +1,36 @@
-<div>This is Redirect Page</div>
+---
+import Image from "astro/components/Image.astro";
+import rpkm from "../../assets/images/rpkm_logo.png";
+import { cn } from "@lib/utils";
+import { buttonVariants } from "@components/ui/button";
+import { appConfig } from "@lib/env";
+---
+
+<div class="w-full pt-12 pb-6 px-4 flex flex-col gap-12">
+  <!-- TODO: i18n -->
+  <h1
+    class="w-full text-3xl font-bold text-primary text-center whitespace-pre-wrap leading-relaxed"
+  >
+    {"งาน First Date จบแล้ว!\nแล้วเจอกันที่"}
+  </h1>
+
+  <!-- TODO: Don't forget to change to RPKM Detail when it's time to deploy RPKM -->
+  <div class="w-full flex flex-col items-center gap-8">
+    <Image src={rpkm} alt="RPKM Logo" class="w-[80%] max-w-62.5" />
+    <!-- TODO: i18n + redirect path -->
+    <a
+      href={appConfig.redirectTo}
+      class={cn(
+        buttonVariants({ variant: "extraRed", size: "lg" }),
+        "w-fit px-6 py-4",
+      )}
+    >
+      เข้าสู่เว็บไซต์
+    </a>
+  </div>
+
+  <!-- TODO: i18n -->
+  <p class="pt-6 text-xl text-center text-primary">
+    วันที่ 31 กรกฎาคม ถึง 2 สิงหาคม
+  </p>
+</div>
