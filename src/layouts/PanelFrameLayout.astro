@@ -8,10 +8,10 @@ import type { HTMLAttributes } from "react";
 
 interface Props extends HTMLAttributes<"div"> {
   navigateBack?: string;
-  hideMenu?: boolean;
+  showMenu?: boolean;
 }
 
-const { navigateBack, hideMenu } = Astro.props;
+const { navigateBack, showMenu } = Astro.props;
 ---
 
 <div class="relative w-full min-h-160 frameContainer">
@@ -41,7 +41,7 @@ const { navigateBack, hideMenu } = Astro.props;
   }
 
   {
-    !hideMenu && (
+    showMenu && (
       <div class="absolute right-4 top-[5cqw] h-12 flex justify-between">
         <Sidebar client:load />
       </div>
