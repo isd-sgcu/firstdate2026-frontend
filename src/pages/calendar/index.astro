@@ -1,0 +1,11 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import MapPage from "@components/map/MapPage.astro";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+---
+
+<BaseLayout title="Firstdate Map">
+  <PanelFrameLayout navigateBack={"/"}>
+    <MapPage />
+  </PanelFrameLayout>
+</BaseLayout>

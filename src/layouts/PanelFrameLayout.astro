@@ -41,7 +41,7 @@ const { navigateBack, hideMenu } = Astro.props;
   }
 
   {
-    hideMenu && (
+    !hideMenu && (
       <div class="absolute right-4 top-[5cqw] h-12 flex justify-between">
         <Sidebar client:load />
       </div>
