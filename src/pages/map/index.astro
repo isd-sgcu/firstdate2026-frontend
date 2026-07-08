@@ -1,0 +1,12 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import MapPage from "@components/map/MapPage";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+import { appConfig } from "@lib/env";
+---
+
+<BaseLayout title={appConfig.appName}>
+  <PanelFrameLayout navigateBack="/" safeInset>
+    <MapPage client:load />
+  </PanelFrameLayout>
+</BaseLayout>
