@@ -1,6 +1,7 @@
 import { cn } from "@lib/utils";
 import { PinIcon } from "lucide-react";
 import activities from "./activities.json";
+import { getImageUrl } from "@lib/function";
 
 const MONTHS: Record<number, string> = {
   1: "January",
@@ -18,18 +19,6 @@ const MONTHS: Record<number, string> = {
 };
 
 const DAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fri", "Sa"];
-
-const activityImages = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/images/*",
-  { eager: true },
-);
-
-const getActivityImageUrl = (filename: string) => {
-  const entry = Object.entries(activityImages).find(([path]) =>
-    path.endsWith(`/${filename}`),
-  );
-  return entry?.[1].default.src;
-};
 
 const activityByDate = new Map(activities.map((a) => [a.date, a.image]));
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -126,7 +115,7 @@ const Calendar = () => {
                       const dateStr = `${cellYear}-${pad(cellMonth)}-${pad(cell.day)}`;
                       const filename = activityByDate.get(dateStr);
                       const imageUrl = filename
-                        ? getActivityImageUrl(filename)
+                        ? getImageUrl(filename)
                         : undefined;
                       const isToday = !cell.overflow && cell.day === today;
 
