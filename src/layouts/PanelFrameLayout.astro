@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<"div"> {
   showMenu?: boolean;
 }
 
-const { navigateBack, showMenu } = Astro.props;
+const { navigateBack = "", showMenu = true } = Astro.props;
 ---
 
 <div class="relative w-full min-h-160 frameContainer">
