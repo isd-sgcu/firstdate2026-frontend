@@ -1,5 +1,6 @@
 import { cn } from "@lib/utils";
 import { PinIcon } from "lucide-react";
+import flower1 from "../../../../assets/images/flower_1.png";
 import activities from "./activities.json";
 
 const MONTHS: Record<number, string> = {
@@ -98,7 +99,7 @@ const Calendar = () => {
             {DAY_LABELS.map((label) => (
               <th
                 key={label}
-                className="h-8  text-right bg-primary text-primary-foreground pr-0.5 border border-muted"
+                className="h-8 text-right bg-primary text-primary-foreground pr-0.5 border border-muted"
               >
                 {label}
               </th>
@@ -146,7 +147,7 @@ const Calendar = () => {
                             />
                           ) : isToday ? (
                             <img
-                              src="src/assets/images/flower_1.png"
+                              src={flower1.src}
                               alt="Today"
                               className="size-[clamp(1.4rem,6.4vw,2rem)] rotate-45 object-contain"
                             />
