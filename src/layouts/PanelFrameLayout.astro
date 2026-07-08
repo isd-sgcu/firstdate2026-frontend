@@ -4,8 +4,20 @@ import { Sidebar } from "@components/shared/Sidebar";
 import Image from "astro/components/Image.astro";
 import logo from "../assets/images/logo_horizontal.png";
 import { ChevronLeft } from "lucide-react";
+import type { HTMLAttributes } from "astro/types";
 
-const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
+interface Props extends HTMLAttributes<"div"> {
+  navigateBack?: string;
+  showMenu?: boolean;
+  showLogo?: boolean;
+}
+
+const {
+  navigateBack = "",
+  showMenu = true,
+  showLogo = true,
+  ...rest
+} = Astro.props;
 ---
 
 <div class="relative w-full min-h-160 frameContainer" {...rest}>
@@ -20,9 +32,13 @@ const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
     />
   </div>
 
-  <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
-    <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
-  </div>
+  {
+    showLogo && (
+      <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
+        <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
+      </div>
+    )
+  }
 
   {
     navigateBack && (
