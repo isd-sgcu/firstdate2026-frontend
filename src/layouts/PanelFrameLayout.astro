@@ -3,9 +3,12 @@ import PanelFrameShape from "@components/shared/PanelFrameShape.astro";
 import { Sidebar } from "@components/shared/Sidebar";
 import Image from "astro/components/Image.astro";
 import logo from "../assets/images/logo_horizontal.png";
+import { ChevronLeft } from "lucide-react";
+
+const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
 ---
 
-<div class="relative w-full min-h-160 frameContainer">
+<div class="relative w-full min-h-160 frameContainer" {...rest}>
   <div class="absolute inset-0 z-[-2]">
     <PanelFrameShape />
   </div>
@@ -21,10 +24,23 @@ import logo from "../assets/images/logo_horizontal.png";
     <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
   </div>
 
-  <div class="absolute left-4 right-4 top-[5cqw] h-12 flex justify-between">
-    <button> back </button>
-    <Sidebar client:load />
-  </div>
+  {
+    navigateBack && (
+      <div class="absolute left-4 right-4 top-[5cqw] h-12 flex justify-between">
+        <a href={navigateBack}>
+          <ChevronLeft className="size-6.5 text-muted" />
+        </a>
+      </div>
+    )
+  }
+
+  {
+    showMenu && (
+      <div class="absolute right-4 top-[5cqw] h-12 flex justify-between">
+        <Sidebar client:load />
+      </div>
+    )
+  }
 
   {/* really depends on width */}
   <div class="py-[31.35cqw] px-[1.25em]">
