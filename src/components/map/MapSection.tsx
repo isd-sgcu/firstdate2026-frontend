@@ -61,7 +61,7 @@ const DataSectionE = () => {
       <div className="flex flex-col gap-4">
         {data.map((item) => {
           return (
-            <div className="flex gap-4" key={item.code}>
+            <div className="flex gap-4 items-center" key={item.code}>
               <span className="font-bold text-secondary">{item.code}</span>
               {/* TODO: i18n */}
               <span className="text-secondary">{item.nameTh}</span>
@@ -74,8 +74,22 @@ const DataSectionE = () => {
 };
 
 const DataSectionF = () => {
-  //   const data = sectionData.F.data;
-  return <div>Content Section F</div>;
+  const data = sectionData.F.data;
+  return (
+    <div className="flex flex-col gap-4">
+      {data.map((item) => {
+        return (
+          <div className="flex gap-4 items-center" key={item.code}>
+            <span className="font-bold text-secondary p-2 bg-[#fbd473]">
+              {item.code}
+            </span>
+            {/* TODO: i18n */}
+            <span className="text-secondary">{item.nameTh}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 const sectionContent: Record<string, () => React.JSX.Element> = {
