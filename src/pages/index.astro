@@ -1,5 +1,5 @@
 ---
-import HomePanel from "@components/home/HomePage.astro";
+import HomePage from "@components/home/HomePage.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
 import { appConfig } from "@lib/env";
@@ -7,6 +7,6 @@ import { appConfig } from "@lib/env";
 
 <BaseLayout title={appConfig.appName}>
   <PanelFrameLayout>
-    <HomePanel />
+    <HomePage />
   </PanelFrameLayout>
 </BaseLayout>
