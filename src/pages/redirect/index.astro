@@ -1,0 +1,12 @@
+---
+import RedirectPage from "@components/home/RedirectPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+import { appConfig } from "@lib/env";
+---
+
+<BaseLayout title={appConfig.appName}>
+  <PanelFrameLayout>
+    <RedirectPage />
+  </PanelFrameLayout>
+</BaseLayout>
