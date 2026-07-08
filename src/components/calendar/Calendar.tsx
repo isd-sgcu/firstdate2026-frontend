@@ -71,8 +71,8 @@ const Calendar = () => {
     <>
       {/* Header */}
       <div className="flex justify-between">
-        <h1 className="text-3xl text-primary whitespace-pre-line">{year}</h1>
-        <h1 className="text-3xl text-primary whitespace-pre-line">
+        <h1 className="text-4xl text-primary whitespace-pre-line">{year}</h1>
+        <h1 className="text-4xl text-primary whitespace-pre-line">
           {MONTHS[month]}
         </h1>
       </div>
@@ -103,7 +103,7 @@ const Calendar = () => {
                       return (
                         <div
                           className={cn(
-                            "flex h-full w-full flex-col items-end justify-center pr-1",
+                            "flex h-full w-full font-bold flex-col items-end justify-center pr-1",
                             day === today
                               ? "bg-primary text-muted"
                               : "text-primary",
