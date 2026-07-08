@@ -81,7 +81,7 @@ const Calendar = () => {
   weeks.push(nextWeek);
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {/* Header */}
       <div className="flex justify-between">
         <span className="text-4xl text-primary whitespace-pre-line">
@@ -174,7 +174,7 @@ const Calendar = () => {
           {MONTHS[nextMonth]}
         </span>
       </div>
-    </>
+    </div>
   );
 };
 
