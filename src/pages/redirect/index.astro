@@ -2,10 +2,9 @@
 import RedirectPage from "@components/redirect/RedirectPage.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
-import { appConfig } from "@lib/env";
 ---
 
-<BaseLayout title={appConfig.appName}>
+<BaseLayout title="Redirect to RPKM">
   <PanelFrameLayout showMenu={false} showLogo={false}>
     <RedirectPage />
   </PanelFrameLayout>
