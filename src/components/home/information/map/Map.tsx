@@ -14,7 +14,7 @@ const MapAndLocator = () => {
         </a>
       </div>
 
-      <div className="w-full h-fit p-2 rounded-2xl flex items-center justify-center bg-secondary cursor-pointer">
+      <div className="w-full h-fit p-2 rounded-2xl flex items-center justify-center bg-secondary">
         <img src={imageUrl} alt={"Map"} className="object-contain" />
       </div>
     </div>
