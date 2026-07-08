@@ -1,9 +1,14 @@
 ---
-
+import Calendar from "./Calendar";
 ---
 
 <div class="pt-12 pb-6 px-4 flex flex-col gap-8">
-  <h1 class="text-3xl text-center text-primary whitespace-pre-line">
-    Calendar Page
-  </h1>
+  <!-- Header -->
+  <div class="flex justify-between">
+    <h1 class="text-3xl text-primary whitespace-pre-line">2026</h1>
+    <!-- TODO: i18n -->
+    <h1 class="text-3xl text-primary whitespace-pre-line">July</h1>
+  </div>
+
+  <Calendar />
 </div>
