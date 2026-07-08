@@ -17,6 +17,8 @@ const MONTHS: Record<number, string> = {
   12: "December",
 };
 
+const DAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fri", "Sa"];
+
 const activityImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/*",
   { eager: true },
@@ -78,6 +80,18 @@ const Calendar = () => {
       </div>
 
       <table className="w-full table-fixed border-collapse">
+        <thead>
+          <tr>
+            {DAY_LABELS.map((label) => (
+              <th
+                key={label}
+                className="h-8  text-right bg-primary text-primary-foreground pr-0.5 border border-muted"
+              >
+                {label}
+              </th>
+            ))}
+          </tr>
+        </thead>
         <tbody>
           {weeks.map((week, weekIndex) => (
             <tr key={weekIndex}>
