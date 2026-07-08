@@ -24,12 +24,12 @@ const activityImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-function getActivityImageUrl(filename: string) {
+const getActivityImageUrl = (filename: string) => {
   const entry = Object.entries(activityImages).find(([path]) =>
     path.endsWith(`/${filename}`),
   );
   return entry?.[1].default.src;
-}
+};
 
 const activityByDate = new Map(activities.map((a) => [a.date, a.image]));
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -49,34 +49,47 @@ const getThaiToday = () => {
   };
 };
 
+type Cell = { day: number; overflow: boolean } | null;
+
 const Calendar = () => {
   const { year, month, day: today } = getThaiToday();
 
   const firstWeekday = new Date(year, month - 1, 1).getDay();
   const daysInMonth = new Date(year, month, 0).getDate();
+  const nextMonth = month === 12 ? 1 : month + 1;
+  const nextYear = month === 12 ? year + 1 : year;
 
-  const weeks: (number | null)[][] = [];
-  let week: (number | null)[] = new Array(firstWeekday).fill(null);
+  const weeks: Cell[][] = [];
+  let week: Cell[] = new Array(firstWeekday).fill(null);
   for (let day = 1; day <= daysInMonth; day++) {
-    week.push(day);
+    week.push({ day, overflow: false });
     if (week.length === 7) {
       weeks.push(week);
       week = [];
     }
   }
+  let overflowDay = 1;
   if (week.length > 0) {
-    while (week.length < 7) week.push(null);
+    while (week.length < 7) week.push({ day: overflowDay++, overflow: true });
     weeks.push(week);
   }
+
+  const nextWeek: Cell[] = [];
+  for (let i = 0; i < 7; i++) {
+    nextWeek.push({ day: overflowDay++, overflow: true });
+  }
+  weeks.push(nextWeek);
 
   return (
     <>
       {/* Header */}
       <div className="flex justify-between">
-        <h1 className="text-4xl text-primary whitespace-pre-line">{year}</h1>
-        <h1 className="text-4xl text-primary whitespace-pre-line">
+        <span className="text-4xl text-primary whitespace-pre-line">
+          {year}
+        </span>
+        <span className="text-4xl text-primary whitespace-pre-line">
           {MONTHS[month]}
-        </h1>
+        </span>
       </div>
 
       <table className="w-full table-fixed border-collapse">
@@ -95,7 +108,7 @@ const Calendar = () => {
         <tbody>
           {weeks.map((week, weekIndex) => (
             <tr key={weekIndex}>
-              {week.map((day, dayIndex) => (
+              {week.map((cell, dayIndex) => (
                 <td
                   key={dayIndex}
                   className={cn(
@@ -106,31 +119,32 @@ const Calendar = () => {
                     dayIndex === week.length - 1 && "border-r-0",
                   )}
                 >
-                  {day &&
+                  {cell &&
                     (() => {
-                      const dateStr = `${year}-${pad(month)}-${pad(day)}`;
+                      const cellMonth = cell.overflow ? nextMonth : month;
+                      const cellYear = cell.overflow ? nextYear : year;
+                      const dateStr = `${cellYear}-${pad(cellMonth)}-${pad(cell.day)}`;
                       const filename = activityByDate.get(dateStr);
                       const imageUrl = filename
                         ? getActivityImageUrl(filename)
                         : undefined;
+                      const isToday = !cell.overflow && cell.day === today;
 
                       return (
                         <div
                           className={cn(
                             "flex h-full w-full font-bold flex-col items-end justify-center pr-1",
-                            day === today
-                              ? "bg-primary text-muted"
-                              : "text-primary",
+                            isToday ? "bg-primary text-muted" : "text-primary",
                           )}
                         >
-                          {day}
+                          {cell.day}
                           {imageUrl ? (
                             <img
                               src={imageUrl}
                               alt={filename}
                               className="size-[clamp(1.75rem,8vw,2.5rem)] object-contain"
                             />
-                          ) : day == today ? (
+                          ) : isToday ? (
                             <img
                               src="src/assets/images/flower_1.png"
                               alt="Today"
@@ -148,6 +162,18 @@ const Calendar = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Footer */}
+      <div className="flex justify-between">
+        {year != nextYear && (
+          <span className="w-full text-4xl text-primary whitespace-pre-line">
+            {nextYear}
+          </span>
+        )}
+        <span className="w-full text-4xl text-end text-primary whitespace-pre-line">
+          {MONTHS[nextMonth]}
+        </span>
+      </div>
     </>
   );
 };
