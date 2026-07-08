@@ -7,12 +7,21 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@components/ui/drawer";
+import { Menu } from "lucide-react";
 
 // not shadcn sidebar. actually a drawer
 export function Sidebar() {
   return (
     <Drawer swipeDirection="up">
-      <DrawerTrigger render={<Button variant="secondary">Drawer</Button>} />
+      <DrawerTrigger
+        render={
+          <Button className={"cursor-pointer"}>
+            <Menu className="size-6.5 text-muted" />
+          </Button>
+        }
+      />
+
+      {/* TODO: Dont forget to change menu */}
       <DrawerContent className="select-none">
         <DrawerHeader>
           <DrawerTitle className="select-none">
