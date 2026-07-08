@@ -1,0 +1,66 @@
+---
+import Image from "astro/components/Image.astro";
+
+import LandingCardFrame from "@components/landing/LandingCardFrame.astro";
+import { buttonVariants } from "@components/ui/button";
+import { cn } from "@lib/utils";
+
+import flowers from "../../assets/images/flower_home.png";
+import logo from "../../assets/images/logo_horizontal.png";
+---
+
+<div
+  class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-clip bg-linear-to-b from-primary to-primary-foreground py-16"
+>
+  <Image
+    src={flowers}
+    alt="flower top"
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 z-0 w-full"
+  />
+  <!-- same image but rotate 180 -->
+  <Image
+    src={flowers}
+    alt="flower bottom"
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full rotate-180"
+  />
+
+  <LandingCardFrame class="relative z-10 w-[92%] max-w-104">
+    {
+      /* justify-between spreads the three sections (logo / text / button) to
+    fill the safe area at the design aspect; when tall content stretches the
+    card instead, there's no free space and gap-4 becomes the spacing. */
+    }
+    <div
+      class="flex h-full flex-col items-center justify-between gap-4 text-center"
+    >
+      <Image src={logo} alt="cu first date icon" class="w-full max-w-40" />
+
+      <div class="flex flex-col gap-5 text-fd-red">
+        <div class="flex flex-col">
+          <!-- TODO: i18n -->
+          <p class="text-[17px]">กิจกรรม</p>
+          <!-- TODO: i18n -->
+          <p class="text-[28px]">
+            ต้อนรับนิสิตใหม่<br />ในวันแรกพบ
+          </p>
+        </div>
+        <!-- TODO: i18n -->
+        <p class="text-2xl">18 กรกฎาคม 2569</p>
+      </div>
+
+      <!-- TODO: replace with sso or redirect or sth after backend is merged -->
+      <!-- TODO: i18n -->
+      <a
+        href="/login"
+        class={cn(
+          buttonVariants({ variant: "default", size: "md" }),
+          "h-12 w-full rounded-full",
+        )}
+      >
+        เข้าสู่ระบบ
+      </a>
+    </div>
+  </LandingCardFrame>
+</div>
