@@ -4,6 +4,12 @@ import { Sidebar } from "@components/shared/Sidebar";
 import Image from "astro/components/Image.astro";
 import logo from "../assets/images/logo_horizontal.png";
 import { ChevronLeft } from "lucide-react";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  navigateBack?: string;
+  showMenu?: boolean;
+}
 
 const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
 ---
