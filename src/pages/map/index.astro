@@ -2,11 +2,10 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MapPage from "@components/map/MapPage";
 import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
-import { appConfig } from "@lib/env";
 ---
 
-<BaseLayout title={appConfig.appName}>
-  <PanelFrameLayout navigateBack="/" safeInset>
+<BaseLayout title="Firstdate Map">
+  <PanelFrameLayout navigateBack={"/"} hideMenu={true}>
     <MapPage client:load />
   </PanelFrameLayout>
 </BaseLayout>
