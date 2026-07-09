@@ -1,4 +1,9 @@
-import { Controller, useFormContext } from "react-hook-form";
+import {
+  Controller,
+  useFormContext,
+  type FieldErrors,
+  type FieldPath,
+} from "react-hook-form";
 import { Combobox } from "@base-ui/react/combobox";
 import { ChevronDownIcon } from "lucide-react";
 
@@ -15,32 +20,60 @@ import {
 
 import type { RegisterFormValues } from "./types";
 
-/** Only the string-valued fields — these inputs/selects bind to a string. */
 type FieldName = {
   [K in keyof RegisterFormValues]: RegisterFormValues[K] extends string
     ? K
     : never;
 }[keyof RegisterFormValues];
+export type Path = FieldPath<RegisterFormValues>;
+export type SelectOption = { value: string; label: string };
 
 export const controlClass =
   "h-11 w-full rounded-md border border-border bg-transparent px-5 text-base";
 
 export const popupClass = "min-w-0";
 
+export function errorAt(errors: FieldErrors<RegisterFormValues>, name: string) {
+  const node = name
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) => (acc as Record<string, unknown>)?.[key],
+      errors,
+    );
+  return (node as { message?: string })?.message;
+}
+
+export function FieldError({
+  message,
+  className,
+}: {
+  message?: string;
+  className?: string;
+}) {
+  if (!message) return null;
+  return (
+    <span className={cn("block text-sm text-destructive", className)}>
+      {message}
+    </span>
+  );
+}
+
 export function FieldBlock({
   label,
   error,
   children,
 }: {
-  label: string;
+  label?: string;
   error?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-base font-normal text-foreground">{label}</label>
+      {label && (
+        <label className="text-base font-normal text-foreground">{label}</label>
+      )}
       {children}
-      {error && <span className="text-sm text-destructive">{error}</span>}
+      <FieldError message={error} />
     </div>
   );
 }
@@ -88,44 +121,50 @@ export function TextField<TName extends FieldName>({
   );
 }
 
-type SelectOption = { value: string; label: string };
-
-export function SelectField<TName extends FieldName>({
+export function SelectField({
   name,
   label,
   placeholder,
   options,
-  items,
+  disabled,
+  onAfterChange,
 }: {
-  name: TName;
-  label: string;
+  name: Path;
+  label?: string;
   placeholder: string;
   options: readonly SelectOption[] | readonly string[];
-  items?: Record<string, string>;
+  disabled?: boolean;
+  onAfterChange?: () => void;
 }) {
   const {
     control,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
-
+  const error = errorAt(errors, name);
   const normalized = options.map((option) =>
     typeof option === "string" ? { value: option, label: option } : option,
   );
+  const items = Object.fromEntries(normalized.map((o) => [o.value, o.label]));
 
   return (
-    <FieldBlock label={label} error={errors[name]?.message}>
+    <FieldBlock label={label} error={error}>
       <Controller
         control={control}
         name={name}
         render={({ field }) => (
           <Select
             items={items}
-            value={field.value || null}
-            onValueChange={(value) => field.onChange(value ?? "")}
+            value={(field.value as string) || null}
+            onValueChange={(value) => {
+              field.onChange(value ?? "");
+              onAfterChange?.();
+            }}
+            disabled={disabled}
           >
             <SelectTrigger
               className={cn(controlClass, "w-full")}
-              aria-invalid={!!errors[name]}
+              aria-invalid={!!error}
+              disabled={disabled}
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
@@ -143,30 +182,34 @@ export function SelectField<TName extends FieldName>({
   );
 }
 
-/** A searchable single-select (base-ui Combobox) wired to the shared form.
+/** A searchable single-select (base-ui Combobox) bound to a form field by path.
  *  Good when there are many options — the user types to filter by label. */
-export function ComboboxField<TName extends FieldName>({
+export function ComboboxField({
   name,
   label,
   placeholder,
   options,
+  disabled,
+  onAfterChange,
 }: {
-  name: TName;
-  label: string;
+  name: Path;
+  label?: string;
   placeholder: string;
   options: readonly SelectOption[];
+  disabled?: boolean;
+  onAfterChange?: () => void;
 }) {
   const {
     control,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
-
+  const error = errorAt(errors, name);
   const values = options.map((option) => option.value);
   const labelFor = (value: string) =>
     options.find((option) => option.value === value)?.label ?? "";
 
   return (
-    <FieldBlock label={label} error={errors[name]?.message}>
+    <FieldBlock label={label} error={error}>
       <Controller
         control={control}
         name={name}
@@ -174,15 +217,20 @@ export function ComboboxField<TName extends FieldName>({
           <Combobox.Root
             items={values}
             itemToStringLabel={labelFor}
-            value={field.value || null}
-            onValueChange={(value) => field.onChange(value ?? "")}
+            value={(field.value as string) || null}
+            onValueChange={(value) => {
+              field.onChange(value ?? "");
+              onAfterChange?.();
+            }}
             openOnInputClick
+            disabled={disabled}
           >
             <div className="relative">
               <Combobox.Input
                 placeholder={placeholder}
-                aria-invalid={!!errors[name]}
+                aria-invalid={!!error}
                 onBlur={field.onBlur}
+                disabled={disabled}
                 className={cn(controlClass, "pr-9")}
               />
               <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-muted-foreground">

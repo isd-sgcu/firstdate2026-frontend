@@ -6,23 +6,25 @@ import { Button } from "@components/ui/button";
 import { CHULA_DISTRICT_ID, CHULA_PROVINCE_ID } from "@lib/thai-geo";
 import { MAX_TRAVEL_LEGS, VEHICLE_OPTIONS } from "@lib/register-options";
 
-import { SectionHeading } from "./fields";
+import {
+  ComboboxField,
+  SectionHeading,
+  SelectField,
+  type SelectOption,
+} from "./fields";
 import { CarIcon, HomeIcon, PinIcon } from "./icons";
 import {
   districtsOf,
-  FormCombobox,
-  FormSelect,
   GeoPair,
   LabelRow,
   PROVINCE_OPTIONS,
   SubLabel,
-  type Option,
 } from "./travel-fields";
 import type { RegisterFormValues } from "./types";
 
 type Leg = RegisterFormValues["travelLegs"][number];
 
-const VEHICLE_OPTS: Option[] = VEHICLE_OPTIONS.map((v) => ({
+const VEHICLE_OPTS: SelectOption[] = VEHICLE_OPTIONS.map((v) => ({
   value: v,
   label: v,
 }));
@@ -113,7 +115,7 @@ export function StepTravelInfo() {
           เขต/อำเภอ และจังหวัดที่ท่านอาศัยอยู่เป็นปกติ
         </p>
         <LabelRow label="จังหวัด">
-          <FormCombobox
+          <ComboboxField
             name="residenceProvince"
             options={PROVINCE_OPTIONS}
             placeholder="เลือกจังหวัด"
@@ -121,7 +123,7 @@ export function StepTravelInfo() {
           />
         </LabelRow>
         <LabelRow label="เขต/อำเภอ">
-          <FormCombobox
+          <ComboboxField
             name="residenceDistrict"
             options={districtsOf(residenceProvince)}
             placeholder="เลือกเขต/อำเภอ"
@@ -210,7 +212,7 @@ function TravelLegCard({
 
       <div className="mt-3">
         <SubLabel icon={<CarIcon />}>ประเภทยานพาหนะ</SubLabel>
-        <FormSelect
+        <SelectField
           name={`travelLegs.${index}.vehicle`}
           options={VEHICLE_OPTS}
           placeholder="เลือกยานพาหนะ"

@@ -5,7 +5,7 @@ import { Checkbox } from "@components/ui/checkbox";
 import { Input } from "@components/ui/input";
 import { OTHER_OPTION } from "@lib/register-options";
 
-import { controlClass, YesNoToggle } from "./fields";
+import { controlClass, FieldError, YesNoToggle } from "./fields";
 import type { RegisterFormValues } from "./types";
 
 type BoolName = {
@@ -184,20 +184,5 @@ export function DetailCard({
       />
       <FieldError message={error} className="mt-1" />
     </HealthCard>
-  );
-}
-
-function FieldError({
-  message,
-  className,
-}: {
-  message?: string;
-  className?: string;
-}) {
-  if (!message) return null;
-  return (
-    <span className={cn("block text-sm text-destructive", className)}>
-      {message}
-    </span>
   );
 }
