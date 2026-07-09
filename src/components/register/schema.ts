@@ -38,6 +38,24 @@ export const registerSchema = z
     // Step 3 — ข้อมูลอื่น ๆ
     sgcuAwareness: required("กรุณาเลือกคำตอบ"),
     prChannel: required("กรุณาเลือกคำตอบ"),
+
+    // Step 4 — ข้อมูลการเดินทาง
+    residenceProvince: required("กรุณาเลือกจังหวัด"),
+    residenceDistrict: required("กรุณาเลือกเขต/อำเภอ"),
+    travelLegs: z
+      .array(
+        z.object({
+          vehicle: required("กรุณาเลือกยานพาหนะ"),
+          originProvince: required("กรุณาเลือกจังหวัด"),
+          originDistrict: required("กรุณาเลือกเขต/อำเภอ"),
+          // The final leg's destination is fixed to จุฬาฯ, so it isn't required
+          // per-field; intermediate legs are checked in the superRefine below.
+          destProvince: z.string(),
+          destDistrict: z.string(),
+        }),
+      )
+      .min(1)
+      .max(4),
   })
   .superRefine((v, ctx) => {
     const need = (when: boolean, path: string, message: string) => {
@@ -65,6 +83,26 @@ export const registerSchema = z
     for (const [has, detail, message] of details) {
       need(v[has] && v[detail].trim() === "", detail, message);
     }
+
+    // Every leg except the last must have a chosen destination (the last leg
+    // always ends at จุฬาฯ, set automatically by the UI).
+    v.travelLegs.forEach((leg, i) => {
+      if (i === v.travelLegs.length - 1) return;
+      if (leg.destProvince.trim() === "") {
+        ctx.addIssue({
+          code: "custom",
+          path: ["travelLegs", i, "destProvince"],
+          message: "กรุณาเลือกจังหวัด",
+        });
+      }
+      if (leg.destDistrict.trim() === "") {
+        ctx.addIssue({
+          code: "custom",
+          path: ["travelLegs", i, "destDistrict"],
+          message: "กรุณาเลือกเขต/อำเภอ",
+        });
+      }
+    });
   });
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;

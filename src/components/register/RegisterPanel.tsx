@@ -7,7 +7,9 @@ import { RegisterStepper } from "./RegisterStepper";
 import { StepPersonalInfo } from "./StepPersonalInfo";
 import { StepHealthInfo } from "./StepHealthInfo";
 import { StepOtherInfo } from "./StepOtherInfo";
+import { StepTravelInfo } from "./StepTravelInfo";
 import { registerSchema } from "./schema";
+import { CHULA_DISTRICT_ID, CHULA_PROVINCE_ID } from "@lib/thai-geo";
 import { STEP_FIELDS, TOTAL_STEPS, type RegisterFormValues } from "./types";
 
 export function RegisterPanel() {
@@ -40,6 +42,18 @@ export function RegisterPanel() {
       // Step 3
       sgcuAwareness: "",
       prChannel: "",
+      // Step 4 — first leg ends at จุฬาฯ by default
+      residenceProvince: "",
+      residenceDistrict: "",
+      travelLegs: [
+        {
+          vehicle: "",
+          originProvince: "",
+          originDistrict: "",
+          destProvince: String(CHULA_PROVINCE_ID),
+          destDistrict: String(CHULA_DISTRICT_ID),
+        },
+      ],
     },
   });
 
@@ -57,7 +71,7 @@ export function RegisterPanel() {
     // Final step: submit everything.
     handleSubmit((data) => {
       // TODO: send to backend once the register endpoint is ready.
-      alert(JSON.stringify(data, null, 2));
+      console.log(JSON.stringify(data, null, 2));
     })();
   };
 
@@ -84,12 +98,7 @@ export function RegisterPanel() {
           {step === 1 && <StepPersonalInfo />}
           {step === 2 && <StepHealthInfo />}
           {step === 3 && <StepOtherInfo />}
-          {step > 3 && (
-            /* TODO: i18n */
-            <p className="py-10 text-center text-muted-foreground">
-              ขั้นตอนที่ {step} (กำลังทำครับ)
-            </p>
-          )}
+          {step === 4 && <StepTravelInfo />}
         </form>
 
         {/* TODO: i18n */}
