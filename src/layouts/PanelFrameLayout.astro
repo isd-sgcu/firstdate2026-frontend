@@ -9,20 +9,44 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"div"> {
   navigateBack?: string;
   showMenu?: boolean;
+  showBottomCap?: boolean;
+  strokeColor?: string;
+  strokeWidth?: number;
+  fillHeight?: boolean;
 }
 
-const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
+const {
+  navigateBack = "",
+  showMenu = true,
+  showBottomCap = true,
+  strokeColor = "var(--color-primary)",
+  strokeWidth = 1,
+  fillHeight = false,
+  ...rest
+} = Astro.props;
 ---
 
-<div class="relative w-full min-h-160 frameContainer" {...rest}>
+<div
+  class:list={[
+    "relative w-full frameContainer",
+    fillHeight ? "h-svh sm:h-[calc(100svh-3rem)]" : "min-h-160",
+  ]}
+  {...rest}
+>
   <div class="absolute inset-0 z-[-2]">
-    <PanelFrameShape />
+    <PanelFrameShape showBottom={showBottomCap} />
   </div>
-  <div class="absolute inset-x-5 inset-y-6 z-[-1]">
+  <div
+    class:list={[
+      "absolute inset-x-5 z-[-1]",
+      showBottomCap ? "inset-y-6" : "top-6 bottom-0",
+    ]}
+  >
     <PanelFrameShape
       variant="stroke"
-      strokeWidth={1}
-      color="var(--color-primary)"
+      strokeWidth={strokeWidth}
+      color={strokeColor}
+      showBottom={showBottomCap}
     />
   </div>
 
@@ -48,10 +72,22 @@ const { navigateBack = "", showMenu = true, ...rest } = Astro.props;
     )
   }
 
-  {/* really depends on width */}
-  <div class="py-[31.35cqw] px-[1.25em]">
-    <slot />
-  </div>
+  {
+    fillHeight ? (
+      <div class="absolute inset-0 flex flex-col px-[1.25em] pt-[31.35cqw]">
+        <slot />
+      </div>
+    ) : (
+      <div
+        class:list={[
+          "px-[1.25em] pt-[31.35cqw]",
+          showBottomCap ? "pb-[31.35cqw]" : "pb-12",
+        ]}
+      >
+        <slot />
+      </div>
+    )
+  }
 </div>
 
 <style>
