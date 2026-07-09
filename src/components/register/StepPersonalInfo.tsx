@@ -31,16 +31,9 @@ const FACULTY_OPTIONS = FACULTIES.map((faculty) => ({
   label: faculty.name,
 }));
 
-const PHONE_RULES = {
-  required: "กรุณากรอกเบอร์โทรศัพท์",
-  pattern: {
-    value: /^0\d{9}$/,
-    message: "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก",
-  },
-};
-
+// Validation lives in the zod schema (./schema); fields just declare their copy.
 export function StepPersonalInfo() {
-  // TODO: i18n — every heading / label / placeholder / validation message below
+  // TODO: i18n — every heading / label / placeholder below is Thai copy.
   return (
     <div className="flex flex-col pb-2">
       <SectionHeading>ข้อมูลส่วนตัว</SectionHeading>
@@ -52,15 +45,13 @@ export function StepPersonalInfo() {
           name="lastName"
           label="นามสกุล"
           placeholder="กรอกนามสกุล..."
-          rules={{ required: "กรุณากรอกนามสกุล" }}
         />
 
         <ComboboxField
           name="faculty"
           label="คณะ"
-          placeholder="คณะ"
+          placeholder="ค้นหาคณะ..."
           options={FACULTY_OPTIONS}
-          rules={{ required: "กรุณาเลือกคณะ" }}
         />
 
         <TextField
@@ -68,13 +59,6 @@ export function StepPersonalInfo() {
           label="เลขประจำตัวนิสิต"
           placeholder="กรอกเลขประจำตัวนิสิต..."
           inputMode="numeric"
-          rules={{
-            required: "กรุณากรอกเลขประจำตัวนิสิต",
-            pattern: {
-              value: /^69\d{8}$/,
-              message: "เลขประจำตัวนิสิตต้องขึ้นต้นด้วย 69 และมี 10 หลัก",
-            },
-          }}
         />
 
         <TextField
@@ -82,7 +66,6 @@ export function StepPersonalInfo() {
           label="เบอร์โทรศัพท์"
           placeholder="กรอกเบอร์โทรศัพท์..."
           inputMode="tel"
-          rules={{ ...PHONE_RULES }}
         />
       </div>
 
@@ -94,10 +77,6 @@ export function StepPersonalInfo() {
           label="เบอร์โทรศัพท์ผู้ปกครอง"
           placeholder="กรอกเบอร์โทรศัพท์ผู้ปกครอง..."
           inputMode="tel"
-          rules={{
-            ...PHONE_RULES,
-            required: "กรุณากรอกเบอร์โทรศัพท์ผู้ปกครอง",
-          }}
         />
 
         <SelectField
@@ -105,7 +84,6 @@ export function StepPersonalInfo() {
           label="ความสัมพันธ์"
           placeholder="ความสัมพันธ์"
           options={RELATION_OPTIONS}
-          rules={{ required: "กรุณาเลือกความสัมพันธ์" }}
         />
       </div>
     </div>

@@ -117,3 +117,32 @@ export const RELATION_OPTIONS = [
   "ญาติ",
   "อื่น ๆ",
 ] as const;
+
+/** The "other" checkbox that reveals a free-text field. */
+export const OTHER_OPTION = "อื่น ๆ";
+
+// TODO: i18n — Thai-only; used as both the value and the label.
+/** อาหารที่แพ้ (Step 2) */
+export const FOOD_ALLERGY_OPTIONS = [
+  "อาหารทะเล",
+  "นม/แลกโตส",
+  "แป้งสาลี",
+  "ไข่",
+  "ถั่ว",
+  "ผงชูรส",
+  OTHER_OPTION,
+] as const;
+
+// TODO: i18n — Thai-only; used as both the value and the label.
+/** ข้อจำกัดด้านอาหาร (Step 2) */
+export const DIETARY_OPTIONS = [
+  "ฮาลาล",
+  "มังสวิรัติ",
+  "ไม่ทานเนื้อสัตว์",
+  "ไม่ทานเนื้อวัว",
+  "ไม่ทานเนื้อหมู",
+  "ไม่ทานไก่",
+  "ไม่ทานเผ็ด",
+  "ไม่ทานผัก",
+  OTHER_OPTION,
+] as const;
