@@ -25,6 +25,13 @@ const { title, description = "firstdate 2026 frontend application" } =
       <slot />
     </main>
     <script is:inline define:vars={{ redirectAt: appConfig.redirectAt }}>
+      const userAgent = navigator.userAgent;
+      if (/Line\//.test(userAgent)) {
+        const url = new URL(location.href);
+        url.searchParams.append("openExternalBrowser", "1");
+        location.href = url.toString();
+      }
+
       const isRedirectPage =
         location.pathname.replace(/\/+$/, "") === "/redirect";
       if (Date.now() >= redirectAt && !isRedirectPage) {
