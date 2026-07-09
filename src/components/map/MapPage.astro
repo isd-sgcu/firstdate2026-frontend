@@ -1,28 +1,7 @@
 ---
-import { MapIcon } from "lucide-react";
-import MapSection from "@components/map/MapSection";
-import { getImageUrl } from "@lib/function";
-
-const imageUrl = getImageUrl("map.png");
+import MapPanel from "./MapPanel";
 ---
 
 <div class="w-full relative pt-4 pb-6 px-4 flex flex-col gap-6">
-  <!-- Header -->
-  <div
-    class="absolute flex flex-col items-center gap-2 top-[-16cqw] left-1/2 -translate-x-1/2 text-primary"
-  >
-    <MapIcon />
-    <!-- TODO: i18n -->
-    <p class="text-2xl font-bold text-primary text-center">แผนที่</p>
-  </div>
-
-  <!-- Map -->
-  <div
-    class="w-full h-auto my-4 rounded-2xl flex items-center justify-center bg-secondary"
-  >
-    <img src={imageUrl} alt={"Map"} class="object-contain w-full h-full" />
-  </div>
-
-  <!-- Map Section -->
-  <MapSection client:load />
+  <MapPanel client:load />
 </div>
