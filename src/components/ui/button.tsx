@@ -11,6 +11,8 @@ const buttonVariants = cva(
         default:
           "bg-primary font-bold text-primary-foreground hover:bg-primary/80",
         red: "bg-fd-red font-bold text-white hover:bg-fd-red/80",
+        extraRed:
+          "bg-[#d9443e] font-bold text-white hover:bg-[#d9443e]/80 border border-black",
         primaryOutline:
           "border-primary bg-white font-bold text-primary hover:bg-primary/5 aria-expanded:bg-primary/10",
         outline:

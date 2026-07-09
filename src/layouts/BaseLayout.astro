@@ -1,5 +1,6 @@
 ---
 import "@styles/global.css";
+import { appConfig } from "@lib/env";
 
 type Props = {
   title: string;
@@ -23,5 +24,12 @@ const { title, description = "firstdate 2026 frontend application" } =
     >
       <slot />
     </main>
+    <script is:inline define:vars={{ redirectAt: appConfig.redirectAt }}>
+      const isRedirectPage =
+        location.pathname.replace(/\/+$/, "") === "/redirect";
+      if (Date.now() >= redirectAt && !isRedirectPage) {
+        location.replace("/redirect");
+      }
+    </script>
   </body>
 </html>

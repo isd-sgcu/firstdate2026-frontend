@@ -1,0 +1,11 @@
+---
+import RedirectPage from "@components/redirect/RedirectPage.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+---
+
+<BaseLayout title="Redirect to RPKM">
+  <PanelFrameLayout showMenu={false} showLogo={false}>
+    <RedirectPage />
+  </PanelFrameLayout>
+</BaseLayout>
