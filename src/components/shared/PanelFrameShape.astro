@@ -38,25 +38,28 @@ export interface Props extends HTMLAttributes<"div"> {
   color?: string;
   /** Stroke width in px (screen units, constant under stretch). Only used when `variant="stroke"`. */
   strokeWidth?: number;
+  /** Render the bottom cap. When false the middle band runs flat to the bottom edge (top + body only). */
+  showBottom?: boolean;
 }
 
 const {
   variant = "fill",
   color = "var(--color-background)",
   strokeWidth = 2,
+  showBottom = true,
   class: className,
   ...props
 } = Astro.props;
 
 const isStroke = variant === "stroke";
 
-const pathProps = isStroke
+const pathProps: Record<string, string | number> = isStroke
   ? {
       fill: "none",
       stroke: color,
-      strokeWidth: strokeWidth,
-      strokeLinejoin: "round",
-      vectorEffect: "non-scaling-stroke",
+      "stroke-width": strokeWidth,
+      "stroke-linejoin": "round",
+      "vector-effect": "non-scaling-stroke",
     }
   : { fill: color };
 
@@ -93,11 +96,15 @@ const svgClass = cn("block w-full shrink-0", isStroke && "overflow-visible");
     )
   }
 
-  <svg
-    viewBox={`0 700 ${WIDTH} ${BOTTOM_CAP_HEIGHT}`}
-    class={cn(svgClass, "h-auto")}
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d={isStroke ? BOTTOM_CAP : `${BOTTOM_CAP}Z`} {...pathProps}></path>
-  </svg>
+  {
+    showBottom && (
+      <svg
+        viewBox={`0 700 ${WIDTH} ${BOTTOM_CAP_HEIGHT}`}
+        class={cn(svgClass, "h-auto")}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d={isStroke ? BOTTOM_CAP : `${BOTTOM_CAP}Z`} {...pathProps} />
+      </svg>
+    )
+  }
 </div>
