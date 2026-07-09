@@ -13,6 +13,7 @@ interface Props extends HTMLAttributes<"div"> {
   strokeColor?: string;
   strokeWidth?: number;
   fillHeight?: boolean;
+  showLogo?: boolean;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   strokeColor = "var(--color-primary)",
   strokeWidth = 1,
   fillHeight = false,
+  showLogo = true,
   ...rest
 } = Astro.props;
 ---
@@ -50,9 +52,13 @@ const {
     />
   </div>
 
-  <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
-    <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
-  </div>
+  {
+    showLogo && (
+      <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
+        <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
+      </div>
+    )
+  }
 
   {
     navigateBack && (
