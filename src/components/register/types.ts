@@ -27,6 +27,6 @@ export const STEP_FIELDS: Record<number, (keyof RegisterFormValues)[]> = {
     "chronicDiseaseHas",
     "chronicDiseaseDetail",
   ],
-  3: [],
+  3: ["sgcuAwareness", "prChannel"],
   4: [],
 };
