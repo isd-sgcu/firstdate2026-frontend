@@ -1,6 +1,8 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
 import sectionData from "./section.json";
 
+const STAFF_BLOCKS = ["A5", "A6"];
+
 type SectionTabProps = {
   value: string;
   nameTh: string;
@@ -31,7 +33,9 @@ const DataSectionAtoD = () => {
                 : ""
           }`}
         >
-          <span className="w-full py-4 font-bold bg-[#97E3EF]">
+          <span
+            className={`w-full py-4 font-bold ${STAFF_BLOCKS.includes(item.code) ? "bg-muted-foreground" : "bg-[#97E3EF]"}`}
+          >
             {item.code}
           </span>
           {/* TODO: i18n */}
