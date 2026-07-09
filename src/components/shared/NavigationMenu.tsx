@@ -69,7 +69,7 @@ export function NavigationMenu() {
             {/* TODO: link? */}
             {isStaff ? (
               <a
-                href="/"
+                href="/staff/register"
                 className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
               >
                 <img src={scanIcon.src} alt="" className="size-6" />
@@ -78,7 +78,7 @@ export function NavigationMenu() {
             ) : (
               <>
                 <a
-                  href="/"
+                  href="/qrcode"
                   className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
                 >
                   <img src={qrCodeIcon.src} alt="" className="size-6" />
