@@ -1,3 +1,5 @@
+import { useStore } from "@nanostores/react";
+
 import { Button } from "@components/ui/button";
 import {
   Drawer,
@@ -6,6 +8,7 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@components/ui/drawer";
+import { $locale, setLocale } from "@lib/i18n/locale";
 import { Menu } from "lucide-react";
 import firstdateLogo from "@assets/images/logo_horizontal.png";
 import homeIcon from "@assets/icons/material-symbols_home-rounded.svg";
@@ -19,6 +22,8 @@ import emergencyIcon from "@assets/icons/material-symbols_call-quality-rounded.s
 // not shadcn sidebar. actually a drawer
 export function NavigationMenu() {
   const isStaff = false;
+  const locale = useStore($locale);
+
   return (
     <Drawer swipeDirection="up">
       <DrawerTrigger
@@ -39,10 +44,12 @@ export function NavigationMenu() {
             />
             <div className="flex items-center gap-0.5">
               <Button
+                type="button"
                 variant="ghost"
                 className="text-lg active:bg-accent p-2 size-10.5 rounded"
+                onClick={() => setLocale(locale === "th" ? "en" : "th")}
               >
-                TH
+                {locale === "th" ? "TH" : "EN"}
               </Button>
 
               <DrawerClose className="p-2 rounded active:bg-accent">
