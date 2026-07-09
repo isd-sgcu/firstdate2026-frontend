@@ -2,6 +2,7 @@ import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import { Scanner } from "@yudiel/react-qr-scanner";
+import { useT } from "@lib/i18n/useT";
 
 export interface StaffRegisterPanelProps {
   isInitiallyQrScanner?: boolean;
@@ -10,10 +11,11 @@ export interface StaffRegisterPanelProps {
 export function StaffRegisterPanel({
   isInitiallyQrScanner = true,
 }: StaffRegisterPanelProps) {
+  const t = useT();
   return (
     <div className="flex flex-col items-center min-h-[70vh]">
       <h1 className="text-center text-2xl mt-5 text-primary leading-7">
-        ลงทะเบียนงาน <br />
+        {t("staff.register.heading")} <br />
         CU first date
       </h1>
       <Tabs
@@ -21,8 +23,12 @@ export function StaffRegisterPanel({
         className="mt-7"
       >
         <TabsList className="self-center">
-          <TabsTrigger value="scanner"> สแกน QR code</TabsTrigger>
-          <TabsTrigger value="manual"> ใช้รหัสนิสิต </TabsTrigger>
+          <TabsTrigger value="scanner">
+            {t("staff.register.tabScanner")}
+          </TabsTrigger>
+          <TabsTrigger value="manual">
+            {t("staff.register.tabManual")}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="scanner">
@@ -38,6 +44,8 @@ export function StaffRegisterPanel({
 }
 
 function CheckInQrScanner() {
+  const t = useT();
+
   // TODO: permission flow
   return (
     <section className="mt-8 px-4">
@@ -50,24 +58,28 @@ function CheckInQrScanner() {
       />
 
       <p className="text-primary text-xs text-center mt-12">
-        เมื่อลงทะเบียนเรียบร้อยแล้ว <br />
-        อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ
+        {t("staff.register.refreshReminderLine1")} <br />
+        {t("staff.register.refreshReminderLine2")}
       </p>
     </section>
   );
 }
 
 function ManualCheckInForm() {
+  const t = useT();
   return (
     <section className="mt-12 items-center flex flex-col">
-      <Input placeholder="กรอกอะไรหว่า" className="w-72 max-w-[75vw]" />
+      <Input
+        placeholder={t("staff.register.studentIdPlaceholder")}
+        className="w-72 max-w-[75vw]"
+      />
       <Button size="lg" className="w-48 mt-4 max-w-[65vw]">
-        ลงทะเบียน
+        {t("staff.register.submit")}
       </Button>
 
       <p className="text-primary text-xs text-center mt-12">
-        เมื่อลงทะเบียนเรียบร้อยแล้ว <br />
-        อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ
+        {t("staff.register.refreshReminderLine1")} <br />
+        {t("staff.register.refreshReminderLine2")}
       </p>
     </section>
   );

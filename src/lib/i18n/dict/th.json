@@ -13,5 +13,16 @@
     "titleLine2": "ในวันแรกพบ",
     "date": "18 กรกฎาคม 2569",
     "cta": "เข้าสู่ระบบ"
+  },
+  "staff": {
+    "register": {
+      "heading": "ลงทะเบียนงาน",
+      "tabScanner": "สแกน QR code",
+      "tabManual": "ใช้รหัสนิสิต",
+      "studentIdPlaceholder": "กรอกรหัสนิสิต",
+      "submit": "ลงทะเบียน",
+      "refreshReminderLine1": "เมื่อลงทะเบียนเรียบร้อยแล้ว",
+      "refreshReminderLine2": "อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ"
+    }
   }
 }

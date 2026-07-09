@@ -13,5 +13,16 @@
     "titleLine2": "on First Date",
     "date": "July 18, 2026",
     "cta": "Log in"
+  },
+  "staff": {
+    "register": {
+      "heading": "Event Registration",
+      "tabScanner": "Scan QR code",
+      "tabManual": "Use student ID",
+      "studentIdPlaceholder": "Enter student ID",
+      "submit": "Register",
+      "refreshReminderLine1": "Once check-in is complete,",
+      "refreshReminderLine2": "remind them to refresh their screen."
+    }
   }
 }
