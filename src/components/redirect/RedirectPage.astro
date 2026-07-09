@@ -1,0 +1,56 @@
+---
+import Image from "astro/components/Image.astro";
+import flowerBlue from "../../assets/images/flower_blue.png";
+import flowerWhite from "../../assets/images/flower_white.png";
+import ladder from "../../assets/images/ladder.png";
+import starPink from "../../assets/images/star_pink.png";
+import starOrange from "../../assets/images/star_orange.png";
+import starYellow from "../../assets/images/star_yellow.png";
+import vase from "../../assets/images/vase.png";
+
+import RedirectPanel from "./RedirectPanel";
+---
+
+<div class="w-full relative pt-12 pb-6 px-4 flex flex-col gap-12">
+  <RedirectPanel />
+
+  <!-- Empty Box -->
+  <div class="w-full h-2"></div>
+
+  <!-- Decorations -->
+  <Image
+    src={flowerBlue}
+    alt="Flower Blue Decoration"
+    class="absolute right-0 top-1/4 translate-x-3/10"
+  />
+  <Image
+    src={flowerWhite}
+    alt="Flower White Decoration"
+    class="absolute top-0 right-0 -translate-y-11/12 max-w-16 w-[20vw] translate-x-1/10"
+  />
+  <Image
+    src={ladder}
+    alt="Ladder Decoration"
+    class="absolute bottom-0 right-0 translate-y-1/2 max-w-32 w-[25vw] translate-x-1/4"
+  />
+  <Image
+    src={starPink}
+    alt="Star Pink Decoration"
+    class="absolute left-0 top-1/2 -translate-x-2/5"
+  />
+  <Image
+    src={starOrange}
+    alt="Star Orange Decoration"
+    class="absolute top-0 right-0 max-w-12 w-[20vw] -translate-x-4/5"
+  />
+  <Image
+    src={starYellow}
+    alt="Star Yellow Decoration"
+    class="absolute top-0 left-0 -translate-y-3/5 max-w-25 w-[30vw] -translate-x-1/4"
+  />
+  <Image
+    src={vase}
+    alt="Vase Decoration"
+    class="absolute bottom-0 left-0 translate-y-3/5 max-w-64 w-[50vw] -translate-x-1/4"
+  />
+</div>

@@ -1,4 +1,8 @@
+import { useStore } from "@nanostores/react";
+
 import { Button } from "@components/ui/button";
+import { $locale, setLocale } from "@lib/i18n/locale";
+import { useT } from "@lib/i18n/useT";
 import { Checkbox } from "./ui/checkbox";
 import { Field } from "./ui/field";
 import { Input } from "./ui/input";
@@ -17,9 +21,40 @@ import { Switch } from "./ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 export function ComponentDemo() {
+  const t = useT();
+  const locale = useStore($locale);
+
   return (
     <section className="grid gap-4 p-6 w-full">
       <h1 className="text-xl font-bold font-mono"> Components </h1>
+
+      <h2 className="text-lg font-bold font-mono"> i18n </h2>
+      <div className="grid gap-2">
+        <p className="text-sm text-muted-foreground font-mono">
+          current locale: {locale}
+        </p>
+        <p>{t("welcome.title", { appName: "firstdate" })}</p>
+        <p className="text-sm">{t("welcome.description")}</p>
+        <div className="flex gap-2">
+          <Button
+            type="button"
+            variant={locale === "th" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setLocale("th")}
+          >
+            ไทย
+          </Button>
+          <Button
+            type="button"
+            variant={locale === "en" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setLocale("en")}
+          >
+            EN
+          </Button>
+        </div>
+      </div>
+      <hr />
 
       <h2 className="text-lg font-bold font-mono"> Typography </h2>
       <div className="grid gap-1">
@@ -117,8 +152,6 @@ export function ComponentDemo() {
       <Tabs defaultValue="overview" className="w-full">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
-          <TabsTrigger value="reports">Reports</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
       </Tabs>
