@@ -106,7 +106,7 @@ export function RegisterPanel() {
             className="h-14 flex-2 rounded-full text-lg"
             onClick={goNext}
           >
-            {step < TOTAL_STEPS ? "ถัดไป" : "ยืนยัน"}
+            ถัดไป
           </Button>
         </div>
       </div>
