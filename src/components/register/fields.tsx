@@ -29,7 +29,8 @@ export type Path = FieldPath<RegisterFormValues>;
 export type SelectOption = { value: string; label: string };
 
 export const controlClass =
-  "h-11 w-full rounded-md border border-border bg-transparent px-5 text-base";
+  "h-11 w-full rounded-md border border-border bg-transparent px-5 text-base " +
+  "disabled:cursor-not-allowed disabled:border-border/60 disabled:bg-border/20 data-disabled:cursor-not-allowed data-disabled:border-border/60 data-disabled:bg-border/20";
 
 export const popupClass = "min-w-0";
 
