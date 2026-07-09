@@ -7,7 +7,7 @@ import { OTHER_OPTION } from "@lib/register-options";
 const required = (message: string) => z.string().trim().min(1, message);
 const phone = z
   .string()
-  .regex(/^0\d{9}$/, "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก");
+  .regex(/^0\d{9}$/, "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก และขึ้นต้นด้วย 0");
 
 export const registerSchema = z
   .object({
