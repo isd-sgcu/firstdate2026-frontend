@@ -7,7 +7,8 @@ import {
   type FieldErrors,
   type FieldPath,
 } from "react-hook-form";
-import { Trash2 } from "lucide-react";
+import { Combobox } from "@base-ui/react/combobox";
+import { ChevronDownIcon, Trash2 } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import { Button } from "@components/ui/button";
@@ -32,6 +33,7 @@ import type { RegisterFormValues } from "./types";
 
 type Name = FieldPath<RegisterFormValues>;
 type Option = { value: string; label: string };
+type Leg = RegisterFormValues["travelLegs"][number];
 
 const PROVINCE_OPTIONS: Option[] = PROVINCES.map((p) => ({
   value: String(p.id),
@@ -45,6 +47,8 @@ const CHULA = {
   province: String(CHULA_PROVINCE_ID),
   district: String(CHULA_DISTRICT_ID),
 };
+const isChula = (leg: Leg) =>
+  leg.destProvince === CHULA.province && leg.destDistrict === CHULA.district;
 
 const districtsOf = (provinceId: string): Option[] =>
   DISTRICTS.filter((d) => String(d.provinceId) === provinceId).map((d) => ({
@@ -66,22 +70,16 @@ function FormSelect({
   name,
   options,
   placeholder,
-  disabled,
-  onAfterChange,
 }: {
   name: Name;
   options: Option[];
   placeholder: string;
-  disabled?: boolean;
-  onAfterChange?: () => void;
 }) {
   const {
     control,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
   const error = errorAt(errors, name);
-  // value → label map so the trigger shows the label (province/district ids
-  // differ from their names).
   const items = Object.fromEntries(options.map((o) => [o.value, o.label]));
 
   return (
@@ -93,16 +91,11 @@ function FormSelect({
           <Select
             items={items}
             value={(field.value as string) || null}
-            onValueChange={(value) => {
-              field.onChange(value ?? "");
-              onAfterChange?.();
-            }}
-            disabled={disabled}
+            onValueChange={(value) => field.onChange(value ?? "")}
           >
             <SelectTrigger
               className={cn(controlClass, "w-full")}
               aria-invalid={!!error}
-              disabled={disabled}
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
@@ -121,8 +114,87 @@ function FormSelect({
   );
 }
 
-/** Province select + dependent district select (district resets when province
- *  changes). When `disabled`, both are locked (used for the fixed จุฬาฯ end). */
+function FormCombobox({
+  name,
+  options,
+  placeholder,
+  disabled,
+  onAfterChange,
+}: {
+  name: Name;
+  options: Option[];
+  placeholder: string;
+  disabled?: boolean;
+  onAfterChange?: () => void;
+}) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<RegisterFormValues>();
+  const error = errorAt(errors, name);
+  const values = options.map((o) => o.value);
+  const labelFor = (value: string) =>
+    options.find((o) => o.value === value)?.label ?? "";
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <Combobox.Root
+            items={values}
+            itemToStringLabel={labelFor}
+            value={(field.value as string) || null}
+            onValueChange={(value) => {
+              field.onChange(value ?? "");
+              onAfterChange?.();
+            }}
+            openOnInputClick
+            disabled={disabled}
+          >
+            <div className="relative">
+              <Combobox.Input
+                placeholder={placeholder}
+                aria-invalid={!!error}
+                onBlur={field.onBlur}
+                disabled={disabled}
+                className={cn(controlClass, "pr-9")}
+              />
+              <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-muted-foreground">
+                <ChevronDownIcon className="size-4" />
+              </span>
+            </div>
+            <Combobox.Portal>
+              <Combobox.Positioner sideOffset={4} className="isolate z-50">
+                <Combobox.Popup className="max-h-(--available-height) w-(--anchor-width) overflow-y-auto rounded-lg border bg-popover p-1 text-popover-foreground shadow-xl ring-1 ring-foreground/10">
+                  <Combobox.Empty className="px-2 py-2 text-sm text-muted-foreground">
+                    ไม่พบผลลัพธ์
+                  </Combobox.Empty>
+                  <Combobox.List>
+                    {(item: string) => (
+                      <Combobox.Item
+                        key={item}
+                        value={item}
+                        className="flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-none select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-selected:font-bold"
+                      >
+                        {labelFor(item)}
+                      </Combobox.Item>
+                    )}
+                  </Combobox.List>
+                </Combobox.Popup>
+              </Combobox.Positioner>
+            </Combobox.Portal>
+          </Combobox.Root>
+        )}
+      />
+      {error && <span className="text-sm text-destructive">{error}</span>}
+    </div>
+  );
+}
+
+/** Province combobox + dependent district combobox (district resets when the
+ *  province changes). When `disabled`, both are locked. */
 function GeoPair({
   provinceName,
   districtName,
@@ -137,14 +209,14 @@ function GeoPair({
 
   return (
     <div className="flex flex-col gap-3">
-      <FormSelect
+      <FormCombobox
         name={provinceName}
         options={PROVINCE_OPTIONS}
         placeholder="เลือกจังหวัด"
         disabled={disabled}
         onAfterChange={() => setValue(districtName, "")}
       />
-      <FormSelect
+      <FormCombobox
         name={districtName}
         options={districtsOf(provinceId)}
         placeholder="เลือกเขต/อำเภอ"
@@ -175,13 +247,16 @@ export function StepTravelInfo() {
   const { control, setValue } = useFormContext<RegisterFormValues>();
   const residenceProvince =
     (useWatch({ name: "residenceProvince" }) as string) || "";
+  const residenceDistrict =
+    (useWatch({ name: "residenceDistrict" }) as string) || "";
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "travelLegs",
   });
+  const legs = useWatch({ control, name: "travelLegs" }) as Leg[] | undefined;
 
-  // The final leg always ends at จุฬาฯ (กรุงเทพมหานคร / เขตปทุมวัน).
+  // always ends at จุฬาฯ (e.g. after deleting the last route).
   useEffect(() => {
     const last = fields.length - 1;
     if (last < 0) return;
@@ -190,9 +265,35 @@ export function StepTravelInfo() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fields.length]);
 
+  useEffect(() => {
+    if (!legs || legs.length === 0) return;
+
+    const reachedChula = legs.findIndex(
+      (leg, i) => i < legs.length - 1 && isChula(leg),
+    );
+    if (reachedChula !== -1) {
+      for (let i = legs.length - 1; i > reachedChula; i--) remove(i);
+      return;
+    }
+
+    legs.forEach((leg, i) => {
+      const originProvince =
+        i === 0 ? residenceProvince : legs[i - 1].destProvince;
+      const originDistrict =
+        i === 0 ? residenceDistrict : legs[i - 1].destDistrict;
+      if (leg.originProvince !== originProvince) {
+        setValue(`travelLegs.${i}.originProvince`, originProvince);
+      }
+      if (leg.originDistrict !== originDistrict) {
+        setValue(`travelLegs.${i}.originDistrict`, originDistrict);
+      }
+    });
+  }, [legs, residenceProvince, residenceDistrict, remove, setValue]);
+
   const addLeg = () => {
     const prevLast = fields.length - 1;
     if (prevLast >= 0) {
+      // the old last leg becomes an intermediate stop — free up its destination
       setValue(`travelLegs.${prevLast}.destProvince`, "");
       setValue(`travelLegs.${prevLast}.destDistrict`, "");
     }
@@ -215,7 +316,7 @@ export function StepTravelInfo() {
           เขต/อำเภอ และจังหวัดที่ท่านอาศัยอยู่เป็นปกติ
         </p>
         <LabelRow label="จังหวัด">
-          <FormSelect
+          <FormCombobox
             name="residenceProvince"
             options={PROVINCE_OPTIONS}
             placeholder="เลือกจังหวัด"
@@ -223,7 +324,7 @@ export function StepTravelInfo() {
           />
         </LabelRow>
         <LabelRow label="เขต/อำเภอ">
-          <FormSelect
+          <FormCombobox
             name="residenceDistrict"
             options={districtsOf(residenceProvince)}
             placeholder="เลือกเขต/อำเภอ"
@@ -232,6 +333,7 @@ export function StepTravelInfo() {
         </LabelRow>
       </div>
 
+      {/* travel legs */}
       <div className="flex flex-col gap-3">
         {/* TODO: i18n */}
         <p className="text-base text-foreground">
@@ -242,6 +344,7 @@ export function StepTravelInfo() {
           {fields.map((leg, index) => {
             const isLastLeg = index === fields.length - 1;
             const showAdd = fields.length < MAX_TRAVEL_LEGS;
+            // px from this node's bottom down to the next dot's centre
             const lineToNext =
               isLastLeg && !showAdd ? null : isLastLeg ? 46 : 35;
             return (
@@ -286,6 +389,7 @@ export function StepTravelInfo() {
                   <GeoPair
                     provinceName={`travelLegs.${index}.originProvince`}
                     districtName={`travelLegs.${index}.originDistrict`}
+                    disabled
                   />
                 </div>
 
