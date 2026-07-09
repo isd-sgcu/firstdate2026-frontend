@@ -11,12 +11,12 @@ import {
 } from "@components/ui/select";
 import {
   FACULTIES,
-  FACULTY_ITEMS,
   PREFIX_OPTIONS,
   RELATION_OPTIONS,
 } from "@lib/register-options";
 
 import {
+  ComboboxField,
   controlClass,
   FieldBlock,
   popupClass,
@@ -55,11 +55,10 @@ export function StepPersonalInfo() {
           rules={{ required: "กรุณากรอกนามสกุล" }}
         />
 
-        <SelectField
+        <ComboboxField
           name="faculty"
           label="คณะ"
           placeholder="คณะ"
-          items={FACULTY_ITEMS}
           options={FACULTY_OPTIONS}
           rules={{ required: "กรุณาเลือกคณะ" }}
         />
@@ -72,8 +71,8 @@ export function StepPersonalInfo() {
           rules={{
             required: "กรุณากรอกเลขประจำตัวนิสิต",
             pattern: {
-              value: /^\d{10}$/,
-              message: "เลขประจำตัวนิสิตต้องเป็นตัวเลข 10 หลัก",
+              value: /^69\d{8}$/,
+              message: "เลขประจำตัวนิสิตต้องขึ้นต้นด้วย 69 และมี 10 หลัก",
             },
           }}
         />

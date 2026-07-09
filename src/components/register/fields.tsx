@@ -1,5 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import type { RegisterOptions } from "react-hook-form";
+import { Combobox } from "@base-ui/react/combobox";
+import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import { Input } from "@components/ui/input";
@@ -135,6 +137,82 @@ export function SelectField<TName extends FieldName>({
               ))}
             </SelectContent>
           </Select>
+        )}
+      />
+    </FieldBlock>
+  );
+}
+
+/** A searchable single-select (base-ui Combobox) wired to the shared form.
+ *  Good when there are many options — the user types to filter by label. */
+export function ComboboxField<TName extends FieldName>({
+  name,
+  label,
+  placeholder,
+  options,
+  rules,
+}: {
+  name: TName;
+  label: string;
+  placeholder: string;
+  options: readonly SelectOption[];
+  rules?: RegisterOptions<RegisterFormValues, TName>;
+}) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<RegisterFormValues>();
+
+  const values = options.map((option) => option.value);
+  const labelFor = (value: string) =>
+    options.find((option) => option.value === value)?.label ?? "";
+
+  return (
+    <FieldBlock label={label} error={errors[name]?.message}>
+      <Controller
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field }) => (
+          <Combobox.Root
+            items={values}
+            itemToStringLabel={labelFor}
+            value={field.value || null}
+            onValueChange={(value) => field.onChange(value ?? "")}
+            openOnInputClick
+          >
+            <div className="relative">
+              <Combobox.Input
+                placeholder={placeholder}
+                aria-invalid={!!errors[name]}
+                onBlur={field.onBlur}
+                className={cn(controlClass, "pr-9")}
+              />
+              <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-muted-foreground">
+                <ChevronDownIcon className="size-4" />
+              </span>
+            </div>
+            <Combobox.Portal>
+              <Combobox.Positioner sideOffset={4} className="isolate z-50">
+                <Combobox.Popup className="max-h-(--available-height) w-(--anchor-width) overflow-y-auto rounded-lg border bg-popover p-1 text-popover-foreground shadow-xl ring-1 ring-foreground/10">
+                  <Combobox.Empty className="px-2 py-2 text-sm text-muted-foreground">
+                    ไม่พบผลลัพธ์
+                  </Combobox.Empty>
+                  <Combobox.List>
+                    {(item: string) => (
+                      <Combobox.Item
+                        key={item}
+                        value={item}
+                        className="flex cursor-default items-center rounded-md px-2 py-1.5 text-base outline-none select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-selected:font-bold"
+                      >
+                        {labelFor(item)}
+                      </Combobox.Item>
+                    )}
+                  </Combobox.List>
+                </Combobox.Popup>
+              </Combobox.Positioner>
+            </Combobox.Portal>
+          </Combobox.Root>
         )}
       />
     </FieldBlock>

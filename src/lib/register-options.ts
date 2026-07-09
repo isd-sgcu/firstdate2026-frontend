@@ -106,15 +106,6 @@ export const FACULTIES: Faculty[] = [
   { code: "99", name: "มหาวิทยาลัยอื่น", nameEn: "Other University" },
 ];
 
-/**
- * code → label map for base-ui `Select`'s `items` prop, so the trigger shows the
- * faculty name instead of the raw code.
- * TODO: i18n — swap `name` for `nameEn`
- */
-export const FACULTY_ITEMS: Record<string, string> = Object.fromEntries(
-  FACULTIES.map((faculty) => [faculty.code, faculty.name]),
-);
-
 // TODO: i18n — Thai-only; these are used as both the value and the label.
 export const PREFIX_OPTIONS = ["นาย", "นาง", "นางสาว", "อื่นๆ"] as const;
 
