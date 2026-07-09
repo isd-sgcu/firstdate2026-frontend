@@ -1,0 +1,128 @@
+/**
+ * Select-option data for the registration form (faculties, name prefixes,
+ * guardian relations).
+ *
+ * Faculties source: the official registrar faculty list
+ * https://cas.reg.chula.ac.th/cu/general/PersonalInformation/Faculty/IndexDisplayFaculty.html
+ */
+
+export type Faculty = {
+  code: string;
+  name: string;
+  nameEn: string;
+};
+
+// TODO: i18n — `name` is Thai, `nameEn` is English; pick by locale when the app
+// becomes bilingual (the select currently shows `name`).
+export const FACULTIES: Faculty[] = [
+  {
+    code: "01",
+    name: "สถาบันภาษาไทยสิรินธร",
+    nameEn: "The Sirindhorn Thai Language Institute",
+  },
+  {
+    code: "02",
+    name: "ศูนย์การศึกษาทั่วไป",
+    nameEn: "Office of Academic Affairs",
+  },
+  { code: "20", name: "บัณฑิตวิทยาลัย", nameEn: "Graduate School" },
+  { code: "21", name: "คณะวิศวกรรมศาสตร์", nameEn: "Faculty of Engineering" },
+  { code: "22", name: "คณะอักษรศาสตร์", nameEn: "Faculty of Arts" },
+  { code: "23", name: "คณะวิทยาศาสตร์", nameEn: "Faculty of Science" },
+  { code: "24", name: "คณะรัฐศาสตร์", nameEn: "Faculty of Political Science" },
+  {
+    code: "25",
+    name: "คณะสถาปัตยกรรมศาสตร์",
+    nameEn: "Faculty of Architecture",
+  },
+  {
+    code: "26",
+    name: "คณะพาณิชยศาสตร์และการบัญชี",
+    nameEn: "Faculty of Commerce and Accountancy",
+  },
+  { code: "27", name: "คณะครุศาสตร์", nameEn: "Faculty of Education" },
+  {
+    code: "28",
+    name: "คณะนิเทศศาสตร์",
+    nameEn: "Faculty of Communication Arts",
+  },
+  { code: "29", name: "คณะเศรษฐศาสตร์", nameEn: "Faculty of Economics" },
+  { code: "30", name: "คณะแพทยศาสตร์", nameEn: "Faculty of Medicine" },
+  {
+    code: "31",
+    name: "คณะสัตวแพทยศาสตร์",
+    nameEn: "Faculty of Veterinary Science",
+  },
+  { code: "32", name: "คณะทันตแพทยศาสตร์", nameEn: "Faculty of Dentistry" },
+  {
+    code: "33",
+    name: "คณะเภสัชศาสตร์",
+    nameEn: "Faculty of Pharmaceutical Sciences",
+  },
+  { code: "34", name: "คณะนิติศาสตร์", nameEn: "Faculty of Law" },
+  {
+    code: "35",
+    name: "คณะศิลปกรรมศาสตร์",
+    nameEn: "Faculty of Fine and Applied Arts",
+  },
+  { code: "36", name: "คณะพยาบาลศาสตร์", nameEn: "Faculty of Nursing" },
+  {
+    code: "37",
+    name: "คณะสหเวชศาสตร์",
+    nameEn: "Faculty of Allied Health Sciences",
+  },
+  { code: "38", name: "คณะจิตวิทยา", nameEn: "Faculty of Psychology" },
+  {
+    code: "39",
+    name: "คณะวิทยาศาสตร์การกีฬา",
+    nameEn: "Faculty of Sports Science",
+  },
+  {
+    code: "40",
+    name: "สำนักวิชาทรัพยากรการเกษตร",
+    nameEn: "School of Agricultural Resources",
+  },
+  {
+    code: "51",
+    name: "วิทยาลัยประชากรศาสตร์",
+    nameEn: "College of Population Studies",
+  },
+  {
+    code: "53",
+    name: "วิทยาลัยวิทยาศาสตร์สาธารณสุข",
+    nameEn: "College of Public Health Sciences",
+  },
+  { code: "55", name: "สถาบันภาษา", nameEn: "Language Institute" },
+  {
+    code: "56",
+    name: "สถาบันนวัตกรรมบูรณาการ",
+    nameEn: "School of Integrated Innovation",
+  },
+  {
+    code: "58",
+    name: "สถาบันบัณฑิตบริหารธุรกิจ ศศินทร์ฯ",
+    nameEn: "Sasin Graduate Institute of Business Administration",
+  },
+  { code: "99", name: "มหาวิทยาลัยอื่น", nameEn: "Other University" },
+];
+
+/**
+ * code → label map for base-ui `Select`'s `items` prop, so the trigger shows the
+ * faculty name instead of the raw code.
+ * TODO: i18n — swap `name` for `nameEn`
+ */
+export const FACULTY_ITEMS: Record<string, string> = Object.fromEntries(
+  FACULTIES.map((faculty) => [faculty.code, faculty.name]),
+);
+
+// TODO: i18n — Thai-only; these are used as both the value and the label.
+export const PREFIX_OPTIONS = ["นาย", "นาง", "นางสาว", "อื่นๆ"] as const;
+
+// TODO: i18n — Thai-only; these are used as both the value and the label.
+export const RELATION_OPTIONS = [
+  "บิดา",
+  "มารดา",
+  "พี่น้อง",
+  "ญาติ",
+  "อื่น ๆ",
+] as const;
