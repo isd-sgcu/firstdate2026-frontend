@@ -6,6 +6,7 @@ import { Button } from "@components/ui/button";
 import { RegisterStepper } from "./RegisterStepper";
 import { StepPersonalInfo } from "./StepPersonalInfo";
 import { StepHealthInfo } from "./StepHealthInfo";
+import { StepOtherInfo } from "./StepOtherInfo";
 import { registerSchema } from "./schema";
 import { STEP_FIELDS, TOTAL_STEPS, type RegisterFormValues } from "./types";
 
@@ -36,6 +37,9 @@ export function RegisterPanel() {
       drugAllergyDetail: "",
       chronicDiseaseHas: false,
       chronicDiseaseDetail: "",
+      // Step 3
+      sgcuAwareness: "",
+      prChannel: "",
     },
   });
 
@@ -79,7 +83,8 @@ export function RegisterPanel() {
         >
           {step === 1 && <StepPersonalInfo />}
           {step === 2 && <StepHealthInfo />}
-          {step > 2 && (
+          {step === 3 && <StepOtherInfo />}
+          {step > 3 && (
             /* TODO: i18n */
             <p className="py-10 text-center text-muted-foreground">
               ขั้นตอนที่ {step} (กำลังทำครับ)

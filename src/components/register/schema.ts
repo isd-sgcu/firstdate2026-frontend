@@ -34,6 +34,10 @@ export const registerSchema = z
     drugAllergyDetail: z.string(),
     chronicDiseaseHas: z.boolean(),
     chronicDiseaseDetail: z.string(),
+
+    // Step 3 — ข้อมูลอื่น ๆ
+    sgcuAwareness: required("กรุณาเลือกคำตอบ"),
+    prChannel: required("กรุณาเลือกคำตอบ"),
   })
   .superRefine((v, ctx) => {
     const need = (when: boolean, path: string, message: string) => {

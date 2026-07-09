@@ -4,6 +4,7 @@ import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@lib/utils";
 import { Input } from "@components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@components/ui/radio-group";
 import {
   Select,
   SelectContent,
@@ -246,6 +247,58 @@ export function YesNoToggle({
       >
         มี
       </button>
+    </div>
+  );
+}
+
+/** A single-choice radio question wired to the shared form. */
+export function RadioGroupField<TName extends FieldName>({
+  name,
+  question,
+  options,
+}: {
+  name: TName;
+  question: string;
+  options: readonly string[];
+}) {
+  const {
+    control,
+    trigger,
+    formState: { errors },
+  } = useFormContext<RegisterFormValues>();
+  const error = errors[name]?.message;
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* TODO: i18n */}
+      <p className="text-base text-foreground">{question}</p>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <RadioGroup
+            value={field.value || null}
+            onValueChange={(value) => {
+              field.onChange(value ?? "");
+              if (error) void trigger(name);
+            }}
+            aria-invalid={!!error}
+            className="gap-3"
+          >
+            {options.map((option) => (
+              // TODO: i18n
+              <label
+                key={option}
+                className="flex cursor-pointer items-center gap-3 select-none"
+              >
+                <RadioGroupItem value={option} aria-invalid={!!error} />
+                <span className="text-sm">{option}</span>
+              </label>
+            ))}
+          </RadioGroup>
+        )}
+      />
+      {error && <span className="text-sm text-destructive">{error}</span>}
     </div>
   );
 }
