@@ -103,7 +103,6 @@ export const FACULTIES: Faculty[] = [
     name: "สถาบันบัณฑิตบริหารธุรกิจ ศศินทร์ฯ",
     nameEn: "Sasin Graduate Institute of Business Administration",
   },
-  { code: "99", name: "มหาวิทยาลัยอื่น", nameEn: "Other University" },
 ];
 
 // TODO: i18n — Thai-only; these are used as both the value and the label.
