@@ -45,7 +45,7 @@ export function StepPdpa({ onConsent }: { onConsent: () => void }) {
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="mt-6 shrink-0 px-6 text-center">
         {/* TODO: i18n */}
-        <h1 className="text-3xl leading-tight font-bold text-primary">
+        <h1 className="text-3xl leading-tight text-primary">
           {PDPA_TITLE.map((line) => (
             <span key={line} className="block">
               {line}
@@ -71,7 +71,7 @@ export function StepPdpa({ onConsent }: { onConsent: () => void }) {
             <ul className="mt-3 list-disc space-y-3 pl-4">
               {PDPA_DEFINITIONS.map((d) => (
                 <li key={d.term}>
-                  <span className="font-bold">{d.term}</span> {d.definition}
+                  <span>{d.term}</span> {d.definition}
                 </li>
               ))}
             </ul>
@@ -83,7 +83,7 @@ export function StepPdpa({ onConsent }: { onConsent: () => void }) {
         <button
           type="button"
           onClick={jump}
-          className="mx-auto mb-3 flex items-center gap-1.5 text-sm font-bold text-fd-red"
+          className="mx-auto mb-3 flex items-center gap-1.5 text-sm text-fd-red"
         >
           {atBottom ? (
             <DoubleArrowUpIcon className="size-5" />
