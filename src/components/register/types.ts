@@ -1,15 +1,5 @@
-export type RegisterFormValues = {
-  // Step 1 — ข้อมูลส่วนตัว
-  prefix: string;
-  firstName: string;
-  lastName: string;
-  faculty: string;
-  studentId: string;
-  phone: string;
-  // Step 1 — ข้อมูลผู้ปกครอง
-  guardianPhone: string;
-  guardianRelation: string;
-};
+export type { RegisterFormValues } from "./schema";
+import type { RegisterFormValues } from "./schema";
 
 export const TOTAL_STEPS = 4;
 
@@ -25,7 +15,18 @@ export const STEP_FIELDS: Record<number, (keyof RegisterFormValues)[]> = {
     "guardianPhone",
     "guardianRelation",
   ],
-  2: [],
+  2: [
+    "foodAllergyHas",
+    "foodAllergyItems",
+    "foodAllergyOther",
+    "dietaryHas",
+    "dietaryItems",
+    "dietaryOther",
+    "drugAllergyHas",
+    "drugAllergyDetail",
+    "chronicDiseaseHas",
+    "chronicDiseaseDetail",
+  ],
   3: [],
   4: [],
 };

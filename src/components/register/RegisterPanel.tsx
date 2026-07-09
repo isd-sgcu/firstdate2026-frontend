@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@components/ui/button";
 import { RegisterStepper } from "./RegisterStepper";
 import { StepPersonalInfo } from "./StepPersonalInfo";
+import { StepHealthInfo } from "./StepHealthInfo";
+import { registerSchema } from "./schema";
 import { STEP_FIELDS, TOTAL_STEPS, type RegisterFormValues } from "./types";
 
 export function RegisterPanel() {
@@ -11,7 +14,9 @@ export function RegisterPanel() {
 
   const methods = useForm<RegisterFormValues>({
     mode: "onTouched",
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      // Step 1
       prefix: "",
       firstName: "",
       lastName: "",
@@ -20,6 +25,17 @@ export function RegisterPanel() {
       phone: "",
       guardianPhone: "",
       guardianRelation: "",
+      // Step 2
+      foodAllergyHas: false,
+      foodAllergyItems: [],
+      foodAllergyOther: "",
+      dietaryHas: false,
+      dietaryItems: [],
+      dietaryOther: "",
+      drugAllergyHas: false,
+      drugAllergyDetail: "",
+      chronicDiseaseHas: false,
+      chronicDiseaseDetail: "",
     },
   });
 
@@ -41,6 +57,8 @@ export function RegisterPanel() {
     })();
   };
 
+  const goBack = () => setStep((prev) => Math.max(1, prev - 1));
+
   return (
     <FormProvider {...methods}>
       <div className="flex min-h-0 flex-1 flex-col">
@@ -60,7 +78,8 @@ export function RegisterPanel() {
           className="no-scrollbar mt-6 min-h-0 flex-1 overflow-y-auto px-6"
         >
           {step === 1 && <StepPersonalInfo />}
-          {step > 1 && (
+          {step === 2 && <StepHealthInfo />}
+          {step > 2 && (
             /* TODO: i18n */
             <p className="py-10 text-center text-muted-foreground">
               ขั้นตอนที่ {step} (กำลังทำครับ)
@@ -68,12 +87,23 @@ export function RegisterPanel() {
           )}
         </form>
 
-        <div className="shrink-0 px-6 pt-4 pb-10">
-          {/* TODO: i18n */}
+        {/* TODO: i18n */}
+        <div className="flex shrink-0 gap-3 px-6 pt-4 pb-10">
+          {step > 1 && (
+            <Button
+              type="button"
+              variant="primaryOutline"
+              size="lg"
+              className="h-14 flex-2 rounded-full text-lg bg-primary-foreground"
+              onClick={goBack}
+            >
+              ย้อนกลับ
+            </Button>
+          )}
           <Button
             type="button"
             size="lg"
-            className="h-14 w-full rounded-full text-lg"
+            className="h-14 flex-2 rounded-full text-lg"
             onClick={goNext}
           >
             {step < TOTAL_STEPS ? "ถัดไป" : "ยืนยัน"}

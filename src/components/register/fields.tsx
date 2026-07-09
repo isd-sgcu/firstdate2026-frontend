@@ -1,5 +1,4 @@
 import { Controller, useFormContext } from "react-hook-form";
-import type { RegisterOptions } from "react-hook-form";
 import { Combobox } from "@base-ui/react/combobox";
 import { ChevronDownIcon } from "lucide-react";
 
@@ -15,7 +14,12 @@ import {
 
 import type { RegisterFormValues } from "./types";
 
-type FieldName = keyof RegisterFormValues;
+/** Only the string-valued fields — these inputs/selects bind to a string. */
+type FieldName = {
+  [K in keyof RegisterFormValues]: RegisterFormValues[K] extends string
+    ? K
+    : never;
+}[keyof RegisterFormValues];
 
 export const controlClass =
   "h-11 w-full rounded-md border border-border bg-transparent px-5 text-base";
@@ -58,13 +62,11 @@ export function TextField<TName extends FieldName>({
   name,
   label,
   placeholder,
-  rules,
   inputMode,
 }: {
   name: TName;
   label: string;
   placeholder: string;
-  rules?: RegisterOptions<RegisterFormValues, TName>;
   inputMode?: React.ComponentProps<"input">["inputMode"];
 }) {
   const {
@@ -79,7 +81,7 @@ export function TextField<TName extends FieldName>({
         placeholder={placeholder}
         inputMode={inputMode}
         aria-invalid={!!errors[name]}
-        {...register(name, rules)}
+        {...register(name)}
       />
     </FieldBlock>
   );
@@ -93,14 +95,12 @@ export function SelectField<TName extends FieldName>({
   placeholder,
   options,
   items,
-  rules,
 }: {
   name: TName;
   label: string;
   placeholder: string;
   options: readonly SelectOption[] | readonly string[];
   items?: Record<string, string>;
-  rules?: RegisterOptions<RegisterFormValues, TName>;
 }) {
   const {
     control,
@@ -116,7 +116,6 @@ export function SelectField<TName extends FieldName>({
       <Controller
         control={control}
         name={name}
-        rules={rules}
         render={({ field }) => (
           <Select
             items={items}
@@ -150,13 +149,11 @@ export function ComboboxField<TName extends FieldName>({
   label,
   placeholder,
   options,
-  rules,
 }: {
   name: TName;
   label: string;
   placeholder: string;
   options: readonly SelectOption[];
-  rules?: RegisterOptions<RegisterFormValues, TName>;
 }) {
   const {
     control,
@@ -172,7 +169,6 @@ export function ComboboxField<TName extends FieldName>({
       <Controller
         control={control}
         name={name}
-        rules={rules}
         render={({ field }) => (
           <Combobox.Root
             items={values}
@@ -216,5 +212,40 @@ export function ComboboxField<TName extends FieldName>({
         )}
       />
     </FieldBlock>
+  );
+}
+
+export function YesNoToggle({
+  value,
+  onChange,
+}: {
+  value: boolean;
+  onChange: (value: boolean) => void;
+}) {
+  const segment = (active: boolean) =>
+    cn(
+      "rounded-full px-4 py-2 text-sm leading-none transition-colors",
+      active ? "bg-primary font-bold text-primary-foreground" : "text-primary",
+    );
+
+  return (
+    <div className="inline-flex shrink-0 items-center rounded-full border border-primary">
+      {/* TODO: i18n */}
+      <button
+        type="button"
+        onClick={() => onChange(false)}
+        className={segment(!value)}
+      >
+        ไม่มี
+      </button>
+      {/* TODO: i18n */}
+      <button
+        type="button"
+        onClick={() => onChange(true)}
+        className={segment(value)}
+      >
+        มี
+      </button>
+    </div>
   );
 }
