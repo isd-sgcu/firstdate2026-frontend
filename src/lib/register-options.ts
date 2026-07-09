@@ -146,3 +146,25 @@ export const DIETARY_OPTIONS = [
   "ไม่ทานผัก",
   OTHER_OPTION,
 ] as const;
+
+// TODO: i18n — Thai-only; used as both the value and the label.
+/** ท่านรู้จัก อบจ. หรือไม่ (Step 3) */
+export const SGCU_AWARENESS_OPTIONS = [
+  "รู้จักและเข้าใจบทบาทหน้าที่ของอบจ.เป็นอย่างดี",
+  "รู้จัก แต่ยังไม่แน่ใจว่าอบจ.มีบทบาทหน้าที่อย่างไร",
+  "ไม่รู้จัก",
+] as const;
+
+// TODO: i18n — Thai-only; used as both the value and the label.
+/** ท่านเห็นการประชาสัมพันธ์จากช่องทางไหนมากที่สุด (Step 3) */
+export const PR_CHANNEL_OPTIONS = [
+  "ฟีดใน instagram ของ cu.firstdate2026",
+  "สตอรี่ใน instagram ของ cu.firstdate2026",
+  "ฟีดใน instagram ของ อบจ. (sgcu.chula)",
+  "สตอรี่ใน instagram ของ อบจ. (sgcu.chula)",
+  "ฟีดใน instagram ของคณะ",
+  "สตอรี่ใน instagram ของคณะ",
+  "ข้อความใน line รุ่นของคณะ",
+  "ข้อความใน line openchat CU110",
+  "เพื่อนหรือคนรู้จักส่งให้ดู",
+] as const;
