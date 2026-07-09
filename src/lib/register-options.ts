@@ -168,3 +168,18 @@ export const PR_CHANNEL_OPTIONS = [
   "ข้อความใน line openchat CU110",
   "เพื่อนหรือคนรู้จักส่งให้ดู",
 ] as const;
+
+// TODO: i18n — Thai + English labels; used as both the value and the label.
+/** ประเภทยานพาหนะ (Step 4) */
+export const VEHICLE_OPTIONS = [
+  "รถยนต์ส่วนบุคคล (Private Car)",
+  "รถยนต์ไฟฟ้าส่วนบุคคล (Private Electric Vehicle)",
+  "BTS/MRT/Airport Rail Link",
+  "รถโดยสารประจำทาง / รถโดยสารไม่ประจำทาง",
+  "แท็กซี่ (Taxi)",
+  "รถจักรยานยนต์ (Motorcycle)",
+  "รถจักรยาน/เดิน (Bicycle or Walking)",
+] as const;
+
+/** Max number of travel legs (ต่อ). */
+export const MAX_TRAVEL_LEGS = 4;
