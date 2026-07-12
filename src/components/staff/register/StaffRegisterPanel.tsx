@@ -1,14 +1,14 @@
 import { Providers } from "@components/shared/Providers";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
-import { Label } from "@components/ui/label";
-import { Switch } from "@components/ui/switch";
+// import { Label } from "@components/ui/label";
+// import { Switch } from "@components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import { useT } from "@lib/i18n/useT";
 import { useMutation } from "@tanstack/react-query";
 import {
   Scanner,
-  useDevices,
+  // useDevices,
   type IScannerError,
 } from "@yudiel/react-qr-scanner";
 import { LoaderCircleIcon } from "lucide-react";
@@ -58,13 +58,13 @@ export function StaffRegisterPanel({
 }
 
 function CheckInQrScanner() {
-  const devices = useDevices();
-  const [selectedDevice, setSelectedDevice] = useState<string | undefined>(
-    undefined,
-  );
+  // const devices = useDevices();
+  // const [selectedDevice, setSelectedDevice] = useState<string | undefined>(
+  //   undefined,
+  // );
 
-  const [paused, setPaused] = useState(false);
-  const [playSound, setPlaySound] = useState(false);
+  // const [paused, setPaused] = useState(false);
+  // const [playSound, setPlaySound] = useState(false);
   const [result, setResult] = useState<"success" | "error" | null>(null);
   // only surface the spinner once the request is slow enough to notice,
   // so fast responses don't flash it
@@ -99,14 +99,14 @@ function CheckInQrScanner() {
           }}
           onError={(error) => displayQrScannerError(error, t)}
           // pause while a request is in flight or a result dialog is open
-          paused={paused || checkIn.isPending || result !== null}
-          sound={playSound}
+          paused={checkIn.isPending || result !== null}
+          // sound={playSound}
           constraints={{
             facingMode: {
               // back camera
               ideal: "environment",
             },
-            deviceId: selectedDevice,
+            // deviceId: selectedDevice,
           }}
         />
         {showLoading && (
@@ -115,7 +115,7 @@ function CheckInQrScanner() {
           </div>
         )}
       </div>
-
+      {/* 
       <div className="mt-2 border border-red-500 p-3 rounded">
         <p>debug</p>
         <Switch checked={!paused} onCheckedChange={(it) => setPaused(!it)} />
@@ -138,7 +138,7 @@ function CheckInQrScanner() {
           ))}
         </select>
       </div>
-
+ */}
       <p className="text-primary text-xs text-center mt-12">
         {t("staff.register.refreshReminderLine1")} <br />
         {t("staff.register.refreshReminderLine2")}
