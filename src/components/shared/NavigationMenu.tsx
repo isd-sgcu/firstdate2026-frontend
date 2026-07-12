@@ -35,7 +35,7 @@ export function NavigationMenu() {
       />
 
       <DrawerContent className="select-none">
-        <div className="sm:w-md sm:mx-auto ">
+        <div className="xs:w-md xs:mx-auto ">
           <DrawerHeader className="flex flex-row items-start justify-between pt-8 px-8">
             <img
               src={firstdateLogo.src}
