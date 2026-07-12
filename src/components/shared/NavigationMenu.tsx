@@ -18,6 +18,7 @@ import editIcon from "@assets/icons/material-symbols_edit-rounded.svg";
 import mapIcon from "@assets/icons/material-symbols_map.svg";
 import calendarIcon from "@assets/icons/material-symbols_calendar-month-rounded.svg";
 import emergencyIcon from "@assets/icons/material-symbols_call-quality-rounded.svg";
+import { QrCodeDialog } from "./QrCode";
 
 // not shadcn sidebar. actually a drawer
 export function NavigationMenu() {
@@ -77,13 +78,15 @@ export function NavigationMenu() {
               </a>
             ) : (
               <>
-                <a
-                  href="/qrcode"
-                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-                >
-                  <img src={qrCodeIcon.src} alt="" className="size-6" />
-                  <span className="pt-1">QR Code</span>
-                </a>
+                <QrCodeDialog
+                  contents="6767676767"
+                  renderTrigger={
+                    <a className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent">
+                      <img src={qrCodeIcon.src} alt="" className="size-6" />
+                      <span className="pt-1">QR Code</span>
+                    </a>
+                  }
+                />
 
                 <a
                   href="/"

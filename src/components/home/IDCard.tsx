@@ -1,14 +1,6 @@
-import { toCanvas } from "@bwip-js/browser";
-import { PanelFrame } from "@components/shared/PanelFrame";
+import { QrCode, QrCodeDialog } from "@components/shared/QrCode";
 import { Button } from "@components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTrigger,
-} from "@components/ui/dialog";
 import { Edit2, RotateCw, Search } from "lucide-react";
-import { useEffect, useRef } from "react";
 
 export function IDCard() {
   // TODO: i18n + api
@@ -64,77 +56,23 @@ export function IDCard() {
             </div>
           </div>
 
-          <div>
-            <QrCode />
-          </div>
+          <QrCodeDialog
+            contents="6767676767"
+            renderTrigger={
+              <section className="flex flex-col items-center">
+                <QrCode
+                  contents="6767676767"
+                  className="size-16 bg-white p-1"
+                />
+                <div className="flex items-center gap-1 mt-0.5">
+                  <Search className="size-2.5 mb-0.5" />
+                  <span className="text-[11px]">กดเพื่อขยาย</span>
+                </div>
+              </section>
+            }
+          />
         </div>
       </section>
     </div>
   );
-}
-
-function QrCode() {
-  const canvas = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    if (!canvas.current) {
-      return;
-    }
-
-    toCanvas(canvas.current, {
-      text: "6767676767",
-      bcid: "qrcode",
-      scale: 4,
-    });
-  }, []);
-
-  return (
-    <Dialog>
-      <DialogTrigger>
-        <section className="flex flex-col items-center">
-          <canvas className="size-16 bg-white p-1" ref={canvas} />
-          <div className="flex items-center gap-1 mt-0.5">
-            <Search className="size-2.5 mb-0.5" />
-            <span className="text-[11px]">กดเพื่อขยาย</span>
-          </div>
-        </section>
-      </DialogTrigger>
-      <DialogContent showCloseButton={false} className="bg-transparent ring-0">
-        <PanelFrame>
-          <section className="flex flex-col items-center gap-4 px-10">
-            <div className="px-3 mt-4">
-              <LargeQrCode text="6767676767" />
-            </div>
-            <span className="font-bold text-center text-xl">6767676767</span>
-            <DialogClose
-              render={
-                <Button size="lg" variant="red" className="w-full">
-                  {" "}
-                  ปิด{" "}
-                </Button>
-              }
-            />
-          </section>
-        </PanelFrame>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function LargeQrCode({ text }: { text: string }) {
-  const canvas = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    if (!canvas.current) {
-      return;
-    }
-
-    toCanvas(canvas.current, {
-      text,
-      bcid: "qrcode",
-      scale: 6,
-    });
-  }, [text]);
-
-  return <canvas className="size-full" ref={canvas} />;
 }
