@@ -1,10 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import { ChevronLeft } from "lucide-react";
-
 import { cn } from "@lib/utils";
-import logo from "@assets/images/logo_horizontal.png";
-import { NavigationMenu } from "@components/shared/NavigationMenu";
 
 /**
  * The ticket/panel vector as a resizable "3-patch" (a vertical-only 9-patch).
@@ -107,21 +103,14 @@ export function PanelFrameShape({
   );
 }
 
-export interface PanelFrameProps extends ComponentPropsWithoutRef<"div"> {
-  navigateBack?: string;
-  showMenu?: boolean;
-}
-
 export function PanelFrame({
-  navigateBack = "",
-  showMenu = true,
   className,
   children,
   ...rest
-}: PanelFrameProps) {
+}: ComponentPropsWithoutRef<"div">) {
   return (
     <div
-      className={cn("relative min-h-160 w-full", className)}
+      className={cn("relative w-full", className)}
       style={{ containerType: "inline-size" }}
       {...rest}
     >
@@ -131,28 +120,10 @@ export function PanelFrame({
       <div className="absolute inset-x-5 inset-y-6 z-[-1]">
         <PanelFrameShape
           variant="stroke"
-          strokeWidth={1}
-          color="var(--color-primary)"
+          strokeWidth={2}
+          color="var(--color-fd-red)"
         />
       </div>
-
-      <div className="absolute top-[7.5cqw] right-0 left-0 grid place-items-center">
-        <img src={logo.src} alt="firstdate logo" className="h-[28cqw] w-fit" />
-      </div>
-
-      {navigateBack && (
-        <div className="absolute top-[4.5cqw] left-4 flex h-12 items-center">
-          <a href={navigateBack}>
-            <ChevronLeft className="size-6.5 text-muted" />
-          </a>
-        </div>
-      )}
-
-      {showMenu && (
-        <div className="absolute top-[4.5cqw] right-4 flex h-12 items-center">
-          <NavigationMenu />
-        </div>
-      )}
 
       {/* really depends on width */}
       <div className="px-[1.25em] py-[31.35cqw]">{children}</div>
