@@ -11,6 +11,7 @@ import { Edit2, RotateCw, Search } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export function IDCard() {
+  // TODO: i18n + api
   return (
     <div className="w-full relative">
       <svg
