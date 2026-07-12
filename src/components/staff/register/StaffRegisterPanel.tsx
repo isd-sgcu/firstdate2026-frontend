@@ -1,16 +1,20 @@
 import { Providers } from "@components/shared/Providers";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
 import { Switch } from "@components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
-import { Scanner, type IScannerError } from "@yudiel/react-qr-scanner";
+import { useT } from "@lib/i18n/useT";
+import { useMutation } from "@tanstack/react-query";
+import {
+  Scanner,
+  useDevices,
+  type IScannerError,
+} from "@yudiel/react-qr-scanner";
+import { LoaderCircleIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
-import { LoaderCircleIcon } from "lucide-react";
-import { useT } from "@lib/i18n/useT";
 import { CheckInResultDialog } from "./CheckInResultDialog";
-import { Label } from "@components/ui/label";
 
 export interface StaffRegisterPanelProps {
   isInitiallyQrScanner?: boolean;
@@ -54,6 +58,11 @@ export function StaffRegisterPanel({
 }
 
 function CheckInQrScanner() {
+  const devices = useDevices();
+  const [selectedDevice, setSelectedDevice] = useState<string | undefined>(
+    undefined,
+  );
+
   const [paused, setPaused] = useState(false);
   const [playSound, setPlaySound] = useState(false);
   const [result, setResult] = useState<"success" | "error" | null>(null);
@@ -92,6 +101,13 @@ function CheckInQrScanner() {
           // pause while a request is in flight or a result dialog is open
           paused={paused || checkIn.isPending || result !== null}
           sound={playSound}
+          constraints={{
+            facingMode: {
+              // back camera
+              ideal: "environment",
+            },
+            deviceId: selectedDevice,
+          }}
         />
         {showLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/40">
@@ -101,6 +117,7 @@ function CheckInQrScanner() {
       </div>
 
       <div className="mt-2 border border-red-500 p-3 rounded">
+        <p>debug</p>
         <Switch checked={!paused} onCheckedChange={(it) => setPaused(!it)} />
         <Label>
           <div className="flex gap-2">
@@ -111,6 +128,15 @@ function CheckInQrScanner() {
           </div>
           {'เล่นเสียง "ติ๊ด" ตอนสแกน'}
         </Label>
+
+        <select onChange={(e) => setSelectedDevice(e.target.value as string)}>
+          <option value="">Select a camera</option>
+          {devices.map((device) => (
+            <option key={device.deviceId} value={device.deviceId}>
+              {device.label || `Camera ${device.deviceId}`}
+            </option>
+          ))}
+        </select>
       </div>
 
       <p className="text-primary text-xs text-center mt-12">
