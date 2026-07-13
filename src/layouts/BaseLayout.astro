@@ -11,7 +11,7 @@ const { title, description = "firstdate 2026 frontend application" } =
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -20,11 +20,18 @@ const { title, description = "firstdate 2026 frontend application" } =
   </head>
   <body class="min-h-screen bg-primary text-foreground font-sans">
     <main
-      class="min-h-screen sm:max-w-md sm:mx-auto sm:py-6 grid place-items-center"
+      class="min-h-screen xs:max-w-md xs:mx-auto xs:py-6 grid place-items-center"
     >
       <slot />
     </main>
     <script is:inline define:vars={{ redirectAt: appConfig.redirectAt }}>
+      const userAgent = navigator.userAgent;
+      if (/Line\//.test(userAgent)) {
+        const url = new URL(location.href);
+        url.searchParams.append("openExternalBrowser", "1");
+        location.href = url.toString();
+      }
+
       const isRedirectPage =
         location.pathname.replace(/\/+$/, "") === "/redirect";
       if (Date.now() >= redirectAt && !isRedirectPage) {
