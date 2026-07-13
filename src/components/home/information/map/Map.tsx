@@ -1,14 +1,16 @@
 import { getImageUrl } from "@lib/function";
+import { useT } from "@lib/i18n/useT";
 import { ChevronRight } from "lucide-react";
 
 const mapImageUrl = getImageUrl("map.png");
 
 const MapAndLocator = () => {
+  const t = useT();
+
   return (
     <div className="w-full flex flex-col gap-4">
       <div className="w-full flex justify-between items-center">
-        {/* TODO: i18n */}
-        <p className="text-2xl font-bold text-primary">แผนที่</p>
+        <p className="text-2xl font-bold text-primary">{t("map.title")}</p>
         <a href="/map">
           <ChevronRight className="text-secondary" />
         </a>

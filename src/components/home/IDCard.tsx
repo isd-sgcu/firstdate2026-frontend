@@ -1,9 +1,11 @@
 import { QrCode, QrCodeDialog } from "@components/shared/QrCode";
 import { Button } from "@components/ui/button";
+import { useT } from "@lib/i18n/useT";
 import { Edit2, RotateCw, Search } from "lucide-react";
 
 export function IDCard() {
-  // TODO: i18n + api
+  const t = useT();
+  // TODO: api
   return (
     <div className="w-full relative">
       <svg
@@ -22,7 +24,7 @@ export function IDCard() {
       </svg>
       <section className="mx-[4%] my-[2%] py-3.5 p-2 bg-primary text-white relative z-1">
         <h2 className="text-center text-xl font-bold">
-          ยินดีต้อนรับสู่ CU Fisrtdate
+          {t("home.idCard.welcome")}
         </h2>
         <div className="flex gap-y-4 gap-x-1 mt-4 flex-wrap justify-around">
           <div className="flex gap-2">
@@ -48,7 +50,7 @@ export function IDCard() {
                 <span className="text-xs">6932345623</span>
               </div>
               <div className="flex items-center text-xs">
-                <span>ยังไม่ได้ลงทะเบียน </span>
+                <span>{t("home.idCard.notRegistered")} </span>
                 <Button size="icon-xs">
                   <RotateCw />
                 </Button>
@@ -66,7 +68,9 @@ export function IDCard() {
                 />
                 <div className="flex items-center gap-1 mt-0.5">
                   <Search className="size-2.5 mb-0.5" />
-                  <span className="text-[11px]">กดเพื่อขยาย</span>
+                  <span className="text-[11px]">
+                    {t("home.idCard.tapToZoom")}
+                  </span>
                 </div>
               </section>
             }

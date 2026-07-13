@@ -14,6 +14,37 @@
     "date": "18 กรกฎาคม 2569",
     "cta": "เข้าสู่ระบบ"
   },
+  "home": {
+    "idCard": {
+      "welcome": "ยินดีต้อนรับสู่ CU Firstdate",
+      "registered": "ลงทะเบียนแล้ว",
+      "notRegistered": "ยังไม่ได้ลงทะเบียน",
+      "tapToZoom": "กดเพื่อขยาย"
+    },
+    "information": {
+      "heading": "ข้อมูลภายในงาน",
+      "comingSoon": "เร็วๆ นี้"
+    }
+  },
+  "map": {
+    "title": "แผนที่"
+  },
+  "nav": {
+    "home": "หน้าหลัก",
+    "scanRegister": "สแกนลงทะเบียน",
+    "qrCode": "QR Code",
+    "editInfo": "แก้ไขข้อมูล",
+    "calendar": "ปฏิทินกิจกรรม",
+    "logout": "ออกจากระบบ"
+  },
+  "emergency": {
+    "title": "ติดต่อฉุกเฉิน"
+  },
+  "redirect": {
+    "title": "งาน First Date จบแล้ว!\nแล้วเจอกันที่",
+    "button": "เข้าสู่เว็บไซต์",
+    "dateRange": "วันที่ 31 กรกฎาคม ถึง 2 สิงหาคม"
+  },
   "staff": {
     "register": {
       "refresh": "รีเฟรช",

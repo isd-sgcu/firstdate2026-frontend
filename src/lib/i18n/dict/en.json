@@ -14,6 +14,37 @@
     "date": "July 18, 2026",
     "cta": "Log in"
   },
+  "home": {
+    "idCard": {
+      "welcome": "Welcome to CU Firstdate",
+      "registered": "Registered",
+      "notRegistered": "Not yet registered",
+      "tapToZoom": "Tap to zoom"
+    },
+    "information": {
+      "heading": "Event Information",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "map": {
+    "title": "Map"
+  },
+  "nav": {
+    "home": "Home",
+    "scanRegister": "Scan to Register",
+    "qrCode": "QR Code",
+    "editInfo": "Edit Information",
+    "calendar": "Event Calendar",
+    "logout": "Log out"
+  },
+  "emergency": {
+    "title": "Emergency Contact"
+  },
+  "redirect": {
+    "title": "First Date has ended!\nSee you at",
+    "button": "Go to website",
+    "dateRange": "July 31 to August 2"
+  },
   "staff": {
     "register": {
       "refresh": "Refresh",
