@@ -36,7 +36,7 @@ const EmergencyPanel = () => {
               key={e.nameTh}
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "h-fit px-6 py-4 flex flex-col gap-2 items-center text-white",
+                "h-fit px-6 py-4 flex flex-col gap-2 items-center text-white whitespace-normal",
               )}
             >
               {phone1 && (

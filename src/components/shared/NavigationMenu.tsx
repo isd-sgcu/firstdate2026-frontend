@@ -61,69 +61,96 @@ export function NavigationMenu() {
             </div>
           </DrawerHeader>
           <section className="mt-6 text-base font-bold px-4">
-            <a
-              href="/"
-              className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-            >
-              <img src={homeIcon.src} alt="" className="size-6" />
-              <span className="pt-1">{t("nav.home")}</span>
-            </a>
+            <DrawerClose
+              render={
+                <a
+                  href="/"
+                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                >
+                  <img src={homeIcon.src} alt="" className="size-6" />
+                  <span className="pt-1">{t("nav.home")}</span>
+                </a>
+              }
+            />
 
             {/* TODO: link? */}
             {isStaff ? (
-              <a
-                href="/staff/register"
-                className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-              >
-                <img src={scanIcon.src} alt="" className="size-6" />
-                <span className="pt-1">{t("nav.scanRegister")}</span>
-              </a>
+              <DrawerClose
+                render={
+                  <a
+                    href="/staff/register"
+                    className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                  >
+                    <img src={scanIcon.src} alt="" className="size-6" />
+                    <span className="pt-1">{t("nav.scanRegister")}</span>
+                  </a>
+                }
+              />
             ) : (
               <>
                 <QrCodeDialog
                   contents="6767676767"
                   renderTrigger={
-                    <a className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent">
-                      <img src={qrCodeIcon.src} alt="" className="size-6" />
-                      <span className="pt-1">{t("nav.qrCode")}</span>
-                    </a>
+                    <DrawerClose
+                      render={
+                        <a className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent">
+                          <img src={qrCodeIcon.src} alt="" className="size-6" />
+                          <span className="pt-1">{t("nav.qrCode")}</span>
+                        </a>
+                      }
+                    />
                   }
                 />
 
-                <a
-                  href="/"
-                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-                >
-                  <img src={editIcon.src} alt="" className="size-6" />
-                  <span className="pt-1">{t("nav.editInfo")}</span>
-                </a>
+                <DrawerClose
+                  render={
+                    <a
+                      href="/"
+                      className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                    >
+                      <img src={editIcon.src} alt="" className="size-6" />
+                      <span className="pt-1">{t("nav.editInfo")}</span>
+                    </a>
+                  }
+                />
               </>
             )}
 
-            <a
-              href="/map"
-              className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-            >
-              <img src={mapIcon.src} alt="" className="size-6" />
-              <span className="pt-1">{t("map.title")}</span>
-            </a>
+            <DrawerClose
+              render={
+                <a
+                  href="/map"
+                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                >
+                  <img src={mapIcon.src} alt="" className="size-6" />
+                  <span className="pt-1">{t("map.title")}</span>
+                </a>
+              }
+            />
 
-            {/* TODO: link? */}
-            <a
-              href="/"
-              className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-            >
-              <img src={calendarIcon.src} alt="" className="size-6" />
-              <span className="pt-1">{t("nav.calendar")}</span>
-            </a>
+            <DrawerClose
+              render={
+                <a
+                  href="/#fd-calendar"
+                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                >
+                  <img src={calendarIcon.src} alt="" className="size-6" />
+                  <span className="pt-1">{t("nav.calendar")}</span>
+                </a>
+              }
+            />
 
-            <a
-              href="/emergency"
-              className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
-            >
-              <img src={emergencyIcon.src} alt="" className="size-6" />
-              <span className="pt-1">{t("emergency.title")}</span>
-            </a>
+            <DrawerClose
+              render={
+                <a
+                  href="/emergency"
+                  className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
+                >
+                  <img src={emergencyIcon.src} alt="" className="size-6" />
+                  <span className="pt-1">{t("emergency.title")}</span>
+                </a>
+              }
+            />
           </section>
           <div className="flex items-center justify-center w-full pt-6 pb-8">
             <Button size="lg" className="text-lg px-6 py-3">
