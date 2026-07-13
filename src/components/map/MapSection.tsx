@@ -1,4 +1,6 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
+import { $locale } from "@lib/i18n/locale";
+import { useStore } from "@nanostores/react";
 import sectionData from "./section.json";
 
 const STAFF_BLOCKS = ["A5", "A6"];
@@ -18,6 +20,7 @@ const sectionTabs: SectionTabProps[] = Object.entries(sectionData).map(
 );
 
 const DataSectionAtoD = () => {
+  const locale = useStore($locale);
   const data = sectionData.AtoD.data;
 
   return (
@@ -38,8 +41,9 @@ const DataSectionAtoD = () => {
           >
             {item.code}
           </span>
-          {/* TODO: i18n */}
-          <span className="text-sm break-all">{item.nameTh}</span>
+          <span className="text-sm break-all">
+            {locale === "th" ? item.nameTh : item.nameEn}
+          </span>
         </div>
       ))}
     </div>
@@ -47,6 +51,7 @@ const DataSectionAtoD = () => {
 };
 
 const DataSectionE = () => {
+  const locale = useStore($locale);
   const data = sectionData.E.data;
   return (
     <div className="flex flex-col gap-4">
@@ -67,8 +72,9 @@ const DataSectionE = () => {
           return (
             <div className="flex gap-4 items-center" key={item.code}>
               <span className="font-bold text-secondary">{item.code}</span>
-              {/* TODO: i18n */}
-              <span className="text-secondary">{item.nameTh}</span>
+              <span className="text-secondary">
+                {locale === "th" ? item.nameTh : item.nameEn}
+              </span>
             </div>
           );
         })}
@@ -78,6 +84,7 @@ const DataSectionE = () => {
 };
 
 const DataSectionF = () => {
+  const locale = useStore($locale);
   const data = sectionData.F.data;
   return (
     <div className="flex flex-col gap-4">
@@ -87,8 +94,9 @@ const DataSectionF = () => {
             <span className="font-bold text-secondary p-2 bg-[#fbd473]">
               {item.code}
             </span>
-            {/* TODO: i18n */}
-            <span className="text-secondary">{item.nameTh}</span>
+            <span className="text-secondary">
+              {locale === "th" ? item.nameTh : item.nameEn}
+            </span>
           </div>
         );
       })}

@@ -1,5 +1,8 @@
 import { buttonVariants } from "@components/ui/button";
+import { $locale } from "@lib/i18n/locale";
+import { useT } from "@lib/i18n/useT";
 import { cn } from "@lib/utils";
+import { useStore } from "@nanostores/react";
 import { PhoneCall } from "lucide-react";
 import emergencies from "./emergency.json";
 
@@ -11,14 +14,16 @@ export type EmergencyType = {
 };
 
 const EmergencyPanel = () => {
+  const t = useT();
+  const locale = useStore($locale);
+
   return (
     <>
       {/*  Header  */}
       <div className="absolute flex flex-col items-center gap-2 top-[-16cqw] left-1/2 -translate-x-1/2 text-primary">
         <PhoneCall fill="var(--fd-pink)" />
-        {/* TODO: i18n  */}
         <p className="text-2xl font-bold text-primary text-center">
-          ติดต่อฉุกเฉิน
+          {t("emergency.title")}
         </p>
       </div>
 
@@ -53,8 +58,7 @@ const EmergencyPanel = () => {
                 </a>
               )}
 
-              {/* TODO: i18n */}
-              <p>{e.nameTh}</p>
+              <p>{locale === "th" ? e.nameTh : e.nameEn}</p>
             </div>
           );
         })}

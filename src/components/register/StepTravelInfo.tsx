@@ -32,16 +32,12 @@ const CHULA = {
   province: String(CHULA_PROVINCE_ID),
   district: String(CHULA_DISTRICT_ID),
 };
-const isChula = (leg: Leg) =>
-  leg.destProvince === CHULA.province && leg.destDistrict === CHULA.district;
 
 // TODO: i18n — all copy in this step is hard-coded Thai.
 export function StepTravelInfo() {
   const { control, setValue } = useFormContext<RegisterFormValues>();
   const residenceProvince =
     (useWatch({ name: "residenceProvince" }) as string) || "";
-  const residenceDistrict =
-    (useWatch({ name: "residenceDistrict" }) as string) || "";
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -58,25 +54,13 @@ export function StepTravelInfo() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fields.length]);
 
-  // Derived rules: (1) leg 1 starts at the residence and every later leg starts
-  // where the previous one ended; (2) if an intermediate leg reaches จุฬาฯ, the
-  // later legs are dropped (you've arrived).
   useEffect(() => {
     if (!legs || legs.length === 0) return;
 
-    const reachedChula = legs.findIndex(
-      (leg, i) => i < legs.length - 1 && isChula(leg),
-    );
-    if (reachedChula !== -1) {
-      for (let i = legs.length - 1; i > reachedChula; i--) remove(i);
-      return;
-    }
-
     legs.forEach((leg, i) => {
-      const originProvince =
-        i === 0 ? residenceProvince : legs[i - 1].destProvince;
-      const originDistrict =
-        i === 0 ? residenceDistrict : legs[i - 1].destDistrict;
+      if (i === 0) return;
+      const originProvince = legs[i - 1].destProvince;
+      const originDistrict = legs[i - 1].destDistrict;
       if (leg.originProvince !== originProvince) {
         setValue(`travelLegs.${i}.originProvince`, originProvince);
       }
@@ -84,7 +68,7 @@ export function StepTravelInfo() {
         setValue(`travelLegs.${i}.originDistrict`, originDistrict);
       }
     });
-  }, [legs, residenceProvince, residenceDistrict, remove, setValue]);
+  }, [legs, setValue]);
 
   const addLeg = () => {
     const prevLast = fields.length - 1;
@@ -224,7 +208,7 @@ function TravelLegCard({
         <GeoPair
           provinceName={`travelLegs.${index}.originProvince`}
           districtName={`travelLegs.${index}.originDistrict`}
-          disabled
+          disabled={index > 0}
         />
       </div>
 
