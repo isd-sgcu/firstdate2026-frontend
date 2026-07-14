@@ -4,12 +4,16 @@ import { useT } from "@lib/i18n/useT";
 import { SectionHeading } from "./fields";
 import { ChecklistCard, DetailCard } from "./health-cards";
 
-export function StepHealthInfo() {
+export function StepHealthInfo({
+  showHeading = true,
+}: { showHeading?: boolean } = {}) {
   const t = useT();
 
   return (
     <div className="flex flex-col pb-2">
-      <SectionHeading>{t("register.health.heading")}</SectionHeading>
+      {showHeading && (
+        <SectionHeading>{t("register.health.heading")}</SectionHeading>
+      )}
 
       <div className="mt-3 flex flex-col gap-4">
         <ChecklistCard

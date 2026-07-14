@@ -25,7 +25,9 @@ const CHULA = {
   district: String(CHULA_DISTRICT_ID),
 };
 
-export function StepTravelInfo() {
+export function StepTravelInfo({
+  showHeading = true,
+}: { showHeading?: boolean } = {}) {
   const t = useT();
   const { control, setValue } = useFormContext<RegisterFormValues>();
   const residenceProvince =
@@ -82,7 +84,9 @@ export function StepTravelInfo() {
 
   return (
     <div className="flex flex-col gap-6 pb-2">
-      <SectionHeading>{t("register.travel.heading")}</SectionHeading>
+      {showHeading && (
+        <SectionHeading>{t("register.travel.heading")}</SectionHeading>
+      )}
 
       {/* residence — labels sit left, but stack above the select on narrow screens */}
       <div className="@container flex flex-col gap-3">

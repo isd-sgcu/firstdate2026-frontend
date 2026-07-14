@@ -37,12 +37,16 @@ const FACULTY_OPTIONS = FACULTIES.map((faculty) => ({
 }));
 
 // Validation lives in the zod schema (./schema); fields just declare their copy.
-export function StepPersonalInfo() {
+export function StepPersonalInfo({
+  showHeading = true,
+}: { showHeading?: boolean } = {}) {
   const t = useT();
 
   return (
     <div className="flex flex-col pb-2">
-      <SectionHeading>{t("register.personal.heading")}</SectionHeading>
+      {showHeading && (
+        <SectionHeading>{t("register.personal.heading")}</SectionHeading>
+      )}
 
       <div className="mt-3 flex flex-col gap-4">
         <NameField />
