@@ -8,12 +8,14 @@ import { StepPersonalInfo } from "./StepPersonalInfo";
 import { StepHealthInfo } from "./StepHealthInfo";
 import { StepOtherInfo } from "./StepOtherInfo";
 import { StepTravelInfo } from "./StepTravelInfo";
+import { StepPdpa } from "./StepPdpa";
 import { registerSchema } from "./schema";
 import { CHULA_DISTRICT_ID, CHULA_PROVINCE_ID } from "@lib/thai-geo";
 import { STEP_FIELDS, TOTAL_STEPS, type RegisterFormValues } from "./types";
 
 export function RegisterPanel() {
   const [step, setStep] = useState(1);
+  const [showPdpa, setShowPdpa] = useState(false);
 
   const methods = useForm<RegisterFormValues>({
     mode: "onTouched",
@@ -68,14 +70,24 @@ export function RegisterPanel() {
       return;
     }
 
-    // Final step: submit everything.
+    setShowPdpa(true);
+  };
+
+  const goBack = () => setStep((prev) => Math.max(1, prev - 1));
+
+  const submitAll = () =>
     handleSubmit((data) => {
       // TODO: send to backend once the register endpoint is ready.
       console.log(JSON.stringify(data, null, 2));
     })();
-  };
 
-  const goBack = () => setStep((prev) => Math.max(1, prev - 1));
+  if (showPdpa) {
+    return (
+      <FormProvider {...methods}>
+        <StepPdpa onConsent={submitAll} />
+      </FormProvider>
+    );
+  }
 
   return (
     <FormProvider {...methods}>
