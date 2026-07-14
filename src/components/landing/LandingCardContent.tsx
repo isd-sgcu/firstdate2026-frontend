@@ -20,7 +20,7 @@ function LandingCta() {
     if (profile.status === "ineligible") {
       window.location.href = "/not-eligible";
     } else if (profile.status === "ready" && profile.me.role !== "staff") {
-      window.location.href = "/register";
+      window.location.href = profile.me.registered ? "/" : "/register";
     }
   }, [profile.status]);
 

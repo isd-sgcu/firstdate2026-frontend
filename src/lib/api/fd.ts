@@ -10,6 +10,12 @@ export type MeResult = {
   registered: boolean;
 };
 
-export function getMe() {
-  return API.get<MeResult>("/v1/fd/users/me");
+type SuccessResponse<T> = {
+  success: true;
+  data: T;
+};
+
+export async function getMe() {
+  const res = await API.get<SuccessResponse<MeResult>>("/v1/fd/users/me");
+  return res.data;
 }
