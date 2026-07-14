@@ -6,6 +6,7 @@ import { Button } from "@components/ui/button";
 import { signInWithGoogle } from "@lib/api/auth";
 import { useSession } from "@lib/auth/useSession";
 import { useProfile } from "@lib/auth/useProfile";
+import { refreshProfile } from "@lib/auth/profile";
 import { useT } from "@lib/i18n/useT";
 
 import logo from "@assets/images/logo_horizontal.png";
@@ -36,6 +37,22 @@ function LandingCta() {
       setIsSigningIn(false);
     }
   };
+
+  if (profile.status === "error") {
+    return (
+      <div className="flex w-full flex-col items-center gap-3">
+        <p className="text-sm text-destructive">{t("login.error")}</p>
+        <Button
+          type="button"
+          size="md"
+          className="h-12 w-full rounded-full"
+          onClick={() => refreshProfile()}
+        >
+          {t("login.retry")}
+        </Button>
+      </div>
+    );
+  }
 
   const isResolving = isSigningIn || session.status !== "unauthenticated";
 

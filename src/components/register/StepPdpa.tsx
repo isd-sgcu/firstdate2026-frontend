@@ -44,7 +44,13 @@ function Blocks({ blocks }: { blocks: PdpaBlock[] }) {
   );
 }
 
-export function StepPdpa({ onConsent }: { onConsent: () => void }) {
+export function StepPdpa({
+  onConsent,
+  isSubmitting,
+}: {
+  onConsent: () => void;
+  isSubmitting?: boolean;
+}) {
   const locale = useStore($locale);
   const content = PDPA_CONTENT[locale];
 
@@ -135,7 +141,7 @@ export function StepPdpa({ onConsent }: { onConsent: () => void }) {
         <Button
           type="button"
           size="lg"
-          disabled={!consented}
+          disabled={!consented || isSubmitting}
           onClick={onConsent}
           className="h-14 w-full rounded-full text-lg font-normal disabled:bg-[#A1A1A1] disabled:text-primary-foreground disabled:opacity-100"
         >

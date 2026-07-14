@@ -18,7 +18,8 @@
     "heading": "Log in",
     "googleButton": "Sign in with Google",
     "loading": "Signing in...",
-    "error": "Sign-in failed. Please try again."
+    "error": "Sign-in failed. Please try again.",
+    "retry": "Try again"
   },
   "notEligible": {
     "title": "Only 1st-year students and event staff are allowed to use this.",
@@ -54,6 +55,100 @@
     "title": "First Date has ended!\nSee you at",
     "button": "Go to website",
     "dateRange": "July 31 to August 2"
+  },
+  "register": {
+    "heading": "Register",
+    "back": "Back",
+    "next": "Next",
+    "error": {
+      "badRequest": "Invalid information. Please check and try again.",
+      "forbidden": "This account can't register.",
+      "alreadyRegistered": "This account has already registered.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "common": {
+      "no": "No",
+      "yes": "Yes",
+      "noResults": "No results found"
+    },
+    "personal": {
+      "heading": "Personal Information",
+      "firstNameLabel": "First name",
+      "prefixPlaceholder": "Prefix",
+      "firstNamePlaceholder": "Enter your first name...",
+      "lastNameLabel": "Last name",
+      "lastNamePlaceholder": "Enter your last name...",
+      "nicknameLabel": "Nickname",
+      "nicknamePlaceholder": "Enter your nickname...",
+      "facultyLabel": "Faculty",
+      "facultyPlaceholder": "Search faculty...",
+      "studentIdLabel": "Student ID",
+      "studentIdPlaceholder": "Enter your student ID...",
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "Enter your phone number...",
+      "guardianHeading": "Guardian Information",
+      "guardianPhoneLabel": "Guardian's phone number",
+      "guardianPhonePlaceholder": "Enter guardian's phone number...",
+      "guardianRelationLabel": "Relationship",
+      "guardianRelationPlaceholder": "Relationship"
+    },
+    "health": {
+      "heading": "Health Information",
+      "foodAllergyTitle": "Food allergies",
+      "foodAllergyNone": "No food allergies",
+      "foodAllergyOtherPlaceholder": "Enter food allergies...",
+      "dietaryTitle": "Dietary restrictions",
+      "dietaryNone": "No dietary restrictions",
+      "dietaryOtherPlaceholder": "Enter other dietary restrictions...",
+      "drugAllergyTitle": "Drug allergies",
+      "drugAllergyNone": "No drug allergies",
+      "drugAllergyYes": "Has drug allergies",
+      "drugAllergyPlaceholder": "Enter drug allergies...",
+      "chronicDiseaseTitle": "Chronic conditions",
+      "chronicDiseaseNone": "No chronic conditions",
+      "chronicDiseaseYes": "Has chronic conditions",
+      "chronicDiseasePlaceholder": "Enter chronic conditions...",
+      "selectedCount": "{count} selected"
+    },
+    "other": {
+      "heading": "Other Information",
+      "sgcuQuestion": "Are you familiar with the Chula Student Government (SGCU)?",
+      "prChannelQuestion": "Where did you see the most publicity for this project?"
+    },
+    "travel": {
+      "heading": "Travel Information",
+      "residenceIntro": "The district and province where you usually live",
+      "provinceLabel": "Province",
+      "districtLabel": "District",
+      "provincePlaceholder": "Select a province",
+      "districtPlaceholder": "Select a district",
+      "legsIntro": "How you'll travel to the event",
+      "addLeg": "Add another leg",
+      "legLabel": "Leg {index}",
+      "removeLeg": "Remove this leg",
+      "vehicleLabel": "Vehicle type",
+      "vehiclePlaceholder": "Select a vehicle",
+      "originLabel": "Origin",
+      "destinationLabel": "Destination"
+    },
+    "validation": {
+      "prefixRequired": "Please select a prefix",
+      "firstNameRequired": "Please enter your first name",
+      "lastNameRequired": "Please enter your last name",
+      "nicknameRequired": "Please enter your nickname",
+      "facultyRequired": "Please select a faculty",
+      "studentIdInvalid": "Student ID must start with 69 and be 10 digits long",
+      "phoneInvalid": "Phone number must be 10 digits and start with 0",
+      "guardianRelationRequired": "Please select a relationship",
+      "choiceRequired": "Please select an answer",
+      "provinceRequired": "Please select a province",
+      "districtRequired": "Please select a district",
+      "vehicleRequired": "Please select a vehicle",
+      "atLeastOne": "Please select at least 1 item",
+      "specifyMore": "Please specify",
+      "drugAllergyRequired": "Please enter your drug allergies",
+      "chronicDiseaseRequired": "Please enter your chronic conditions"
+    }
   },
   "staff": {
     "register": {

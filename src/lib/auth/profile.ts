@@ -8,6 +8,7 @@ export type ProfileState =
   | { status: "loading" }
   | { status: "unauthenticated" }
   | { status: "ineligible" }
+  | { status: "error" }
   | { status: "ready"; me: MeResult };
 
 export const $profile = atom<ProfileState>({ status: "loading" });
@@ -33,7 +34,7 @@ export function refreshProfile(): Promise<void> {
         if (err instanceof APIError && err.status === 403) {
           $profile.set({ status: "ineligible" });
         } else {
-          $profile.set({ status: "unauthenticated" });
+          $profile.set({ status: "error" });
         }
       }
     })().finally(() => {

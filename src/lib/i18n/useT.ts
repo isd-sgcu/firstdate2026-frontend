@@ -37,3 +37,5 @@ export function useT() {
     );
   };
 }
+
+export type Translator = ReturnType<typeof useT>;

@@ -76,7 +76,6 @@ export function NavigationMenu() {
               }
             />
 
-            {/* TODO: link? */}
             {isStaff ? (
               <DrawerClose
                 render={
@@ -91,6 +90,7 @@ export function NavigationMenu() {
               />
             ) : (
               <>
+                {/* TODO */}
                 <QrCodeDialog
                   contents="6767676767"
                   renderTrigger={
@@ -108,7 +108,7 @@ export function NavigationMenu() {
                 <DrawerClose
                   render={
                     <a
-                      href="/"
+                      href="/edit-profile"
                       className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
                     >
                       <img src={editIcon.src} alt="" className="size-6" />

@@ -2,25 +2,27 @@ import {
   PR_CHANNEL_OPTIONS,
   SGCU_AWARENESS_OPTIONS,
 } from "@lib/register-options";
+import { useT } from "@lib/i18n/useT";
 
 import { RadioGroupField, SectionHeading } from "./fields";
 
-// TODO: i18n — all copy in this step is hard-coded Thai.
 export function StepOtherInfo() {
+  const t = useT();
+
   return (
     <div className="flex flex-col pb-2">
-      <SectionHeading>ข้อมูลอื่น ๆ</SectionHeading>
+      <SectionHeading>{t("register.other.heading")}</SectionHeading>
 
       <div className="mt-3 flex flex-col gap-6">
         <RadioGroupField
           name="sgcuAwareness"
-          question="ท่านรู้จัก องค์การบริหารสโมสรนิสิตจุฬาฯ (อบจ.) หรือไม่"
+          question={t("register.other.sgcuQuestion")}
           options={SGCU_AWARENESS_OPTIONS}
         />
 
         <RadioGroupField
           name="prChannel"
-          question="ท่านเห็นการประชาสัมพันธ์โครงการจากช่องทางไหนมากที่สุด"
+          question={t("register.other.prChannelQuestion")}
           options={PR_CHANNEL_OPTIONS}
         />
       </div>

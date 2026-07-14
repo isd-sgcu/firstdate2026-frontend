@@ -18,7 +18,8 @@
     "heading": "เข้าสู่ระบบ",
     "googleButton": "เข้าสู่ระบบด้วย Google",
     "loading": "กำลังเข้าสู่ระบบ...",
-    "error": "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง"
+    "error": "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+    "retry": "ลองใหม่อีกครั้ง"
   },
   "notEligible": {
     "title": "อนุญาตให้ใช้งานเฉพาะนิสิตปี 1 และ staff งานเท่านั้น",
@@ -54,6 +55,100 @@
     "title": "งาน First Date จบแล้ว!\nแล้วเจอกันที่",
     "button": "เข้าสู่เว็บไซต์",
     "dateRange": "วันที่ 31 กรกฎาคม ถึง 2 สิงหาคม"
+  },
+  "register": {
+    "heading": "ลงทะเบียน",
+    "back": "ย้อนกลับ",
+    "next": "ถัดไป",
+    "error": {
+      "badRequest": "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบแล้วลองใหม่อีกครั้ง",
+      "forbidden": "บัญชีนี้ไม่สามารถลงทะเบียนได้",
+      "alreadyRegistered": "บัญชีนี้ลงทะเบียนไปแล้ว",
+      "generic": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+    },
+    "common": {
+      "no": "ไม่มี",
+      "yes": "มี",
+      "noResults": "ไม่พบผลลัพธ์"
+    },
+    "personal": {
+      "heading": "ข้อมูลส่วนตัว",
+      "firstNameLabel": "ชื่อจริง",
+      "prefixPlaceholder": "คำนำหน้า",
+      "firstNamePlaceholder": "กรอกชื่อจริง...",
+      "lastNameLabel": "นามสกุล",
+      "lastNamePlaceholder": "กรอกนามสกุล...",
+      "nicknameLabel": "ชื่อเล่น",
+      "nicknamePlaceholder": "กรอกชื่อเล่น...",
+      "facultyLabel": "คณะ",
+      "facultyPlaceholder": "ค้นหาคณะ...",
+      "studentIdLabel": "เลขประจำตัวนิสิต",
+      "studentIdPlaceholder": "กรอกเลขประจำตัวนิสิต...",
+      "phoneLabel": "เบอร์โทรศัพท์",
+      "phonePlaceholder": "กรอกเบอร์โทรศัพท์...",
+      "guardianHeading": "ข้อมูลผู้ปกครอง",
+      "guardianPhoneLabel": "เบอร์โทรศัพท์ผู้ปกครอง",
+      "guardianPhonePlaceholder": "กรอกเบอร์โทรศัพท์ผู้ปกครอง...",
+      "guardianRelationLabel": "ความสัมพันธ์",
+      "guardianRelationPlaceholder": "ความสัมพันธ์"
+    },
+    "health": {
+      "heading": "ข้อมูลสุขภาพ",
+      "foodAllergyTitle": "อาหารที่แพ้",
+      "foodAllergyNone": "ไม่มีอาหารที่แพ้",
+      "foodAllergyOtherPlaceholder": "กรอกอาหารที่แพ้...",
+      "dietaryTitle": "ข้อจำกัดด้านอาหาร",
+      "dietaryNone": "ไม่มีข้อจำกัดด้านอาหาร",
+      "dietaryOtherPlaceholder": "กรอกข้อจำกัดอาหารอื่นๆ...",
+      "drugAllergyTitle": "ยาที่แพ้",
+      "drugAllergyNone": "ไม่มียาที่แพ้",
+      "drugAllergyYes": "มียาที่แพ้",
+      "drugAllergyPlaceholder": "กรอกยาที่แพ้...",
+      "chronicDiseaseTitle": "โรคประจำตัว",
+      "chronicDiseaseNone": "ไม่มีโรคประจำตัว",
+      "chronicDiseaseYes": "มีโรคประจำตัว",
+      "chronicDiseasePlaceholder": "กรอกโรคประจำตัว...",
+      "selectedCount": "เลือกแล้ว {count} รายการ"
+    },
+    "other": {
+      "heading": "ข้อมูลอื่น ๆ",
+      "sgcuQuestion": "ท่านรู้จัก องค์การบริหารสโมสรนิสิตจุฬาฯ (อบจ.) หรือไม่",
+      "prChannelQuestion": "ท่านเห็นการประชาสัมพันธ์โครงการจากช่องทางไหนมากที่สุด"
+    },
+    "travel": {
+      "heading": "ข้อมูลการเดินทาง",
+      "residenceIntro": "เขต/อำเภอ และจังหวัดที่ท่านอาศัยอยู่เป็นปกติ",
+      "provinceLabel": "จังหวัด",
+      "districtLabel": "เขต/อำเภอ",
+      "provincePlaceholder": "เลือกจังหวัด",
+      "districtPlaceholder": "เลือกเขต/อำเภอ",
+      "legsIntro": "รูปแบบการเดินทางมาร่วมกิจกรรม",
+      "addLeg": "เพิ่มต่อการเดินทาง",
+      "legLabel": "ต่อที่ {index}",
+      "removeLeg": "ลบเส้นทางนี้",
+      "vehicleLabel": "ประเภทยานพาหนะ",
+      "vehiclePlaceholder": "เลือกยานพาหนะ",
+      "originLabel": "ต้นทาง",
+      "destinationLabel": "ปลายทาง"
+    },
+    "validation": {
+      "prefixRequired": "กรุณาเลือกคำนำหน้า",
+      "firstNameRequired": "กรุณากรอกชื่อจริง",
+      "lastNameRequired": "กรุณากรอกนามสกุล",
+      "nicknameRequired": "กรุณากรอกชื่อเล่น",
+      "facultyRequired": "กรุณาเลือกคณะ",
+      "studentIdInvalid": "เลขประจำตัวนิสิตต้องขึ้นต้นด้วย 69 และมี 10 หลัก",
+      "phoneInvalid": "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก และขึ้นต้นด้วย 0",
+      "guardianRelationRequired": "กรุณาเลือกความสัมพันธ์",
+      "choiceRequired": "กรุณาเลือกคำตอบ",
+      "provinceRequired": "กรุณาเลือกจังหวัด",
+      "districtRequired": "กรุณาเลือกเขต/อำเภอ",
+      "vehicleRequired": "กรุณาเลือกยานพาหนะ",
+      "atLeastOne": "กรุณาเลือกอย่างน้อย 1 รายการ",
+      "specifyMore": "กรุณาระบุเพิ่มเติม",
+      "drugAllergyRequired": "กรุณากรอกยาที่แพ้",
+      "chronicDiseaseRequired": "กรุณากรอกโรคประจำตัว"
+    }
   },
   "staff": {
     "register": {

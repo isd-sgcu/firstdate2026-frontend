@@ -21,6 +21,7 @@ function resolveRedirect(profile: ProfileState, path: string): string | null {
     const isStaff = profile.me.role === "staff";
     if (isStaff && !STAFF_ALLOWED_PATHS.includes(path)) return "/";
     if (!isStaff && path === "/staff/register") return "/";
+    if (!isStaff && profile.me.registered && path === "/register") return "/";
     return null;
   }
 
