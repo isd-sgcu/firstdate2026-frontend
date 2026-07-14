@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useProfile } from "./useProfile";
 import type { ProfileState } from "./profile";
 
-const STAFF_ALLOWED_PATHS = ["/", "/staff/register"];
+const STAFF_ALLOWED_PATHS = ["/", "/staff/register", "/emergency", "/map"];
 const PUBLIC_PATHS = ["/landing"];
 const REDIRECT_PATH = "/redirect";
 
