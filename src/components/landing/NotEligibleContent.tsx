@@ -1,6 +1,6 @@
-import { buttonVariants } from "@components/ui/button";
+import { Button } from "@components/ui/button";
+import { logout } from "@lib/auth/session";
 import { useT } from "@lib/i18n/useT";
-import { cn } from "@lib/utils";
 
 import logo from "@assets/images/logo_horizontal.png";
 
@@ -17,15 +17,18 @@ export function NotEligibleContent() {
 
       <p className="text-2xl text-fd-red">{t("notEligible.title")}</p>
 
-      <a
-        href="/landing"
-        className={cn(
-          buttonVariants({ variant: "default", size: "md" }),
-          "h-12 w-full rounded-full",
-        )}
+      <Button
+        type="button"
+        size="md"
+        className="h-12 w-full rounded-full"
+        onClick={() =>
+          logout().then(() => {
+            window.location.href = "/landing";
+          })
+        }
       >
         {t("notEligible.button")}
-      </a>
+      </Button>
     </div>
   );
 }

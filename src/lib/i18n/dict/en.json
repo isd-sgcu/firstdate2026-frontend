@@ -50,7 +50,6 @@
   "login": {
     "heading": "Log in",
     "googleButton": "Sign in with Google",
-    "loading": "Signing in...",
     "error": "Sign-in failed. Please try again.",
     "retry": "Try again"
   },
