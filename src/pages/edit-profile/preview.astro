@@ -1,0 +1,24 @@
+---
+// Dev-only, UNGUARDED preview of /edit-profile with mock data (the real page
+// is auth-gated and needs a getProfile session). Delete when no longer needed.
+import "@styles/global.css";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+import { EditProfilePreview } from "@components/edit-profile/EditProfilePreview";
+---
+
+<html lang="th" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile (preview)</title>
+  </head>
+  <body class="min-h-screen bg-primary text-foreground font-sans">
+    <main
+      class="min-h-screen xs:max-w-md xs:mx-auto xs:py-6 grid place-items-center"
+    >
+      <PanelFrameLayout navigateBack={"/"} strokeWidth={2} fillHeight>
+        <EditProfilePreview client:load />
+      </PanelFrameLayout>
+    </main>
+  </body>
+</html>
