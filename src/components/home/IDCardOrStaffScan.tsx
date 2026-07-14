@@ -1,10 +1,33 @@
 import { QrCode, QrCodeDialog } from "@components/shared/QrCode";
-import { Button } from "@components/ui/button";
+import { Button, buttonVariants } from "@components/ui/button";
+import { useProfile } from "@lib/auth/useProfile";
 import { useT } from "@lib/i18n/useT";
-import { Edit2, RotateCw, Search } from "lucide-react";
+import { cn } from "@lib/utils";
+import { Edit2, RotateCw, Search, UserPlus } from "lucide-react";
 
-export function IDCard() {
+export function IDCardOrStaffScan() {
   const t = useT();
+  const profile = useProfile();
+  const isStaff = profile.status === "ready" && profile.me.role === "staff";
+
+  if (isStaff) {
+    return (
+      <div className="flex flex-col gap-4">
+        <h1 className="text-4xl font-bold text-primary text-center">Staff</h1>
+        <a
+          href="/staff/register"
+          className={cn(
+            buttonVariants({ variant: "default" }),
+            "h-auto w-full flex-col gap-2 py-2",
+          )}
+        >
+          <UserPlus className="size-8" />
+          <span className="text-base">{t("staff.register.submit")}</span>
+        </a>
+      </div>
+    );
+  }
+
   // TODO: api
   return (
     <div className="w-full relative">
