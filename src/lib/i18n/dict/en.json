@@ -14,6 +14,16 @@
     "date": "July 18, 2026",
     "cta": "Log in"
   },
+  "login": {
+    "heading": "Log in",
+    "googleButton": "Sign in with Google",
+    "loading": "Signing in...",
+    "error": "Sign-in failed. Please try again."
+  },
+  "notEligible": {
+    "title": "Only 1st-year students and event staff are allowed to use this.",
+    "button": "Back to landing"
+  },
   "home": {
     "idCard": {
       "welcome": "Welcome to CU Firstdate",
