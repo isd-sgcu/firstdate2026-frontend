@@ -34,7 +34,8 @@
     },
     "information": {
       "heading": "Event Information",
-      "comingSoon": "Coming Soon"
+      "comingSoon": "Coming Soon",
+      "rpkmButton": "Go to RPKM website"
     }
   },
   "map": {
