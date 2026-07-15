@@ -46,13 +46,13 @@ export function useAccessGuard(pathname: string): { ready: boolean } {
   const redirectTo = resolveRedirect(profile, path);
 
   useEffect(() => {
-    if (import.meta.env.DEV) {
-      toast.info("[dev] ยกเลิกการ redirect ของ AccessGaurd", {
-        description: `จริงๆ ควรโดน redirect ไป ${redirectTo} แต่ยกเลิกเพราะอยู่ใน dev`,
-      });
-      return;
-    }
     if (redirectTo) {
+      if (import.meta.env.DEV) {
+        toast.info("[dev] ยกเลิกการ redirect ของ AccessGaurd", {
+          description: `จริงๆ ควรโดน redirect ไป ${redirectTo} แต่ยกเลิกเพราะอยู่ใน dev`,
+        });
+        return;
+      }
       window.location.href = redirectTo;
     }
   }, [redirectTo]);
