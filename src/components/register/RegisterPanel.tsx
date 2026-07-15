@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { useStore } from "@nanostores/react";
 
 import { Button } from "@components/ui/button";
 import { Providers } from "@components/shared/Providers";
@@ -18,7 +17,6 @@ import { CHULA_DISTRICT_ID, CHULA_PROVINCE_ID } from "@lib/thai-geo";
 import { APIError } from "@lib/client";
 import { registerFd } from "@lib/api/fd";
 import { useSession } from "@lib/auth/useSession";
-import { $locale } from "@lib/i18n/locale";
 import { useT } from "@lib/i18n/useT";
 import { STEP_FIELDS, TOTAL_STEPS, type RegisterFormValues } from "./types";
 
@@ -44,12 +42,11 @@ function submitErrorKey(status: number) {
 
 export function RegisterPanel() {
   const t = useT();
-  const locale = useStore($locale);
   const [step, setStep] = useState(1);
   const [showPdpa, setShowPdpa] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const schema = useMemo(() => buildRegisterSchema(t), [locale]);
+  const schema = useMemo(() => buildRegisterSchema(t), [t]);
 
   const methods = useForm<RegisterFormValues>({
     mode: "onTouched",
@@ -97,11 +94,10 @@ export function RegisterPanel() {
   const { trigger, handleSubmit, setValue } = methods;
 
   const session = useSession();
+  const email = session.status === "authenticated" ? session.user.email : null;
   useEffect(() => {
-    if (session.status === "authenticated") {
-      setValue("studentId", deriveStudentId(session.user.email));
-    }
-  }, [session.status, setValue]);
+    if (email) setValue("studentId", deriveStudentId(email));
+  }, [email, setValue]);
 
   const goNext = async () => {
     const valid = await trigger(STEP_FIELDS[step]);

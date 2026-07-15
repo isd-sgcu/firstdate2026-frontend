@@ -4,14 +4,12 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useStore } from "@nanostores/react";
 
 import { Button } from "@components/ui/button";
 import { buildRegisterSchema } from "@components/register/schema";
 import type { RegisterFormValues } from "@components/register/types";
 import { APIError } from "@lib/client";
 import { updateProfile, type ProfileResult } from "@lib/api/fd";
-import { $locale } from "@lib/i18n/locale";
 import { useT } from "@lib/i18n/useT";
 
 import { EditPencil } from "./EditPencil";
@@ -87,10 +85,9 @@ function SectionForm({
   onDone: () => void;
 }) {
   const t = useT();
-  const locale = useStore($locale);
   const queryClient = useQueryClient();
 
-  const schema = useMemo(() => buildRegisterSchema(t), [locale]);
+  const schema = useMemo(() => buildRegisterSchema(t), [t]);
   const methods = useForm<RegisterFormValues>({
     mode: "onTouched",
     resolver: zodResolver(schema),
