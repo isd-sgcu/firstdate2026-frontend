@@ -1,3 +1,4 @@
+import { CameraTroubleshoot } from "@components/shared/CameraTroubleshootDialog";
 import { Providers } from "@components/shared/Providers";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
@@ -196,7 +197,11 @@ function CheckInQrScanner() {
         </select>
       </div>
  */}
-      <p className="text-primary text-xs text-center mt-12">
+      <div className="flex justify-center mt-4">
+        <CameraTroubleshoot className="text-primary text-sm" />
+      </div>
+
+      <p className="text-primary text-xs text-center mt-8">
         {t("staff.register.refreshReminderLine1")} <br />
         {t("staff.register.refreshReminderLine2")}
       </p>
