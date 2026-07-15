@@ -1,10 +1,5 @@
 import { useStore } from "@nanostores/react";
 
-import {
-  PREFIX_OPTIONS,
-  VEHICLE_OPTIONS,
-  labelOf,
-} from "@lib/register-options";
 import { $locale } from "@lib/i18n/locale";
 import { useT } from "@lib/i18n/useT";
 import type { ProfileResult } from "@lib/api/fd";
@@ -13,6 +8,15 @@ import { StepHealthInfo } from "@components/register/StepHealthInfo";
 import { StepTravelInfo } from "@components/register/StepTravelInfo";
 
 import { EditSectionDialog } from "./EditSectionDialog";
+import {
+  dietaryLabels,
+  facultyLabel,
+  foodAllergyLabels,
+  placeLabel,
+  prefixLabel,
+  relationLabel,
+  vehicleLabel,
+} from "./display";
 import { parseAllergies } from "./fromProfile";
 
 const DASH = "-";
@@ -69,17 +73,8 @@ export function PersonalCard({ profile }: { profile: ProfileResult }) {
   const t = useT();
   const locale = useStore($locale);
   const { user } = profile;
-  const prefixLabel = user.prefix
-    ? labelOf(
-        locale,
-        PREFIX_OPTIONS.find((o) => o.value === user.prefix) ?? {
-          value: "",
-          th: "",
-          en: "",
-        },
-      )
-    : "";
-  const fullName = `${prefixLabel}${user.firstName} ${user.lastName}`.trim();
+  const fullName =
+    `${prefixLabel(locale, user.prefix)}${user.firstName} ${user.lastName}`.trim();
 
   return (
     <SectionShell
@@ -101,7 +96,7 @@ export function PersonalCard({ profile }: { profile: ProfileResult }) {
         />
         <Field
           label={t("editProfile.personal.faculty")}
-          value={user.faculty ?? ""}
+          value={facultyLabel(locale, user.faculty)}
         />
         <Field
           label={t("editProfile.personal.phone")}
@@ -113,7 +108,7 @@ export function PersonalCard({ profile }: { profile: ProfileResult }) {
         />
         <Field
           label={t("editProfile.personal.relation")}
-          value={user.emergencyContactName ?? ""}
+          value={relationLabel(locale, user.emergencyContactName)}
         />
       </div>
     </SectionShell>
@@ -122,18 +117,11 @@ export function PersonalCard({ profile }: { profile: ProfileResult }) {
 
 export function HealthCard({ profile }: { profile: ProfileResult }) {
   const t = useT();
+  const locale = useStore($locale);
   const { user } = profile;
   const { food, drug } = parseAllergies(user.allergies);
-  const foodItems = food
-    ? food
-        .split(", ")
-        .map((s) => s.trim())
-        .filter(Boolean)
-    : [];
-  const dietaryItems = (user.dietary ?? "")
-    .split(", ")
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const foodItems = foodAllergyLabels(locale, food);
+  const dietaryItems = dietaryLabels(locale, user.dietary);
 
   return (
     <SectionShell
@@ -177,13 +165,7 @@ export function TravelCard({ profile }: { profile: ProfileResult }) {
   const locale = useStore($locale);
   const { user, travelLegs } = profile;
   const legs = [...travelLegs].sort((a, b) => a.seq - b.seq);
-  const residence = [user.csoProvince, user.csoDistrict]
-    .filter(Boolean)
-    .join(", ");
-  const vehicleLabel = (value: string) => {
-    const found = VEHICLE_OPTIONS.find((o) => o.value === value);
-    return found ? labelOf(locale, found) : value;
-  };
+  const residence = placeLabel(locale, user.csoProvince, user.csoDistrict);
 
   return (
     <SectionShell
@@ -216,23 +198,23 @@ export function TravelCard({ profile }: { profile: ProfileResult }) {
                     {t("editProfile.travel.vehicle")}
                   </span>
                   <span className="min-w-0 text-foreground wrap-anywhere">
-                    {vehicleLabel(leg.vehicle)}
+                    {vehicleLabel(locale, leg.vehicle)}
                   </span>
                   <span className="text-muted-foreground">
                     {t("editProfile.travel.origin")}
                   </span>
                   <span className="min-w-0 text-foreground wrap-anywhere">
-                    {[leg.originProvince, leg.originDistrict]
-                      .filter(Boolean)
-                      .join(", ")}
+                    {placeLabel(locale, leg.originProvince, leg.originDistrict)}
                   </span>
                   <span className="text-muted-foreground">
                     {t("editProfile.travel.destination")}
                   </span>
                   <span className="min-w-0 text-foreground wrap-anywhere">
-                    {[leg.destinationProvince, leg.destinationDistrict]
-                      .filter(Boolean)
-                      .join(", ")}
+                    {placeLabel(
+                      locale,
+                      leg.destinationProvince,
+                      leg.destinationDistrict,
+                    )}
                   </span>
                 </div>
               </div>
