@@ -2,7 +2,6 @@
 import "@styles/global.css";
 import { appConfig } from "@lib/env";
 import { AuthGuard } from "@components/shared/AuthGuard";
-import { DevBanner } from "@components/dev/DevBanner";
 
 type Props = {
   title: string;
@@ -22,7 +21,6 @@ const { title, description = "firstdate 2026 frontend application" } =
   </head>
   <body class="min-h-screen bg-primary text-foreground font-sans">
     <AuthGuard client:load pathname={Astro.url.pathname} />
-    <DevBanner client:load />
     <main
       class="min-h-screen xs:max-w-md xs:mx-auto xs:py-6 grid place-items-center"
     >
