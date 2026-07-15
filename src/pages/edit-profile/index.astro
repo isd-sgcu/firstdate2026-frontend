@@ -1,0 +1,11 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PanelFrameLayout from "@layouts/PanelFrameLayout.astro";
+import { EditProfilePanel } from "@components/edit-profile/EditProfilePanel";
+---
+
+<BaseLayout title="Edit Profile">
+  <PanelFrameLayout navigateBack={"/"} strokeWidth={2} fillHeight>
+    <EditProfilePanel client:load />
+  </PanelFrameLayout>
+</BaseLayout>

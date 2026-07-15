@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { useStore } from "@nanostores/react";
 
 import { cn } from "@lib/utils";
 import { Input } from "@components/ui/input";
@@ -9,10 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
+import { $locale } from "@lib/i18n/locale";
+import { useT } from "@lib/i18n/useT";
 import {
   FACULTIES,
   PREFIX_OPTIONS,
   RELATION_OPTIONS,
+  facultyCodeOf,
+  labelOf,
 } from "@lib/register-options";
 
 import {
@@ -28,61 +34,86 @@ import type { RegisterFormValues } from "./types";
 
 const FACULTY_OPTIONS = FACULTIES.map((faculty) => ({
   value: faculty.code,
-  label: faculty.name,
+  th: faculty.name,
+  en: faculty.nameEn,
 }));
 
 // Validation lives in the zod schema (./schema); fields just declare their copy.
-export function StepPersonalInfo() {
-  // TODO: i18n — every heading / label / placeholder below is Thai copy.
+export function StepPersonalInfo({
+  showHeading = true,
+}: { showHeading?: boolean } = {}) {
+  const t = useT();
+  const { watch, setValue } = useFormContext<RegisterFormValues>();
+
+  // Faculty is derived from the CUNET ID rather than asked for — the id itself
+  // comes from the authenticated email, so both stay read-only. An id whose
+  // last two digits match no faculty leaves the field editable to pick by hand.
+  const derivedFaculty = facultyCodeOf(watch("studentId"));
+  useEffect(() => {
+    if (derivedFaculty) setValue("faculty", derivedFaculty);
+  }, [derivedFaculty, setValue]);
+
   return (
     <div className="flex flex-col pb-2">
-      <SectionHeading>ข้อมูลส่วนตัว</SectionHeading>
+      {showHeading && (
+        <SectionHeading>{t("register.personal.heading")}</SectionHeading>
+      )}
 
       <div className="mt-3 flex flex-col gap-4">
         <NameField />
 
         <TextField
           name="lastName"
-          label="นามสกุล"
-          placeholder="กรอกนามสกุล..."
+          label={t("register.personal.lastNameLabel")}
+          placeholder={t("register.personal.lastNamePlaceholder")}
+        />
+
+        <TextField
+          name="nickname"
+          label={t("register.personal.nicknameLabel")}
+          placeholder={t("register.personal.nicknamePlaceholder")}
         />
 
         <ComboboxField
           name="faculty"
-          label="คณะ"
-          placeholder="ค้นหาคณะ..."
+          label={t("register.personal.facultyLabel")}
+          placeholder={t("register.personal.facultyPlaceholder")}
           options={FACULTY_OPTIONS}
+          disabled={!!derivedFaculty}
         />
 
         <TextField
           name="studentId"
-          label="เลขประจำตัวนิสิต"
-          placeholder="กรอกเลขประจำตัวนิสิต..."
+          label={t("register.personal.studentIdLabel")}
+          placeholder={t("register.personal.studentIdPlaceholder")}
           inputMode="numeric"
+          disabled
         />
 
         <TextField
           name="phone"
-          label="เบอร์โทรศัพท์"
-          placeholder="กรอกเบอร์โทรศัพท์..."
+          label={t("register.personal.phoneLabel")}
+          placeholder={t("register.personal.phonePlaceholder")}
           inputMode="tel"
         />
       </div>
 
-      <SectionHeading className="mt-6">ข้อมูลผู้ปกครอง</SectionHeading>
+      <SectionHeading className="mt-6">
+        {t("register.personal.guardianHeading")}
+      </SectionHeading>
 
       <div className="mt-3 flex flex-col gap-4">
         <TextField
           name="guardianPhone"
-          label="เบอร์โทรศัพท์ผู้ปกครอง"
-          placeholder="กรอกเบอร์โทรศัพท์ผู้ปกครอง..."
+          label={t("register.personal.guardianPhoneLabel")}
+          placeholder={t("register.personal.guardianPhonePlaceholder")}
           inputMode="tel"
         />
 
         <SelectField
           name="guardianRelation"
-          label="ความสัมพันธ์"
-          placeholder="ความสัมพันธ์"
+          label={t("register.personal.guardianRelationLabel")}
+          placeholder={t("register.personal.guardianRelationPlaceholder")}
           options={RELATION_OPTIONS}
         />
       </div>
@@ -91,6 +122,13 @@ export function StepPersonalInfo() {
 }
 
 function NameField() {
+  const t = useT();
+  const locale = useStore($locale);
+  // Without `items`, Select.Value falls back to rendering the raw enum token
+  // ("mr") instead of the option's label.
+  const prefixItems = Object.fromEntries(
+    PREFIX_OPTIONS.map((option) => [option.value, labelOf(locale, option)]),
+  );
   const {
     control,
     register,
@@ -99,7 +137,7 @@ function NameField() {
 
   return (
     <FieldBlock
-      label="ชื่อจริง"
+      label={t("register.personal.firstNameLabel")}
       error={errors.prefix?.message ?? errors.firstName?.message}
     >
       <div className="@container">
@@ -107,11 +145,12 @@ function NameField() {
           <Controller
             control={control}
             name="prefix"
-            rules={{ required: "กรุณาเลือกคำนำหน้า" }}
+            rules={{ required: t("register.validation.prefixRequired") }}
             render={({ field }) => (
               <Select
-                value={field.value || null}
-                onValueChange={(value) => field.onChange(value ?? "")}
+                items={prefixItems}
+                value={field.value ?? null}
+                onValueChange={(value) => field.onChange(value)}
               >
                 <SelectTrigger
                   className={cn(
@@ -120,12 +159,14 @@ function NameField() {
                   )}
                   aria-invalid={!!errors.prefix}
                 >
-                  <SelectValue placeholder="คำนำหน้า" />
+                  <SelectValue
+                    placeholder={t("register.personal.prefixPlaceholder")}
+                  />
                 </SelectTrigger>
                 <SelectContent className={popupClass}>
                   {PREFIX_OPTIONS.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
+                    <SelectItem key={option.value} value={option.value}>
+                      {labelOf(locale, option)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -137,9 +178,11 @@ function NameField() {
               controlClass,
               "@min-[280px]:min-w-37.5 @min-[280px]:flex-1",
             )}
-            placeholder="กรอกชื่อจริง..."
+            placeholder={t("register.personal.firstNamePlaceholder")}
             aria-invalid={!!errors.firstName}
-            {...register("firstName", { required: "กรุณากรอกชื่อจริง" })}
+            {...register("firstName", {
+              required: t("register.validation.firstNameRequired"),
+            })}
           />
         </div>
       </div>

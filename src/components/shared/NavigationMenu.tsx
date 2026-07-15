@@ -1,5 +1,3 @@
-import { useStore } from "@nanostores/react";
-
 import { Button } from "@components/ui/button";
 import {
   Drawer,
@@ -8,8 +6,9 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@components/ui/drawer";
-import { $locale, setLocale } from "@lib/i18n/locale";
 import { useT } from "@lib/i18n/useT";
+import { logout } from "@lib/auth/session";
+import { useProfile } from "@lib/auth/useProfile";
 import { Menu } from "lucide-react";
 import firstdateLogo from "@assets/images/logo_horizontal.png";
 import homeIcon from "@assets/icons/material-symbols_home-rounded.svg";
@@ -20,11 +19,12 @@ import mapIcon from "@assets/icons/material-symbols_map.svg";
 import calendarIcon from "@assets/icons/material-symbols_calendar-month-rounded.svg";
 import emergencyIcon from "@assets/icons/material-symbols_call-quality-rounded.svg";
 import { QrCodeDialog } from "./QrCode";
+import { LocaleToggle } from "./LocaleToggle";
 
 // not shadcn sidebar. actually a drawer
 export function NavigationMenu() {
-  const isStaff = false;
-  const locale = useStore($locale);
+  const profile = useProfile();
+  const isStaff = profile.status === "ready" && profile.me.role === "staff";
   const t = useT();
 
   return (
@@ -46,14 +46,7 @@ export function NavigationMenu() {
               className="size-20"
             />
             <div className="flex items-center gap-0.5">
-              <Button
-                type="button"
-                variant="ghost"
-                className="text-lg active:bg-accent p-2 size-10.5 rounded"
-                onClick={() => setLocale(locale === "th" ? "en" : "th")}
-              >
-                {locale === "th" ? "TH" : "EN"}
-              </Button>
+              <LocaleToggle />
 
               <DrawerClose className="p-2 rounded active:bg-accent">
                 <Menu className="size-6.5 text-primary" />
@@ -73,7 +66,6 @@ export function NavigationMenu() {
               }
             />
 
-            {/* TODO: link? */}
             {isStaff ? (
               <DrawerClose
                 render={
@@ -88,6 +80,7 @@ export function NavigationMenu() {
               />
             ) : (
               <>
+                {/* TODO */}
                 <QrCodeDialog
                   contents="6767676767"
                   renderTrigger={
@@ -105,7 +98,7 @@ export function NavigationMenu() {
                 <DrawerClose
                   render={
                     <a
-                      href="/"
+                      href="/edit-profile"
                       className="flex w-full items-center py-3.5 rounded px-4 gap-2 active:bg-accent"
                     >
                       <img src={editIcon.src} alt="" className="size-6" />
@@ -153,7 +146,15 @@ export function NavigationMenu() {
             />
           </section>
           <div className="flex items-center justify-center w-full pt-6 pb-8">
-            <Button size="lg" className="text-lg px-6 py-3">
+            <Button
+              size="lg"
+              className="text-lg px-6 py-3"
+              onClick={() =>
+                logout().then(() => {
+                  window.location.href = "/landing";
+                })
+              }
+            >
               {t("nav.logout")}
             </Button>
           </div>

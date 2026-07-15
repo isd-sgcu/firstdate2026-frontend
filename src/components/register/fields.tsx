@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 import { Combobox } from "@base-ui/react/combobox";
 import { ChevronDownIcon } from "lucide-react";
+import { useStore } from "@nanostores/react";
 
 import { cn } from "@lib/utils";
 import { Input } from "@components/ui/input";
@@ -17,6 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
+import { $locale } from "@lib/i18n/locale";
+import { useT } from "@lib/i18n/useT";
+import { labelOf, type LabeledOption } from "@lib/register-options";
 
 import type { RegisterFormValues } from "./types";
 
@@ -26,7 +30,6 @@ type FieldName = {
     : never;
 }[keyof RegisterFormValues];
 export type Path = FieldPath<RegisterFormValues>;
-export type SelectOption = { value: string; label: string };
 
 export const controlClass =
   "h-11 w-full rounded-md border border-border bg-transparent px-5 text-base " +
@@ -98,11 +101,13 @@ export function TextField<TName extends FieldName>({
   label,
   placeholder,
   inputMode,
+  disabled,
 }: {
   name: TName;
   label: string;
   placeholder: string;
   inputMode?: React.ComponentProps<"input">["inputMode"];
+  disabled?: boolean;
 }) {
   const {
     register,
@@ -115,6 +120,7 @@ export function TextField<TName extends FieldName>({
         className={controlClass}
         placeholder={placeholder}
         inputMode={inputMode}
+        disabled={disabled}
         aria-invalid={!!errors[name]}
         {...register(name)}
       />
@@ -133,7 +139,7 @@ export function SelectField({
   name: Path;
   label?: string;
   placeholder: string;
-  options: readonly SelectOption[] | readonly string[];
+  options: readonly LabeledOption[];
   disabled?: boolean;
   onAfterChange?: () => void;
 }) {
@@ -141,11 +147,11 @@ export function SelectField({
     control,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
+  const locale = useStore($locale);
   const error = errorAt(errors, name);
-  const normalized = options.map((option) =>
-    typeof option === "string" ? { value: option, label: option } : option,
+  const items = Object.fromEntries(
+    options.map((o) => [o.value, labelOf(locale, o)]),
   );
-  const items = Object.fromEntries(normalized.map((o) => [o.value, o.label]));
 
   return (
     <FieldBlock label={label} error={error}>
@@ -170,9 +176,9 @@ export function SelectField({
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent className={popupClass}>
-              {normalized.map((option) => (
+              {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
-                  {option.label}
+                  {labelOf(locale, option)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -196,7 +202,7 @@ export function ComboboxField({
   name: Path;
   label?: string;
   placeholder: string;
-  options: readonly SelectOption[];
+  options: readonly LabeledOption[];
   disabled?: boolean;
   onAfterChange?: () => void;
 }) {
@@ -204,10 +210,19 @@ export function ComboboxField({
     control,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
+  const locale = useStore($locale);
+  const t = useT();
   const error = errorAt(errors, name);
   const values = options.map((option) => option.value);
   const labelFor = (value: string) =>
-    options.find((option) => option.value === value)?.label ?? "";
+    labelOf(
+      locale,
+      options.find((option) => option.value === value) ?? {
+        value: "",
+        th: "",
+        en: "",
+      },
+    );
 
   return (
     <FieldBlock label={label} error={error}>
@@ -242,7 +257,7 @@ export function ComboboxField({
               <Combobox.Positioner sideOffset={4} className="isolate z-50">
                 <Combobox.Popup className="max-h-(--available-height) w-(--anchor-width) overflow-y-auto rounded-lg border bg-popover p-1 text-popover-foreground shadow-xl ring-1 ring-foreground/10">
                   <Combobox.Empty className="px-2 py-2 text-sm text-muted-foreground">
-                    ไม่พบผลลัพธ์
+                    {t("register.common.noResults")}
                   </Combobox.Empty>
                   <Combobox.List>
                     {(item: string) => (
@@ -272,6 +287,7 @@ export function YesNoToggle({
   value: boolean;
   onChange: (value: boolean) => void;
 }) {
+  const t = useT();
   const segment = (active: boolean) =>
     cn(
       "rounded-full px-4 py-2 text-sm leading-none transition-colors",
@@ -280,21 +296,19 @@ export function YesNoToggle({
 
   return (
     <div className="inline-flex shrink-0 items-center rounded-full border border-primary">
-      {/* TODO: i18n */}
       <button
         type="button"
         onClick={() => onChange(false)}
         className={segment(!value)}
       >
-        ไม่มี
+        {t("register.common.no")}
       </button>
-      {/* TODO: i18n */}
       <button
         type="button"
         onClick={() => onChange(true)}
         className={segment(value)}
       >
-        มี
+        {t("register.common.yes")}
       </button>
     </div>
   );
@@ -308,18 +322,18 @@ export function RadioGroupField<TName extends FieldName>({
 }: {
   name: TName;
   question: string;
-  options: readonly string[];
+  options: readonly LabeledOption[];
 }) {
   const {
     control,
     trigger,
     formState: { errors },
   } = useFormContext<RegisterFormValues>();
+  const locale = useStore($locale);
   const error = errors[name]?.message;
 
   return (
     <div className="flex flex-col gap-3">
-      {/* TODO: i18n */}
       <p className="text-base text-foreground">{question}</p>
       <Controller
         control={control}
@@ -335,13 +349,12 @@ export function RadioGroupField<TName extends FieldName>({
             className="gap-3"
           >
             {options.map((option) => (
-              // TODO: i18n
               <label
-                key={option}
+                key={option.value}
                 className="flex cursor-pointer items-center gap-3 select-none"
               >
-                <RadioGroupItem value={option} aria-invalid={!!error} />
-                <span className="text-sm">{option}</span>
+                <RadioGroupItem value={option.value} aria-invalid={!!error} />
+                <span className="text-sm">{labelOf(locale, option)}</span>
               </label>
             ))}
           </RadioGroup>

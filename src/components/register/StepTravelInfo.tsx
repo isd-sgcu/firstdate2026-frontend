@@ -5,13 +5,9 @@ import { Trash2 } from "lucide-react";
 import { Button } from "@components/ui/button";
 import { CHULA_DISTRICT_ID, CHULA_PROVINCE_ID } from "@lib/thai-geo";
 import { MAX_TRAVEL_LEGS, VEHICLE_OPTIONS } from "@lib/register-options";
+import { useT } from "@lib/i18n/useT";
 
-import {
-  ComboboxField,
-  SectionHeading,
-  SelectField,
-  type SelectOption,
-} from "./fields";
+import { ComboboxField, SectionHeading, SelectField } from "./fields";
 import { CarIcon, HomeIcon, PinIcon } from "./icons";
 import {
   districtsOf,
@@ -24,17 +20,15 @@ import type { RegisterFormValues } from "./types";
 
 type Leg = RegisterFormValues["travelLegs"][number];
 
-const VEHICLE_OPTS: SelectOption[] = VEHICLE_OPTIONS.map((v) => ({
-  value: v,
-  label: v,
-}));
 const CHULA = {
   province: String(CHULA_PROVINCE_ID),
   district: String(CHULA_DISTRICT_ID),
 };
 
-// TODO: i18n — all copy in this step is hard-coded Thai.
-export function StepTravelInfo() {
+export function StepTravelInfo({
+  showHeading = true,
+}: { showHeading?: boolean } = {}) {
+  const t = useT();
   const { control, setValue } = useFormContext<RegisterFormValues>();
   const residenceProvince =
     (useWatch({ name: "residenceProvince" }) as string) || "";
@@ -90,27 +84,28 @@ export function StepTravelInfo() {
 
   return (
     <div className="flex flex-col gap-6 pb-2">
-      <SectionHeading>ข้อมูลการเดินทาง</SectionHeading>
+      {showHeading && (
+        <SectionHeading>{t("register.travel.heading")}</SectionHeading>
+      )}
 
       {/* residence — labels sit left, but stack above the select on narrow screens */}
       <div className="@container flex flex-col gap-3">
-        {/* TODO: i18n */}
         <p className="text-base text-foreground">
-          เขต/อำเภอ และจังหวัดที่ท่านอาศัยอยู่เป็นปกติ
+          {t("register.travel.residenceIntro")}
         </p>
-        <LabelRow label="จังหวัด">
+        <LabelRow label={t("register.travel.provinceLabel")}>
           <ComboboxField
             name="residenceProvince"
             options={PROVINCE_OPTIONS}
-            placeholder="เลือกจังหวัด"
+            placeholder={t("register.travel.provincePlaceholder")}
             onAfterChange={() => setValue("residenceDistrict", "")}
           />
         </LabelRow>
-        <LabelRow label="เขต/อำเภอ">
+        <LabelRow label={t("register.travel.districtLabel")}>
           <ComboboxField
             name="residenceDistrict"
             options={districtsOf(residenceProvince)}
-            placeholder="เลือกเขต/อำเภอ"
+            placeholder={t("register.travel.districtPlaceholder")}
             disabled={!residenceProvince}
           />
         </LabelRow>
@@ -118,9 +113,8 @@ export function StepTravelInfo() {
 
       {/* travel legs on a timeline */}
       <div className="flex flex-col gap-3">
-        {/* TODO: i18n */}
         <p className="text-base text-foreground">
-          รูปแบบการเดินทางมาร่วมกิจกรรม
+          {t("register.travel.legsIntro")}
         </p>
 
         <div className="flex flex-col gap-6">
@@ -144,8 +138,7 @@ export function StepTravelInfo() {
                 className="h-11 w-full rounded-full bg-primary-foreground"
                 onClick={addLeg}
               >
-                {/* TODO: i18n */}
-                เพิ่มต่อการเดินทาง
+                {t("register.travel.addLeg")}
               </Button>
             </div>
           )}
@@ -166,6 +159,7 @@ function TravelLegCard({
   canAdd: boolean;
   onRemove: () => void;
 }) {
+  const t = useT();
   const lineToNext = isLast && !canAdd ? null : isLast ? 46 : 35;
 
   return (
@@ -179,8 +173,9 @@ function TravelLegCard({
       <span className="absolute top-1.5 left-0 size-2.5 rounded-full bg-fd-red" />
 
       <div className="flex items-center justify-between gap-2">
-        {/* TODO: i18n */}
-        <span className="font-bold text-primary">ต่อที่ {index + 1}</span>
+        <span className="font-bold text-primary">
+          {t("register.travel.legLabel", { index: String(index + 1) })}
+        </span>
         {index > 0 && (
           <button
             type="button"
@@ -188,23 +183,26 @@ function TravelLegCard({
             className="flex shrink-0 items-center gap-1 rounded-full border border-fd-red px-2.5 py-1 text-sm text-fd-red"
           >
             <Trash2 className="size-3.5" />
-            {/* TODO: i18n */}
-            ลบเส้นทางนี้
+            {t("register.travel.removeLeg")}
           </button>
         )}
       </div>
 
       <div className="mt-3">
-        <SubLabel icon={<CarIcon />}>ประเภทยานพาหนะ</SubLabel>
+        <SubLabel icon={<CarIcon />}>
+          {t("register.travel.vehicleLabel")}
+        </SubLabel>
         <SelectField
           name={`travelLegs.${index}.vehicle`}
-          options={VEHICLE_OPTS}
-          placeholder="เลือกยานพาหนะ"
+          options={VEHICLE_OPTIONS}
+          placeholder={t("register.travel.vehiclePlaceholder")}
         />
       </div>
 
       <div className="mt-3">
-        <SubLabel icon={<HomeIcon />}>ต้นทาง</SubLabel>
+        <SubLabel icon={<HomeIcon />}>
+          {t("register.travel.originLabel")}
+        </SubLabel>
         <GeoPair
           provinceName={`travelLegs.${index}.originProvince`}
           districtName={`travelLegs.${index}.originDistrict`}
@@ -213,7 +211,9 @@ function TravelLegCard({
       </div>
 
       <div className="mt-3">
-        <SubLabel icon={<PinIcon />}>ปลายทาง</SubLabel>
+        <SubLabel icon={<PinIcon />}>
+          {t("register.travel.destinationLabel")}
+        </SubLabel>
         <GeoPair
           provinceName={`travelLegs.${index}.destProvince`}
           districtName={`travelLegs.${index}.destDistrict`}

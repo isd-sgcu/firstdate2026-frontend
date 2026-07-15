@@ -1,10 +1,17 @@
 /**
  * Select-option data for the registration form (faculties, name prefixes,
- * guardian relations).
+ * guardian relations, vehicles, health checklists, PR questions).
  *
  * Faculties source: the official registrar faculty list
  * https://cas.reg.chula.ac.th/cu/general/PersonalInformation/Faculty/IndexDisplayFaculty.html
+ *
+ * `value` is what's stored in form state / sent to the backend — for prefix
+ * and vehicle it's the exact backend enum token, so no extra mapping is
+ * needed in toRegistrationBody.ts. `th`/`en` are display-only.
  */
+
+import type { LocaleType } from "./i18n/locale";
+import type { Prefix, Vehicle } from "./api/fd";
 
 export type Faculty = {
   code: string;
@@ -12,8 +19,16 @@ export type Faculty = {
   nameEn: string;
 };
 
-// TODO: i18n — `name` is Thai, `nameEn` is English; pick by locale when the app
-// becomes bilingual (the select currently shows `name`).
+export type LabeledOption<V extends string = string> = {
+  value: V;
+  th: string;
+  en: string;
+};
+
+export function labelOf(locale: LocaleType, option: LabeledOption): string {
+  return locale === "th" ? option.th : option.en;
+}
+
 export const FACULTIES: Faculty[] = [
   {
     code: "01",
@@ -105,80 +120,146 @@ export const FACULTIES: Faculty[] = [
   },
 ];
 
-// TODO: i18n — Thai-only; these are used as both the value and the label.
-export const PREFIX_OPTIONS = ["นาย", "นาง", "นางสาว", "อื่นๆ"] as const;
+export const facultyCodeOf = (studentId: string): string => {
+  const code = studentId.trim().slice(-2);
+  return FACULTIES.some((faculty) => faculty.code === code) ? code : "";
+};
 
-// TODO: i18n — Thai-only; these are used as both the value and the label.
-export const RELATION_OPTIONS = [
-  "บิดา",
-  "มารดา",
-  "พี่น้อง",
-  "ญาติ",
-  "อื่น ๆ",
-] as const;
+export const PREFIX_OPTIONS: LabeledOption<Prefix>[] = [
+  { value: "mr", th: "นาย", en: "Mr." },
+  { value: "mrs", th: "นาง", en: "Mrs." },
+  { value: "ms", th: "นางสาว", en: "Ms." },
+  { value: "not_specified", th: "ไม่ระบุ", en: "Not specified" },
+  { value: "other", th: "อื่นๆ", en: "Other" },
+];
+
+export const PREFIX_VALUES = PREFIX_OPTIONS.map((option) => option.value);
+
+export const RELATION_OPTIONS: LabeledOption[] = [
+  { value: "father", th: "บิดา", en: "Father" },
+  { value: "mother", th: "มารดา", en: "Mother" },
+  { value: "sibling", th: "พี่น้อง", en: "Sibling" },
+  { value: "relative", th: "ญาติ", en: "Relative" },
+  { value: "other", th: "อื่น ๆ", en: "Other" },
+];
 
 /** The "other" checkbox that reveals a free-text field. */
-export const OTHER_OPTION = "อื่น ๆ";
+export const OTHER_OPTION = "other";
 
-// TODO: i18n — Thai-only; used as both the value and the label.
 /** อาหารที่แพ้ (Step 2) */
-export const FOOD_ALLERGY_OPTIONS = [
-  "อาหารทะเล",
-  "นม/แลกโตส",
-  "แป้งสาลี",
-  "ไข่",
-  "ถั่ว",
-  "ผงชูรส",
-  OTHER_OPTION,
-] as const;
+export const FOOD_ALLERGY_OPTIONS: LabeledOption[] = [
+  { value: "seafood", th: "อาหารทะเล", en: "Seafood" },
+  { value: "dairy", th: "นม/แลกโตส", en: "Milk/Lactose" },
+  { value: "wheat", th: "แป้งสาลี", en: "Wheat" },
+  { value: "egg", th: "ไข่", en: "Egg" },
+  { value: "nuts", th: "ถั่ว", en: "Nuts" },
+  { value: "msg", th: "ผงชูรส", en: "MSG" },
+  { value: OTHER_OPTION, th: "อื่น ๆ", en: "Other" },
+];
 
-// TODO: i18n — Thai-only; used as both the value and the label.
 /** ข้อจำกัดด้านอาหาร (Step 2) */
-export const DIETARY_OPTIONS = [
-  "ฮาลาล",
-  "มังสวิรัติ",
-  "ไม่ทานเนื้อสัตว์",
-  "ไม่ทานเนื้อวัว",
-  "ไม่ทานเนื้อหมู",
-  "ไม่ทานไก่",
-  "ไม่ทานเผ็ด",
-  "ไม่ทานผัก",
-  OTHER_OPTION,
-] as const;
+export const DIETARY_OPTIONS: LabeledOption[] = [
+  { value: "halal", th: "ฮาลาล", en: "Halal" },
+  { value: "vegetarian", th: "มังสวิรัติ", en: "Vegetarian" },
+  { value: "no_meat", th: "ไม่ทานเนื้อสัตว์", en: "No meat" },
+  { value: "no_beef", th: "ไม่ทานเนื้อวัว", en: "No beef" },
+  { value: "no_pork", th: "ไม่ทานเนื้อหมู", en: "No pork" },
+  { value: "no_chicken", th: "ไม่ทานไก่", en: "No chicken" },
+  { value: "no_spicy", th: "ไม่ทานเผ็ด", en: "No spicy food" },
+  { value: "no_vegetable", th: "ไม่ทานผัก", en: "No vegetables" },
+  { value: OTHER_OPTION, th: "อื่น ๆ", en: "Other" },
+];
 
-// TODO: i18n — Thai-only; used as both the value and the label.
 /** ท่านรู้จัก อบจ. หรือไม่ (Step 3) */
-export const SGCU_AWARENESS_OPTIONS = [
-  "รู้จักและเข้าใจบทบาทหน้าที่ของอบจ.เป็นอย่างดี",
-  "รู้จัก แต่ยังไม่แน่ใจว่าอบจ.มีบทบาทหน้าที่อย่างไร",
-  "ไม่รู้จัก",
-] as const;
+export const SGCU_AWARENESS_OPTIONS: LabeledOption[] = [
+  {
+    value: "aware_and_understand",
+    th: "รู้จักและเข้าใจบทบาทหน้าที่ของอบจ.เป็นอย่างดี",
+    en: "Familiar with it and understand its role well",
+  },
+  {
+    value: "aware_not_sure",
+    th: "รู้จัก แต่ยังไม่แน่ใจว่าอบจ.มีบทบาทหน้าที่อย่างไร",
+    en: "Familiar with it, but not sure what its role is",
+  },
+  { value: "not_aware", th: "ไม่รู้จัก", en: "Not familiar with it" },
+];
 
-// TODO: i18n — Thai-only; used as both the value and the label.
 /** ท่านเห็นการประชาสัมพันธ์จากช่องทางไหนมากที่สุด (Step 3) */
-export const PR_CHANNEL_OPTIONS = [
-  "ฟีดใน instagram ของ cu.firstdate2026",
-  "สตอรี่ใน instagram ของ cu.firstdate2026",
-  "ฟีดใน instagram ของ อบจ. (sgcu.chula)",
-  "สตอรี่ใน instagram ของ อบจ. (sgcu.chula)",
-  "ฟีดใน instagram ของคณะ",
-  "สตอรี่ใน instagram ของคณะ",
-  "ข้อความใน line รุ่นของคณะ",
-  "ข้อความใน line openchat CU110",
-  "เพื่อนหรือคนรู้จักส่งให้ดู",
-] as const;
+export const PR_CHANNEL_OPTIONS: LabeledOption[] = [
+  {
+    value: "ig_feed_firstdate",
+    th: "ฟีดใน instagram ของ cu.firstdate2026",
+    en: "Instagram feed of cu.firstdate2026",
+  },
+  {
+    value: "ig_story_firstdate",
+    th: "สตอรี่ใน instagram ของ cu.firstdate2026",
+    en: "Instagram story of cu.firstdate2026",
+  },
+  {
+    value: "ig_feed_sgcu",
+    th: "ฟีดใน instagram ของ อบจ. (sgcu.chula)",
+    en: "Instagram feed of SGCU (sgcu.chula)",
+  },
+  {
+    value: "ig_story_sgcu",
+    th: "สตอรี่ใน instagram ของ อบจ. (sgcu.chula)",
+    en: "Instagram story of SGCU (sgcu.chula)",
+  },
+  {
+    value: "ig_feed_faculty",
+    th: "ฟีดใน instagram ของคณะ",
+    en: "Instagram feed of my faculty",
+  },
+  {
+    value: "ig_story_faculty",
+    th: "สตอรี่ใน instagram ของคณะ",
+    en: "Instagram story of my faculty",
+  },
+  {
+    value: "line_faculty",
+    th: "ข้อความใน line รุ่นของคณะ",
+    en: "Message in my faculty's LINE group",
+  },
+  {
+    value: "line_openchat",
+    th: "ข้อความใน line openchat CU110",
+    en: "Message in the CU110 LINE OpenChat",
+  },
+  {
+    value: "friend_referral",
+    th: "เพื่อนหรือคนรู้จักส่งให้ดู",
+    en: "A friend or acquaintance showed me",
+  },
+];
 
-// TODO: i18n — Thai + English labels; used as both the value and the label.
 /** ประเภทยานพาหนะ (Step 4) */
-export const VEHICLE_OPTIONS = [
-  "รถยนต์ส่วนบุคคล (Private Car)",
-  "รถยนต์ไฟฟ้าส่วนบุคคล (Private Electric Vehicle)",
-  "BTS/MRT/Airport Rail Link",
-  "รถโดยสารประจำทาง / รถโดยสารไม่ประจำทาง",
-  "แท็กซี่ (Taxi)",
-  "รถจักรยานยนต์ (Motorcycle)",
-  "รถจักรยาน/เดิน (Bicycle or Walking)",
-] as const;
+export const VEHICLE_OPTIONS: LabeledOption<Vehicle>[] = [
+  { value: "private_car", th: "รถยนต์ส่วนบุคคล", en: "Private Car" },
+  {
+    value: "private_ev",
+    th: "รถยนต์ไฟฟ้าส่วนบุคคล",
+    en: "Private Electric Vehicle",
+  },
+  {
+    value: "transit",
+    th: "BTS/MRT/Airport Rail Link",
+    en: "BTS/MRT/Airport Rail Link",
+  },
+  {
+    value: "bus",
+    th: "รถโดยสารประจำทาง / รถโดยสารไม่ประจำทาง",
+    en: "Bus",
+  },
+  { value: "taxi", th: "แท็กซี่", en: "Taxi" },
+  { value: "motorcycle", th: "รถจักรยานยนต์", en: "Motorcycle" },
+  {
+    value: "bike_walk",
+    th: "รถจักรยาน/เดิน",
+    en: "Bicycle or Walking",
+  },
+];
 
 /** Max number of travel legs (ต่อ). */
 export const MAX_TRAVEL_LEGS = 4;

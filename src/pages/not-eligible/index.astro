@@ -1,0 +1,33 @@
+---
+import Image from "astro/components/Image.astro";
+
+import { NotEligibleContent } from "@components/landing/NotEligibleContent";
+import LandingFrameLayout from "@layouts/LandingFrameLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import flowers from "../../assets/images/flower_home.png";
+---
+
+<BaseLayout title="Not Eligible">
+  <div
+    class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-clip bg-linear-to-b from-primary to-primary-foreground py-16"
+  >
+    <Image
+      src={flowers}
+      alt="flower top"
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 top-0 z-0 w-full"
+    />
+    <!-- same image but rotate 180 -->
+    <Image
+      src={flowers}
+      alt="flower bottom"
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full rotate-180"
+    />
+
+    <LandingFrameLayout class="relative z-10 w-[92%] max-w-104">
+      <NotEligibleContent client:load />
+    </LandingFrameLayout>
+  </div>
+</BaseLayout>

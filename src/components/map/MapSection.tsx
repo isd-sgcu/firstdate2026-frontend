@@ -111,13 +111,14 @@ const sectionContent: Record<string, () => React.JSX.Element> = {
 };
 
 const MapSection = () => {
+  const locale = useStore($locale);
+
   return (
     <Tabs defaultValue={sectionTabs[0].value}>
       <TabsList className="w-full mb-4">
         {sectionTabs.map((tab) => (
-          // TODO: i18n
           <TabsTrigger key={tab.value} value={tab.value}>
-            {tab.nameEn}
+            {locale === "th" ? tab.nameTh : tab.nameEn}
           </TabsTrigger>
         ))}
       </TabsList>
