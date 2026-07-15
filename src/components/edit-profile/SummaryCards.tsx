@@ -89,7 +89,6 @@ export function PersonalCard({ profile }: { profile: ProfileResult }) {
           section="personal"
           title={t("editProfile.personal.title")}
           profile={profile}
-          defaultOpen
           body={<StepPersonalInfo showHeading={false} />}
         />
       }

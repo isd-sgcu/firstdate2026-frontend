@@ -1,29 +1,43 @@
-import { useRef, useState } from "react";
+// import { useRef, useState } from "react";
 
-import { EditPencil } from "./EditPencil";
+import { useSession } from "@lib/auth/useSession";
+
+// import { EditPencil } from "./EditPencil";
 
 /**
- * Profile-photo box with an edit pencil. There is no upload endpoint yet, so
- * picking an image only previews it locally — nothing is persisted.
- * TODO: wire to an avatar upload API once the backend provides one.
+ * Profile-photo box. The photo comes from the Google account the user signed in
+ * with — Better Auth stores it on the session as `user.image`, so it is
+ * read-only here.
+ *
+ * The edit pencil + file picker are commented out below: there is still no
+ * avatar upload endpoint, so picking a file could only ever preview locally and
+ * would be silently discarded. Restore them once the backend can store one.
  */
 export function AvatarEditor() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const session = useSession();
+  const image = session.status === "authenticated" ? session.user.image : null;
 
-  const onPick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) setPreview(URL.createObjectURL(file));
-  };
+  // const inputRef = useRef<HTMLInputElement>(null);
+  // const [preview, setPreview] = useState<string | null>(null);
+  //
+  // const onPick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) setPreview(URL.createObjectURL(file));
+  // };
 
   return (
     <div className="relative mx-auto w-40">
       <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-[#DEDEDE]">
-        {preview && (
-          <img src={preview} alt="" className="h-full w-full object-cover" />
+        {image && (
+          <img
+            src={image}
+            alt=""
+            referrerPolicy="no-referrer"
+            className="h-full w-full object-cover"
+          />
         )}
       </div>
-      <button
+      {/* <button
         type="button"
         onClick={() => inputRef.current?.click()}
         aria-label="แก้ไขรูปโปรไฟล์"
@@ -37,7 +51,7 @@ export function AvatarEditor() {
         accept="image/*"
         className="hidden"
         onChange={onPick}
-      />
+      /> */}
     </div>
   );
 }

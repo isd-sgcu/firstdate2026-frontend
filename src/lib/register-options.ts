@@ -124,6 +124,7 @@ export const PREFIX_OPTIONS: LabeledOption<Prefix>[] = [
   { value: "mr", th: "นาย", en: "Mr." },
   { value: "mrs", th: "นาง", en: "Mrs." },
   { value: "ms", th: "นางสาว", en: "Ms." },
+  { value: "not_specified", th: "ไม่ระบุ", en: "Not specified" },
   { value: "other", th: "อื่นๆ", en: "Other" },
 ];
 

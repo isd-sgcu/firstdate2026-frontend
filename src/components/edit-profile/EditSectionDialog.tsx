@@ -25,16 +25,14 @@ export function EditSectionDialog({
   title,
   profile,
   body,
-  defaultOpen = false,
 }: {
   section: EditSection;
   title: string;
   profile: ProfileResult;
   body: React.ReactNode;
-  defaultOpen?: boolean;
 }) {
   const t = useT();
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(false);
 
   return (
     <DialogPrimitive.Root open={open} onOpenChange={setOpen}>

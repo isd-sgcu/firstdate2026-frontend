@@ -112,6 +112,11 @@ export function StepPersonalInfo({
 function NameField() {
   const t = useT();
   const locale = useStore($locale);
+  // Without `items`, Select.Value falls back to rendering the raw enum token
+  // ("mr") instead of the option's label.
+  const prefixItems = Object.fromEntries(
+    PREFIX_OPTIONS.map((option) => [option.value, labelOf(locale, option)]),
+  );
   const {
     control,
     register,
@@ -131,6 +136,7 @@ function NameField() {
             rules={{ required: t("register.validation.prefixRequired") }}
             render={({ field }) => (
               <Select
+                items={prefixItems}
                 value={field.value || null}
                 onValueChange={(value) => field.onChange(value ?? "")}
               >
