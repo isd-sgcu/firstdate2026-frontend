@@ -4,9 +4,7 @@ import {
   FACULTIES,
   FOOD_ALLERGY_OPTIONS,
   OTHER_OPTION,
-  PR_CHANNEL_OPTIONS,
   RELATION_OPTIONS,
-  SGCU_AWARENESS_OPTIONS,
   type LabeledOption,
 } from "@lib/register-options";
 import type { RegistrationBody, TravelLegInput } from "@lib/api/fd";
@@ -20,10 +18,11 @@ const districtName = (id: string) =>
 const facultyName = (code: string) =>
   FACULTIES.find((f) => f.code === code)?.name ?? code;
 
-// Free-text backend fields (allergies/dietary/pnoSgcuAwareness/pnoReferralSource/
-// emergencyContactName) store the Thai label regardless of UI locale, so the
-// stored data stays consistent no matter which language the form was filled
-// in — labelOf() is only for what's shown on screen.
+// Free-text backend fields (allergies/dietary/emergencyContactName) store the
+// Thai label regardless of UI locale, so the stored data stays consistent no
+// matter which language the form was filled in — labelOf() is only for what's
+// shown on screen. The two P&O survey fields are the exception: `students`
+// documents them as taking the answer code, so they send the option value.
 const thLabel = (options: LabeledOption[], value: string) =>
   options.find((o) => o.value === value)?.th ?? value;
 
@@ -70,7 +69,7 @@ export function toRegistrationBody(data: RegisterFormValues): RegistrationBody {
 
   return {
     pdpaConsent: true,
-    prefix: data.prefix as RegistrationBody["prefix"],
+    prefix: data.prefix,
     firstName: data.firstName,
     lastName: data.lastName,
     nickname: data.nickname,
@@ -83,8 +82,8 @@ export function toRegistrationBody(data: RegisterFormValues): RegistrationBody {
     medicalNotes: data.chronicDiseaseHas
       ? data.chronicDiseaseDetail.trim() || null
       : null,
-    pnoSgcuAwareness: thLabel(SGCU_AWARENESS_OPTIONS, data.sgcuAwareness),
-    pnoReferralSource: thLabel(PR_CHANNEL_OPTIONS, data.prChannel),
+    pnoSgcuAwareness: data.sgcuAwareness,
+    pnoReferralSource: data.prChannel,
     csoProvince: provinceName(data.residenceProvince),
     csoDistrict: districtName(data.residenceDistrict),
     travelLegs: data.travelLegs.map(mapLeg),

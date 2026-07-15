@@ -53,7 +53,7 @@ export function RegisterPanel() {
     resolver: zodResolver(schema),
     defaultValues: {
       // Step 1
-      prefix: "",
+      prefix: undefined,
       firstName: "",
       lastName: "",
       nickname: "",

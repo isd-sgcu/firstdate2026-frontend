@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useStore } from "@nanostores/react";
 
@@ -16,6 +17,7 @@ import {
   FACULTIES,
   PREFIX_OPTIONS,
   RELATION_OPTIONS,
+  facultyCodeOf,
   labelOf,
 } from "@lib/register-options";
 
@@ -41,6 +43,15 @@ export function StepPersonalInfo({
   showHeading = true,
 }: { showHeading?: boolean } = {}) {
   const t = useT();
+  const { watch, setValue } = useFormContext<RegisterFormValues>();
+
+  // Faculty is derived from the CUNET ID rather than asked for — the id itself
+  // comes from the authenticated email, so both stay read-only. An id whose
+  // last two digits match no faculty leaves the field editable to pick by hand.
+  const derivedFaculty = facultyCodeOf(watch("studentId"));
+  useEffect(() => {
+    if (derivedFaculty) setValue("faculty", derivedFaculty);
+  }, [derivedFaculty, setValue]);
 
   return (
     <div className="flex flex-col pb-2">
@@ -68,6 +79,7 @@ export function StepPersonalInfo({
           label={t("register.personal.facultyLabel")}
           placeholder={t("register.personal.facultyPlaceholder")}
           options={FACULTY_OPTIONS}
+          disabled={!!derivedFaculty}
         />
 
         <TextField
@@ -137,8 +149,8 @@ function NameField() {
             render={({ field }) => (
               <Select
                 items={prefixItems}
-                value={field.value || null}
-                onValueChange={(value) => field.onChange(value ?? "")}
+                value={field.value ?? null}
+                onValueChange={(value) => field.onChange(value)}
               >
                 <SelectTrigger
                   className={cn(

@@ -1,3 +1,5 @@
+import type { DefaultValues } from "react-hook-form";
+
 import {
   CHULA_DISTRICT_ID,
   CHULA_PROVINCE_ID,
@@ -102,7 +104,7 @@ const chulaLeg = () => ({
 
 export function profileToFormValues(
   profile: ProfileResult,
-): RegisterFormValues {
+): DefaultValues<RegisterFormValues> {
   const { user, travelLegs } = profile;
   const { food, drug } = parseAllergies(user.allergies);
   const foodChecklist = reverseChecklist(FOOD_ALLERGY_OPTIONS, food);
@@ -115,7 +117,7 @@ export function profileToFormValues(
 
   return {
     // ข้อมูลส่วนตัว
-    prefix: user.prefix ?? "",
+    prefix: user.prefix ?? undefined,
     firstName: user.firstName,
     lastName: user.lastName,
     nickname: user.nickname ?? "",
