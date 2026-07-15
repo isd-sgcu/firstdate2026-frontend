@@ -1,9 +1,12 @@
+import { CameraTroubleshoot } from "@components/shared/CameraTroubleshootDialog";
 import { Providers } from "@components/shared/Providers";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 // import { Label } from "@components/ui/label";
 // import { Switch } from "@components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
+import { checkinRegistration } from "@lib/api/checkin";
+import { APIError } from "@lib/client";
 import { useT } from "@lib/i18n/useT";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -57,6 +60,67 @@ export function StaffRegisterPanel({
   );
 }
 
+interface CheckInResult {
+  variant: "success" | "error";
+  /** null = use the variant's default title. */
+  title: string | null;
+  description: string | null;
+}
+
+/**
+ * Maps a /fd/checkin/registration failure to dialog content.
+ * ALREADY_CHECKED_IN still shows the success dialog (with its own title) —
+ * the student is registered either way.
+ */
+function checkInErrorToResult(
+  error: unknown,
+  studentId: string,
+  t: ReturnType<typeof useT>,
+): CheckInResult {
+  if (error instanceof APIError) {
+    switch (error.code) {
+      case "ALREADY_CHECKED_IN":
+        return {
+          variant: "success",
+          title: t("staff.register.checkIn.alreadyCheckedInTitle"),
+          description: studentId,
+        };
+      case "STUDENT_NOT_FOUND":
+        return {
+          variant: "error",
+          title: null,
+          description: t("staff.register.checkIn.studentNotFoundDescription"),
+        };
+      case "FORBIDDEN_NOT_STAFF":
+        return {
+          variant: "error",
+          title: null,
+          description: t("staff.register.checkIn.notStaffDescription"),
+        };
+    }
+  }
+  return {
+    variant: "error",
+    title: null,
+    description: t("staff.register.checkIn.errorDescription"),
+  };
+}
+
+function useCheckIn() {
+  const t = useT();
+  const [result, setResult] = useState<CheckInResult | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: (studentId: string) => checkinRegistration(studentId),
+    onSuccess: (_entry, studentId) =>
+      setResult({ variant: "success", title: null, description: studentId }),
+    onError: (error, studentId) =>
+      setResult(checkInErrorToResult(error, studentId, t)),
+  });
+
+  return { mutation, result, clearResult: () => setResult(null) };
+}
+
 function CheckInQrScanner() {
   // const devices = useDevices();
   // const [selectedDevice, setSelectedDevice] = useState<string | undefined>(
@@ -65,17 +129,11 @@ function CheckInQrScanner() {
 
   // const [paused, setPaused] = useState(false);
   // const [playSound, setPlaySound] = useState(false);
-  const [result, setResult] = useState<"success" | "error" | null>(null);
+  const { mutation: checkIn, result, clearResult } = useCheckIn();
   // only surface the spinner once the request is slow enough to notice,
   // so fast responses don't flash it
   const [showLoading, setShowLoading] = useState(false);
   const t = useT();
-
-  const checkIn = useMutation({
-    mutationFn: (code: string) => simulateApi(code),
-    onSuccess: (ok) => setResult(ok ? "success" : "error"),
-    onError: () => setResult("error"),
-  });
 
   // show loading indicator if the api took more than 400ms
   useEffect(() => {
@@ -115,7 +173,7 @@ function CheckInQrScanner() {
           </div>
         )}
       </div>
-      {/* 
+      {/*
       <div className="mt-2 border border-red-500 p-3 rounded">
         <p>debug</p>
         <Switch checked={!paused} onCheckedChange={(it) => setPaused(!it)} />
@@ -139,23 +197,21 @@ function CheckInQrScanner() {
         </select>
       </div>
  */}
-      <p className="text-primary text-xs text-center mt-12">
+      <div className="flex justify-center mt-4">
+        <CameraTroubleshoot className="text-primary text-sm" />
+      </div>
+
+      <p className="text-primary text-xs text-center mt-8">
         {t("staff.register.refreshReminderLine1")} <br />
         {t("staff.register.refreshReminderLine2")}
       </p>
 
       <CheckInResultDialog
         open={result !== null}
-        onOpenChange={(open) => !open && setResult(null)}
-        variant={result ?? "success"}
-        // TODO: update description to {name}\n {id} once we have the api
-        description={
-          result === "success"
-            ? t("staff.register.checkIn.successDescription")
-            : result === "error"
-              ? t("staff.register.checkIn.errorDescription")
-              : null
-        }
+        onOpenChange={(open) => !open && clearResult()}
+        variant={result?.variant ?? "success"}
+        title={result?.title}
+        description={result?.description}
       />
     </section>
   );
@@ -201,21 +257,42 @@ function displayQrScannerError(
   });
 }
 
-async function simulateApi(code: string) {
-  console.log("checking in", code);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return Math.random() > 0.5;
-}
-
 function ManualCheckInForm() {
   const t = useT();
+  const [studentId, setStudentId] = useState("");
+  const { mutation: checkIn, result, clearResult } = useCheckIn();
+
+  function handleSubmit() {
+    if (checkIn.isPending) return;
+    if (!/^\d{10}$/.test(studentId)) {
+      toast.error(t("staff.register.invalidStudentId"));
+      return;
+    }
+    checkIn.mutate(studentId);
+  }
+
+  function handleDialogClose() {
+    if (result?.variant === "success") setStudentId("");
+    clearResult();
+  }
+
   return (
     <section className="mt-12 items-center flex flex-col">
       <Input
+        inputMode="numeric"
+        maxLength={10}
+        value={studentId}
+        onChange={(e) => setStudentId(e.target.value.replace(/\D/g, ""))}
         placeholder={t("staff.register.studentIdPlaceholder")}
         className="w-72 max-w-[75vw]"
       />
-      <Button size="lg" className="w-48 mt-4 max-w-[65vw]">
+      <Button
+        size="lg"
+        className="w-48 mt-4 max-w-[65vw]"
+        disabled={checkIn.isPending}
+        onClick={handleSubmit}
+      >
+        {checkIn.isPending && <LoaderCircleIcon className="animate-spin" />}
         {t("staff.register.submit")}
       </Button>
 
@@ -223,6 +300,14 @@ function ManualCheckInForm() {
         {t("staff.register.refreshReminderLine1")} <br />
         {t("staff.register.refreshReminderLine2")}
       </p>
+
+      <CheckInResultDialog
+        open={result !== null}
+        onOpenChange={(open) => !open && handleDialogClose()}
+        variant={result?.variant ?? "success"}
+        title={result?.title}
+        description={result?.description}
+      />
     </section>
   );
 }

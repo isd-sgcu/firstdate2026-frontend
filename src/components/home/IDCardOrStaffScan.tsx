@@ -1,13 +1,18 @@
 import { QrCode, QrCodeDialog } from "@components/shared/QrCode";
 import { Button, buttonVariants } from "@components/ui/button";
 import { useProfile } from "@lib/auth/useProfile";
+import { useSession } from "@lib/auth/useSession";
 import { useT } from "@lib/i18n/useT";
 import { cn } from "@lib/utils";
-import { Edit2, RotateCw, Search, UserPlus } from "lucide-react";
+import { Edit2, RotateCw, Search, User, UserPlus } from "lucide-react";
 
 export function IDCardOrStaffScan() {
   const t = useT();
   const profile = useProfile();
+  const session = useSession();
+  const profileImage =
+    session.status === "authenticated" ? session.user.image : null;
+  const me = profile.status === "ready" ? profile.me : undefined;
   const isStaff = profile.status === "ready" && profile.me.role === "staff";
 
   if (isStaff) {
@@ -51,26 +56,31 @@ export function IDCardOrStaffScan() {
         </h2>
         <div className="flex gap-y-4 gap-x-1 mt-4 flex-wrap justify-around">
           <div className="flex gap-2">
-            <div className="size-20 rounded bg-amber-50 flex flex-col justify-center items-center">
-              <p className="text-primary text-[3.5px] text-center font-bold">
-                ⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠄⢁⠈⢻⢿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⠃⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⡀⠭⢿⣿⣿⣿⣿
-                ⣿⣿⣿⣿⡟⠄⢀⣾⣿⣿⣿⣷⣶⣿⣷⣶⣶⡆⠄⠄⠄⣿⣿⣿⣿ ⣿⣿⣿⣿⡇⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠄⠄⢸⣿⣿⣿⣿
-                ⣿⣿⣿⣿⣇⣼⣿⣿⠿⠶⠙⣿⡟⠡⣴⣿⣽⣿⣧⠄⢸⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣾⣿⣿⣟⣭⣾⣿⣷⣶⣶⣴⣶⣿⣿⢄⣿⣿⣿⣿⣿
-                ⣿⣿⣿⣿⣿⣿⣿⣿⡟⣩⣿⣿⣿⡏⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣹⡋⠘⠷⣦⣀⣠⡶⠁⠈⠁⠄⣿⣿⣿⣿⣿⣿⣿
-                ⣿⣿⣿⣿⣿⣿⣍⠃⣴⣶⡔⠒⠄⣠⢀⠄⠄⠄⡨⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⣿⣦⡘⠿⣷⣿⠿⠟⠃⠄⠄⣠⡇⠈⠻⣿⣿⣿⣿
-                ⣿⣿⣿⣿⡿⠟⠋⢁⣷⣠⠄⠄⠄⠄⣀⣠⣾⡟⠄⠄⠄⠄⠉⠙⠻ ⡿⠟⠋⠁⠄⠄⠄⢸⣿⣿⡯⢓⣴⣾⣿⣿⡟⠄⠄⠄⠄⠄⠄⠄
-                ⠄⠄⠄⠄⠄⠄⠄⣿⡟⣷⠄⠹⣿⣿⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄
-              </p>
-            </div>
+            {profileImage ? (
+              <img className="size-20 rounded" src={profileImage} />
+            ) : (
+              <div className="size-20 rounded bg-neutral-200 items-center justify-center flex">
+                <User className="text-neutral-400 size-8" />
+              </div>
+            )}
             <div className="flex flex-col justify-between gap-2">
               <div className="flex flex-col">
                 <div className="flex items-center">
-                  <span className="font-bold text-sm">สมชาย รักจุฬา</span>
-                  <Button size="icon-xs">
-                    <Edit2 />
-                  </Button>
+                  <span className="font-bold text-sm">
+                    {me
+                      ? `${me.firstName} ${me.lastName}`
+                      : t("home.idCard.loading")}
+                  </span>
+                  <a
+                    href="/edit-profile"
+                    className={buttonVariants({ size: "icon-xs" })}
+                  >
+                    <Edit2 className="size-3" />
+                  </a>
                 </div>
-                <span className="text-xs">6932345623</span>
+                <span className="text-xs">
+                  {me?.studentId ?? t("home.idCard.loading")}
+                </span>
               </div>
               <div className="flex items-center text-xs">
                 <span>{t("home.idCard.notRegistered")} </span>
@@ -82,11 +92,11 @@ export function IDCardOrStaffScan() {
           </div>
 
           <QrCodeDialog
-            contents="6767676767"
+            contents={me?.studentId ?? "6767676767"}
             renderTrigger={
               <section className="flex flex-col items-center">
                 <QrCode
-                  contents="6767676767"
+                  contents={me?.studentId ?? "6767676767"}
                   className="size-16 bg-white p-1"
                 />
                 <div className="flex items-center gap-1 mt-0.5">

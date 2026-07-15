@@ -62,7 +62,8 @@
       "welcome": "Welcome to CU Firstdate",
       "registered": "Registered",
       "notRegistered": "Not yet registered",
-      "tapToZoom": "Tap to zoom"
+      "tapToZoom": "Tap to zoom",
+      "loading": "Loading..."
     },
     "information": {
       "heading": "Event Information",
@@ -193,12 +194,16 @@
       "submit": "Register",
       "refreshReminderLine1": "Once check-in is complete,",
       "refreshReminderLine2": "remind them to refresh their screen.",
+      "invalidStudentId": "Please enter a valid 10-digit student ID.",
       "checkIn": {
         "confirm": "OK",
         "successTitle": "Check-in successful",
         "successDescription": "You're all set. Remind them to refresh their screen.",
+        "alreadyCheckedInTitle": "Already checked in",
         "errorTitle": "Check-in failed",
-        "errorDescription": "Something went wrong. Please have them try again."
+        "errorDescription": "Something went wrong. Please have them try again.",
+        "studentNotFoundDescription": "Student ID not found in the system.",
+        "notStaffDescription": "This account doesn't have staff permission for this event."
       },
       "qrScannerError": {
         "permissionDenied": "We need permission to use the camera. Please allow camera access, then try again.",
@@ -212,6 +217,19 @@
         "typeError": "Something went wrong while starting the camera. Please try again.",
         "unknown": "Something went wrong. Please try again."
       }
+    }
+  },
+  "qrcode": {
+    "troubleshoot": {
+      "link": "Camera not working?",
+      "title": "Camera Troubleshooting",
+      "intro": "If the camera doesn't start or the screen stays black, follow the steps for your browser.",
+      "chromeTitle": "Chrome / Edge (Android)",
+      "chromeSteps": "1. Tap the lock or settings icon next to the address bar\n2. Open Permissions\n3. Allow Camera\n4. Refresh this page",
+      "safariTitle": "Safari (iPhone / iPad)",
+      "safariSteps": "1. Tap the \"AA\" or settings button in the address bar\n2. Open Website Settings\n3. Set Camera to Allow\n4. Reload this page\n\nOr go to Settings > Safari > Camera and choose Allow.",
+      "genericTitle": "Other tips",
+      "genericSteps": "• Close other apps or tabs using the camera, then retry\n• Refresh this page\n• If it still fails, try another browser or device"
     }
   }
 }

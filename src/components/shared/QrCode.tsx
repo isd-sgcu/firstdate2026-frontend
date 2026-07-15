@@ -61,7 +61,7 @@ export function QrCodeDialog({ renderTrigger, contents }: QrCodeDialogProps) {
                 className="size-full"
               />
             </div>
-            <span className="font-bold text-center text-xl">6767676767</span>
+            <span className="font-bold text-center text-xl">{contents}</span>
             <DialogClose
               render={
                 <Button size="lg" variant="red" className="w-full">
