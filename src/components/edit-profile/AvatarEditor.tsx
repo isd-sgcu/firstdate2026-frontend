@@ -4,15 +4,7 @@ import { useSession } from "@lib/auth/useSession";
 
 // import { EditPencil } from "./EditPencil";
 
-/**
- * Profile-photo box. The photo comes from the Google account the user signed in
- * with — Better Auth stores it on the session as `user.image`, so it is
- * read-only here.
- *
- * The edit pencil + file picker are commented out below: there is still no
- * avatar upload endpoint, so picking a file could only ever preview locally and
- * would be silently discarded. Restore them once the backend can store one.
- */
+//  use image now if possible connect edit with backend api if exist
 export function AvatarEditor() {
   const session = useSession();
   const image = session.status === "authenticated" ? session.user.image : null;
