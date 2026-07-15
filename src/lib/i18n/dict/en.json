@@ -193,12 +193,16 @@
       "submit": "Register",
       "refreshReminderLine1": "Once check-in is complete,",
       "refreshReminderLine2": "remind them to refresh their screen.",
+      "invalidStudentId": "Please enter a valid 10-digit student ID.",
       "checkIn": {
         "confirm": "OK",
         "successTitle": "Check-in successful",
         "successDescription": "You're all set. Remind them to refresh their screen.",
+        "alreadyCheckedInTitle": "Already checked in",
         "errorTitle": "Check-in failed",
-        "errorDescription": "Something went wrong. Please have them try again."
+        "errorDescription": "Something went wrong. Please have them try again.",
+        "studentNotFoundDescription": "Student ID not found in the system.",
+        "notStaffDescription": "This account doesn't have staff permission for this event."
       },
       "qrScannerError": {
         "permissionDenied": "We need permission to use the camera. Please allow camera access, then try again.",

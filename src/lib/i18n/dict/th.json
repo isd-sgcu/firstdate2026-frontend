@@ -193,12 +193,16 @@
       "submit": "ลงทะเบียน",
       "refreshReminderLine1": "เมื่อลงทะเบียนเรียบร้อยแล้ว",
       "refreshReminderLine2": "อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ",
+      "invalidStudentId": "กรุณากรอกเลขนิสิต 10 หลักให้ถูกต้อง",
       "checkIn": {
         "confirm": "ตกลง",
         "successTitle": "ลงทะเบียนสำเร็จ",
         "successDescription": "เรียบร้อยแล้ว อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ",
+        "alreadyCheckedInTitle": "บันทึกข้อมูลสำเร็จ",
         "errorTitle": "ลงทะเบียนไม่สำเร็จ",
-        "errorDescription": "เกิดข้อผิดพลาด กรุณาให้น้องลองใหม่อีกครั้ง"
+        "errorDescription": "เกิดข้อผิดพลาด กรุณาให้น้องลองใหม่อีกครั้ง",
+        "studentNotFoundDescription": "ไม่พบรหัสนิสิตนี้ในระบบ",
+        "notStaffDescription": "บัญชีนี้ไม่มีสิทธิ์สตาฟสำหรับงานนี้"
       },
       "qrScannerError": {
         "permissionDenied": "ต้องขออนุญาตใช้กล้องก่อน กรุณาอนุญาตให้เข้าถึงกล้องแล้วลองใหม่อีกครั้ง",

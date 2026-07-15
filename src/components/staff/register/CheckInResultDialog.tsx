@@ -15,6 +15,8 @@ export interface CheckInResultDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   variant: CheckInResultVariant;
+  /** Overrides the variant's default title, e.g. the already-checked-in case. */
+  title?: string | null;
   /** Optional message shown under the title; hidden when nullish. */
   description?: string | null;
 }
@@ -23,14 +25,16 @@ export function CheckInResultDialog({
   open,
   onOpenChange,
   variant,
+  title: titleOverride,
   description,
 }: CheckInResultDialogProps) {
   const t = useT();
 
   const title =
-    variant === "success"
+    titleOverride ??
+    (variant === "success"
       ? t("staff.register.checkIn.successTitle")
-      : t("staff.register.checkIn.errorTitle");
+      : t("staff.register.checkIn.errorTitle"));
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -55,7 +59,7 @@ export function CheckInResultDialog({
             <DialogHeader className="items-center">
               <DialogTitle className="text-3xl">{title}</DialogTitle>
               {description ? (
-                <DialogDescription className="text-xl text-primary">
+                <DialogDescription className="text-xl whitespace-pre-line text-primary">
                   {description}
                 </DialogDescription>
               ) : null}
