@@ -25,6 +25,7 @@ import { LocaleToggle } from "./LocaleToggle";
 export function NavigationMenu() {
   const profile = useProfile();
   const isStaff = profile.status === "ready" && profile.me.role === "staff";
+  const me = profile.status === "ready" ? profile.me : undefined;
   const t = useT();
 
   return (
@@ -80,9 +81,8 @@ export function NavigationMenu() {
               />
             ) : (
               <>
-                {/* TODO */}
                 <QrCodeDialog
-                  contents="6767676767"
+                  contents={me?.studentId ?? "6767676767"}
                   renderTrigger={
                     <DrawerClose
                       render={

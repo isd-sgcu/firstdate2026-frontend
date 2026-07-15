@@ -62,7 +62,8 @@
       "welcome": "ยินดีต้อนรับสู่ CU Firstdate",
       "registered": "ลงทะเบียนแล้ว",
       "notRegistered": "ยังไม่ได้ลงทะเบียน",
-      "tapToZoom": "กดเพื่อขยาย"
+      "tapToZoom": "กดเพื่อขยาย",
+      "loading": "กำลังโหลด..."
     },
     "information": {
       "heading": "ข้อมูลภายในงาน",

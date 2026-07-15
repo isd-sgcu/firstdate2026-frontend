@@ -62,7 +62,8 @@
       "welcome": "Welcome to CU Firstdate",
       "registered": "Registered",
       "notRegistered": "Not yet registered",
-      "tapToZoom": "Tap to zoom"
+      "tapToZoom": "Tap to zoom",
+      "loading": "Loading..."
     },
     "information": {
       "heading": "Event Information",
