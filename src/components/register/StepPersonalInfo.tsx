@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { useStore } from "@nanostores/react";
 
@@ -16,6 +17,7 @@ import {
   FACULTIES,
   PREFIX_OPTIONS,
   RELATION_OPTIONS,
+  facultyCodeOf,
   labelOf,
 } from "@lib/register-options";
 
@@ -41,6 +43,15 @@ export function StepPersonalInfo({
   showHeading = true,
 }: { showHeading?: boolean } = {}) {
   const t = useT();
+  const { watch, setValue } = useFormContext<RegisterFormValues>();
+
+  // Faculty is derived from the CUNET ID rather than asked for — the id itself
+  // comes from the authenticated email, so both stay read-only. An id whose
+  // last two digits match no faculty leaves the field editable to pick by hand.
+  const derivedFaculty = facultyCodeOf(watch("studentId"));
+  useEffect(() => {
+    if (derivedFaculty) setValue("faculty", derivedFaculty);
+  }, [derivedFaculty, setValue]);
 
   return (
     <div className="flex flex-col pb-2">
@@ -68,6 +79,7 @@ export function StepPersonalInfo({
           label={t("register.personal.facultyLabel")}
           placeholder={t("register.personal.facultyPlaceholder")}
           options={FACULTY_OPTIONS}
+          disabled={!!derivedFaculty}
         />
 
         <TextField
@@ -112,6 +124,11 @@ export function StepPersonalInfo({
 function NameField() {
   const t = useT();
   const locale = useStore($locale);
+  // Without `items`, Select.Value falls back to rendering the raw enum token
+  // ("mr") instead of the option's label.
+  const prefixItems = Object.fromEntries(
+    PREFIX_OPTIONS.map((option) => [option.value, labelOf(locale, option)]),
+  );
   const {
     control,
     register,
@@ -131,8 +148,9 @@ function NameField() {
             rules={{ required: t("register.validation.prefixRequired") }}
             render={({ field }) => (
               <Select
-                value={field.value || null}
-                onValueChange={(value) => field.onChange(value ?? "")}
+                items={prefixItems}
+                value={field.value ?? null}
+                onValueChange={(value) => field.onChange(value)}
               >
                 <SelectTrigger
                   className={cn(

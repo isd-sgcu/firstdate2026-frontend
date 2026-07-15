@@ -1,5 +1,3 @@
-import { useStore } from "@nanostores/react";
-
 import { Button } from "@components/ui/button";
 import {
   Drawer,
@@ -8,7 +6,6 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@components/ui/drawer";
-import { $locale, setLocale } from "@lib/i18n/locale";
 import { useT } from "@lib/i18n/useT";
 import { logout } from "@lib/auth/session";
 import { useProfile } from "@lib/auth/useProfile";
@@ -22,12 +19,12 @@ import mapIcon from "@assets/icons/material-symbols_map.svg";
 import calendarIcon from "@assets/icons/material-symbols_calendar-month-rounded.svg";
 import emergencyIcon from "@assets/icons/material-symbols_call-quality-rounded.svg";
 import { QrCodeDialog } from "./QrCode";
+import { LocaleToggle } from "./LocaleToggle";
 
 // not shadcn sidebar. actually a drawer
 export function NavigationMenu() {
   const profile = useProfile();
   const isStaff = profile.status === "ready" && profile.me.role === "staff";
-  const locale = useStore($locale);
   const t = useT();
 
   return (
@@ -49,14 +46,7 @@ export function NavigationMenu() {
               className="size-20"
             />
             <div className="flex items-center gap-0.5">
-              <Button
-                type="button"
-                variant="ghost"
-                className="text-lg active:bg-accent p-2 size-10.5 rounded"
-                onClick={() => setLocale(locale === "th" ? "en" : "th")}
-              >
-                {locale === "th" ? "TH" : "EN"}
-              </Button>
+              <LocaleToggle />
 
               <DrawerClose className="p-2 rounded active:bg-accent">
                 <Menu className="size-6.5 text-primary" />

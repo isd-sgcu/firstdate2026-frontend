@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { OTHER_OPTION } from "@lib/register-options";
+import { OTHER_OPTION, PREFIX_VALUES } from "@lib/register-options";
 import type { Translator } from "@lib/i18n/useT";
 
 export function buildRegisterSchema(t: Translator) {
@@ -12,7 +12,7 @@ export function buildRegisterSchema(t: Translator) {
   return z
     .object({
       // Step 1 — ข้อมูลส่วนตัว
-      prefix: required(t("register.validation.prefixRequired")),
+      prefix: z.enum(PREFIX_VALUES, t("register.validation.prefixRequired")),
       firstName: required(t("register.validation.firstNameRequired")),
       lastName: required(t("register.validation.lastNameRequired")),
       nickname: required(t("register.validation.nicknameRequired")),

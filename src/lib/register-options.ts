@@ -120,12 +120,20 @@ export const FACULTIES: Faculty[] = [
   },
 ];
 
+export const facultyCodeOf = (studentId: string): string => {
+  const code = studentId.trim().slice(-2);
+  return FACULTIES.some((faculty) => faculty.code === code) ? code : "";
+};
+
 export const PREFIX_OPTIONS: LabeledOption<Prefix>[] = [
   { value: "mr", th: "นาย", en: "Mr." },
   { value: "mrs", th: "นาง", en: "Mrs." },
   { value: "ms", th: "นางสาว", en: "Ms." },
+  { value: "not_specified", th: "ไม่ระบุ", en: "Not specified" },
   { value: "other", th: "อื่นๆ", en: "Other" },
 ];
+
+export const PREFIX_VALUES = PREFIX_OPTIONS.map((option) => option.value);
 
 export const RELATION_OPTIONS: LabeledOption[] = [
   { value: "father", th: "บิดา", en: "Father" },

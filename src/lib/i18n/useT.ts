@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useStore } from "@nanostores/react";
 
 import { $locale } from "./locale";
@@ -25,17 +26,21 @@ function resolve(node: unknown, path: string): string {
   return typeof value === "string" ? value : path;
 }
 
+// use callback
 export function useT() {
   const locale = useStore($locale);
 
-  return function t(key: DictKey<Dict>, vars?: Record<string, string>) {
-    const template = resolve(dict[locale], key);
-    if (!vars) return template;
-    return Object.entries(vars).reduce(
-      (result, [name, value]) => result.replaceAll(`{${name}}`, value),
-      template,
-    );
-  };
+  return useCallback(
+    function t(key: DictKey<Dict>, vars?: Record<string, string>) {
+      const template = resolve(dict[locale], key);
+      if (!vars) return template;
+      return Object.entries(vars).reduce(
+        (result, [name, value]) => result.replaceAll(`{${name}}`, value),
+        template,
+      );
+    },
+    [locale],
+  );
 }
 
 export type Translator = ReturnType<typeof useT>;
