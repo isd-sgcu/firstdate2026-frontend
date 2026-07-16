@@ -30,15 +30,12 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        if: github.ref_name == 'main'
         run: bun install --frozen-lockfile
 
       - name: Type check
-        if: github.ref_name == 'main'
         run: bun run typecheck
 
       - name: Lint
-        if: github.ref_name == 'main'
         run: bun run lint
 
       - name: Check formatting
