@@ -1,0 +1,235 @@
+{
+  "editProfile": {
+    "heading": "แก้ไข",
+    "edit": "แก้ไข",
+    "confirm": "ยืนยัน",
+    "saved": "บันทึกสำเร็จ",
+    "loading": "กำลังโหลด...",
+    "loadError": "ไม่สามารถโหลดข้อมูลได้",
+    "personal": {
+      "title": "ข้อมูลส่วนตัว",
+      "realName": "ชื่อจริง",
+      "studentId": "เลขประจำตัวนิสิต",
+      "faculty": "คณะ",
+      "phone": "เบอร์โทรศัพท์",
+      "guardianPhone": "เบอร์โทรศัพท์ผู้ปกครอง",
+      "relation": "ความสัมพันธ์"
+    },
+    "health": {
+      "title": "ข้อมูลสุขภาพ",
+      "foodAllergy": "อาหารที่แพ้",
+      "dietary": "ข้อจำกัดด้านอาหาร",
+      "drugAllergy": "ยาที่แพ้",
+      "chronicDisease": "โรคประจำตัว"
+    },
+    "travel": {
+      "title": "ข้อมูลการเดินทาง",
+      "residence": "ที่อยู่อาศัย",
+      "legsIntro": "การเดินทางมาร่วมกิจกรรม",
+      "legLabel": "ต่อที่ {index}",
+      "vehicle": "ยานพาหนะ",
+      "origin": "ต้นทาง",
+      "destination": "ปลายทาง"
+    }
+  },
+  "welcome": {
+    "title": "{appName}",
+    "description": "Astro, React และ TypeScript พร้อมให้ทีมเริ่มสร้างหน้าจอผลิตภัณฑ์แล้ว",
+    "button": {
+      "checkReact": "เช็ก React",
+      "ready": "พร้อม"
+    }
+  },
+  "landing": {
+    "eyebrow": "กิจกรรม",
+    "titleLine1": "ต้อนรับนิสิตใหม่",
+    "titleLine2": "ในวันแรกพบ",
+    "date": "18 กรกฎาคม 2569",
+    "cta": "เข้าสู่ระบบ"
+  },
+  "login": {
+    "heading": "เข้าสู่ระบบ",
+    "googleButton": "เข้าสู่ระบบด้วย Google",
+    "error": "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+    "retry": "ลองใหม่อีกครั้ง"
+  },
+  "notEligible": {
+    "title": "อนุญาตให้ใช้งานเฉพาะนิสิตปี 1 และ staff งานเท่านั้น",
+    "button": "กลับหน้าแรก"
+  },
+  "home": {
+    "idCard": {
+      "welcome": "ยินดีต้อนรับสู่ CU Firstdate",
+      "registered": "ลงทะเบียนแล้ว",
+      "notRegistered": "ยังไม่ได้ลงทะเบียน",
+      "tapToZoom": "กดเพื่อขยาย",
+      "loading": "กำลังโหลด..."
+    },
+    "information": {
+      "heading": "ข้อมูลภายในงาน",
+      "comingSoon": "เร็วๆ นี้",
+      "rpkmButton": "เข้าสู่เว็บไซต์ RPKM"
+    }
+  },
+  "map": {
+    "title": "แผนที่"
+  },
+  "nav": {
+    "home": "หน้าหลัก",
+    "scanRegister": "สแกนลงทะเบียน",
+    "qrCode": "QR Code",
+    "editInfo": "แก้ไขข้อมูล",
+    "calendar": "ปฏิทินกิจกรรม",
+    "logout": "ออกจากระบบ"
+  },
+  "emergency": {
+    "title": "ติดต่อฉุกเฉิน"
+  },
+  "redirect": {
+    "title": "งาน First Date จบแล้ว!\nแล้วเจอกันที่",
+    "button": "เข้าสู่เว็บไซต์",
+    "dateRange": "วันที่ 31 กรกฎาคม ถึง 2 สิงหาคม"
+  },
+  "register": {
+    "heading": "ลงทะเบียน",
+    "back": "ย้อนกลับ",
+    "next": "ถัดไป",
+    "error": {
+      "badRequest": "ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบแล้วลองใหม่อีกครั้ง",
+      "forbidden": "บัญชีนี้ไม่สามารถลงทะเบียนได้",
+      "alreadyRegistered": "บัญชีนี้ลงทะเบียนไปแล้ว",
+      "generic": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+    },
+    "common": {
+      "no": "ไม่มี",
+      "yes": "มี",
+      "noResults": "ไม่พบผลลัพธ์"
+    },
+    "personal": {
+      "heading": "ข้อมูลส่วนตัว",
+      "firstNameLabel": "ชื่อจริง",
+      "prefixPlaceholder": "คำนำหน้า",
+      "firstNamePlaceholder": "กรอกชื่อจริง...",
+      "lastNameLabel": "นามสกุล",
+      "lastNamePlaceholder": "กรอกนามสกุล...",
+      "nicknameLabel": "ชื่อเล่น",
+      "nicknamePlaceholder": "กรอกชื่อเล่น...",
+      "facultyLabel": "คณะ",
+      "facultyPlaceholder": "ค้นหาคณะ...",
+      "studentIdLabel": "เลขประจำตัวนิสิต",
+      "studentIdPlaceholder": "กรอกเลขประจำตัวนิสิต...",
+      "phoneLabel": "เบอร์โทรศัพท์",
+      "phonePlaceholder": "กรอกเบอร์โทรศัพท์...",
+      "guardianHeading": "ข้อมูลผู้ปกครอง",
+      "guardianPhoneLabel": "เบอร์โทรศัพท์ผู้ปกครอง",
+      "guardianPhonePlaceholder": "กรอกเบอร์โทรศัพท์ผู้ปกครอง...",
+      "guardianRelationLabel": "ความสัมพันธ์",
+      "guardianRelationPlaceholder": "ความสัมพันธ์"
+    },
+    "health": {
+      "heading": "ข้อมูลสุขภาพ",
+      "foodAllergyTitle": "อาหารที่แพ้",
+      "foodAllergyNone": "ไม่มีอาหารที่แพ้",
+      "foodAllergyOtherPlaceholder": "กรอกอาหารที่แพ้...",
+      "dietaryTitle": "ข้อจำกัดด้านอาหาร",
+      "dietaryNone": "ไม่มีข้อจำกัดด้านอาหาร",
+      "dietaryOtherPlaceholder": "กรอกข้อจำกัดอาหารอื่นๆ...",
+      "drugAllergyTitle": "ยาที่แพ้",
+      "drugAllergyNone": "ไม่มียาที่แพ้",
+      "drugAllergyYes": "มียาที่แพ้",
+      "drugAllergyPlaceholder": "กรอกยาที่แพ้...",
+      "chronicDiseaseTitle": "โรคประจำตัว",
+      "chronicDiseaseNone": "ไม่มีโรคประจำตัว",
+      "chronicDiseaseYes": "มีโรคประจำตัว",
+      "chronicDiseasePlaceholder": "กรอกโรคประจำตัว...",
+      "selectedCount": "เลือกแล้ว {count} รายการ"
+    },
+    "other": {
+      "heading": "ข้อมูลอื่น ๆ",
+      "sgcuQuestion": "ท่านรู้จัก องค์การบริหารสโมสรนิสิตจุฬาฯ (อบจ.) หรือไม่",
+      "prChannelQuestion": "ท่านเห็นการประชาสัมพันธ์โครงการจากช่องทางไหนมากที่สุด"
+    },
+    "travel": {
+      "heading": "ข้อมูลการเดินทาง",
+      "residenceIntro": "เขต/อำเภอ และจังหวัดที่ท่านอาศัยอยู่เป็นปกติ",
+      "provinceLabel": "จังหวัด",
+      "districtLabel": "เขต/อำเภอ",
+      "provincePlaceholder": "เลือกจังหวัด",
+      "districtPlaceholder": "เลือกเขต/อำเภอ",
+      "legsIntro": "รูปแบบการเดินทางมาร่วมกิจกรรม",
+      "addLeg": "เพิ่มต่อการเดินทาง",
+      "legLabel": "ต่อที่ {index}",
+      "removeLeg": "ลบเส้นทางนี้",
+      "vehicleLabel": "ประเภทยานพาหนะ",
+      "vehiclePlaceholder": "เลือกยานพาหนะ",
+      "originLabel": "ต้นทาง",
+      "destinationLabel": "ปลายทาง"
+    },
+    "validation": {
+      "prefixRequired": "กรุณาเลือกคำนำหน้า",
+      "firstNameRequired": "กรุณากรอกชื่อจริง",
+      "lastNameRequired": "กรุณากรอกนามสกุล",
+      "nicknameRequired": "กรุณากรอกชื่อเล่น",
+      "facultyRequired": "กรุณาเลือกคณะ",
+      "studentIdInvalid": "เลขประจำตัวนิสิตต้องขึ้นต้นด้วย 69 และมี 10 หลัก",
+      "phoneInvalid": "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก และขึ้นต้นด้วย 0",
+      "guardianRelationRequired": "กรุณาเลือกความสัมพันธ์",
+      "choiceRequired": "กรุณาเลือกคำตอบ",
+      "provinceRequired": "กรุณาเลือกจังหวัด",
+      "districtRequired": "กรุณาเลือกเขต/อำเภอ",
+      "vehicleRequired": "กรุณาเลือกยานพาหนะ",
+      "atLeastOne": "กรุณาเลือกอย่างน้อย 1 รายการ",
+      "specifyMore": "กรุณาระบุเพิ่มเติม",
+      "drugAllergyRequired": "กรุณากรอกยาที่แพ้",
+      "chronicDiseaseRequired": "กรุณากรอกโรคประจำตัว"
+    }
+  },
+  "staff": {
+    "register": {
+      "refresh": "รีเฟรช",
+      "heading": "ลงทะเบียนงาน",
+      "tabScanner": "สแกน QR code",
+      "tabManual": "ใช้รหัสนิสิต",
+      "studentIdPlaceholder": "กรอกรหัสนิสิต",
+      "submit": "ลงทะเบียน",
+      "refreshReminderLine1": "เมื่อลงทะเบียนเรียบร้อยแล้ว",
+      "refreshReminderLine2": "อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ",
+      "invalidStudentId": "กรุณากรอกเลขนิสิต 10 หลักให้ถูกต้อง",
+      "checkIn": {
+        "confirm": "ตกลง",
+        "successTitle": "ลงทะเบียนสำเร็จ",
+        "successDescription": "เรียบร้อยแล้ว อย่าลืมแจ้งน้องให้กดรีเฟรชหน้าจอ",
+        "alreadyCheckedInTitle": "บันทึกข้อมูลสำเร็จ",
+        "errorTitle": "ลงทะเบียนไม่สำเร็จ",
+        "errorDescription": "เกิดข้อผิดพลาด กรุณาให้น้องลองใหม่อีกครั้ง",
+        "studentNotFoundDescription": "ไม่พบรหัสนิสิตนี้ในระบบ",
+        "notStaffDescription": "บัญชีนี้ไม่มีสิทธิ์สตาฟสำหรับงานนี้"
+      },
+      "qrScannerError": {
+        "permissionDenied": "ต้องขออนุญาตใช้กล้องก่อน กรุณาอนุญาตให้เข้าถึงกล้องแล้วลองใหม่อีกครั้ง",
+        "noCamera": "ไม่พบกล้องบนอุปกรณ์นี้ กรุณาลองใช้อุปกรณ์อื่น",
+        "inUse": "กล้องกำลังถูกใช้งานโดยแอปหรือแท็บอื่น กรุณาปิดแล้วลองใหม่อีกครั้ง",
+        "overconstrained": "ไม่สามารถเปิดกล้องบนอุปกรณ์นี้ได้ กรุณาลองใช้อุปกรณ์อื่น",
+        "insecureContext": "กล้องใช้งานได้เฉพาะบนการเชื่อมต่อที่ปลอดภัย (https) กรุณาเปิดหน้านี้ผ่าน https",
+        "unsupported": "เบราว์เซอร์นี้ไม่รองรับการใช้งานกล้อง กรุณาลองใช้เบราว์เซอร์อื่น",
+        "aborted": "การเปิดกล้องถูกขัดจังหวะ กรุณาลองใหม่อีกครั้ง",
+        "security": "เบราว์เซอร์บล็อกการเข้าถึงกล้อง กรุณาตรวจสอบการตั้งค่าเบราว์เซอร์แล้วลองใหม่",
+        "typeError": "เกิดข้อผิดพลาดขณะเปิดกล้อง กรุณาลองใหม่อีกครั้ง",
+        "unknown": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+      }
+    }
+  },
+  "qrcode": {
+    "troubleshoot": {
+      "link": "วิธีแก้ปัญหากล้อง",
+      "title": "วิธีแก้ปัญหากล้อง",
+      "intro": "หากกล้องไม่ทำงานหรือหน้าจอเป็นสีดำ ให้ลองทำตามขั้นตอนตามเบราว์เซอร์ที่ใช้งาน",
+      "chromeTitle": "Chrome / Edge (Android)",
+      "chromeSteps": "1. แตะไอคอนแม่กุญแจหรือไอคอนตั้งค่าข้างช่องที่อยู่เว็บ\n2. เลือก สิทธิ์ (Permissions)\n3. เปิดสิทธิ์ กล้อง (Camera)\n4. รีเฟรชหน้านี้อีกครั้ง",
+      "safariTitle": "Safari (iPhone / iPad)",
+      "safariSteps": "1. แตะปุ่ม \"AA\" หรือไอคอนตั้งค่าในแถบที่อยู่เว็บ\n2. เลือก การตั้งค่าเว็บไซต์ (Website Settings)\n3. ตั้งค่า กล้อง เป็น อนุญาต (Allow)\n4. โหลดหน้านี้ใหม่\n\nหรือไปที่ ตั้งค่า > Safari > กล้อง แล้วเลือก อนุญาต",
+      "genericTitle": "วิธีอื่น ๆ",
+      "genericSteps": "• ปิดแอปหรือแท็บอื่นที่กำลังใช้กล้องอยู่ แล้วลองใหม่\n• รีเฟรชหน้านี้อีกครั้ง\n• หากยังไม่ได้ ลองเปลี่ยนเบราว์เซอร์หรืออุปกรณ์อื่น"
+    }
+  }
+}

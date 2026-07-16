@@ -1,5 +1,8 @@
 ---
 import "@styles/global.css";
+import { appConfig } from "@lib/env";
+import { AuthGuard } from "@components/shared/AuthGuard";
+import { Toaster } from "@components/ui/sonner";
 
 type Props = {
   title: string;
@@ -10,16 +13,36 @@ const { title, description = "firstdate 2026 frontend application" } =
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" translate="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-[#f7f4ee] text-[#172026] font-sans">
-    <main class="grid min-h-screen place-items-center p-8">
+  <body class="min-h-screen bg-primary text-foreground font-sans">
+    <AuthGuard client:load pathname={Astro.url.pathname} />
+    <Toaster client:load />
+    <main
+      class="min-h-screen xs:max-w-md xs:mx-auto xs:py-6 grid place-items-center"
+    >
       <slot />
     </main>
+    <script is:inline define:vars={{ redirectAt: appConfig.redirectAt }}>
+      const userAgent = navigator.userAgent;
+      if (/Line\//.test(userAgent)) {
+        const url = new URL(location.href);
+        url.searchParams.append("openExternalBrowser", "1");
+        location.href = url.toString();
+      }
+
+      const isRedirectPage =
+        location.pathname.replace(/\/+$/, "") === "/redirect";
+      if (Date.now() >= redirectAt && !isRedirectPage) {
+        location.replace("/redirect");
+      } else if (Date.now() < redirectAt && isRedirectPage) {
+        location.replace("/");
+      }
+    </script>
   </body>
 </html>

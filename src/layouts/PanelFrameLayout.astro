@@ -1,0 +1,114 @@
+---
+import PanelFrameShape from "@components/shared/PanelFrameShape.astro";
+import { NavigationMenu } from "@components/shared/NavigationMenu";
+import { LocaleToggle } from "@components/shared/LocaleToggle";
+import Image from "astro/components/Image.astro";
+import logo from "../assets/images/logo_horizontal.png";
+import { ChevronLeft } from "lucide-react";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  navigateBack?: string;
+  showMenu?: boolean;
+  showLocaleToggle?: boolean;
+  showBottomCap?: boolean;
+  strokeColor?: string;
+  strokeWidth?: number;
+  fillHeight?: boolean;
+  showLogo?: boolean;
+}
+
+const {
+  navigateBack = "",
+  showMenu = true,
+  showLocaleToggle = false,
+  showBottomCap = true,
+  strokeColor = "var(--color-fd-red)",
+  strokeWidth = 1,
+  fillHeight = false,
+  showLogo = true,
+  ...rest
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "relative w-full frameContainer",
+    fillHeight ? "h-svh xs:h-[calc(100svh-3rem)]" : "min-h-160",
+  ]}
+  {...rest}
+>
+  <div class="absolute inset-0 z-[-2]">
+    <PanelFrameShape showBottom={showBottomCap} />
+  </div>
+  <div
+    class:list={[
+      "absolute inset-x-5 z-[-1]",
+      showBottomCap ? "inset-y-6" : "top-6 bottom-0",
+    ]}
+  >
+    <PanelFrameShape
+      variant="stroke"
+      strokeWidth={strokeWidth}
+      color={strokeColor}
+      showBottom={showBottomCap}
+    />
+  </div>
+
+  {
+    showLogo && (
+      <div class="absolute left-0 right-0 top-[7.5cqw] grid place-items-center">
+        <Image src={logo} alt="firstdate logo" class="h-[28cqw] w-fit" />
+      </div>
+    )
+  }
+
+  {
+    navigateBack && (
+      <div class="absolute left-4 right-4 top-[4.5cqw] z-10 h-12 flex items-center">
+        <a href={navigateBack}>
+          <ChevronLeft className="size-6.5 text-muted" />
+        </a>
+      </div>
+    )
+  }
+
+  {
+    showMenu && (
+      <div class="absolute right-4 top-[4.5cqw] z-20 h-12 flex items-center">
+        <NavigationMenu client:load />
+      </div>
+    )
+  }
+
+  {
+    showLocaleToggle && (
+      <div class="absolute right-4 top-[4.5cqw] z-20 h-12 flex items-center">
+        <LocaleToggle client:load className="text-muted" />
+      </div>
+    )
+  }
+
+  {
+    fillHeight ? (
+      <div class="absolute inset-0 flex flex-col px-[1.25em] pt-[31.35cqw]">
+        <slot />
+      </div>
+    ) : (
+      <div
+        class:list={[
+          "px-[1.25em] pt-[31.35cqw]",
+          showBottomCap ? "pb-[31.35cqw]" : "pb-12",
+        ]}
+      >
+        <slot />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .frameContainer {
+    container-type: inline-size;
+  }
+</style>

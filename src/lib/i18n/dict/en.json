@@ -1,0 +1,235 @@
+{
+  "editProfile": {
+    "heading": "Edit",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "saved": "Saved successfully",
+    "loading": "Loading...",
+    "loadError": "Unable to load your data",
+    "personal": {
+      "title": "Personal Information",
+      "realName": "Full name",
+      "studentId": "Student ID",
+      "faculty": "Faculty",
+      "phone": "Phone number",
+      "guardianPhone": "Guardian phone number",
+      "relation": "Relationship"
+    },
+    "health": {
+      "title": "Health Information",
+      "foodAllergy": "Food allergies",
+      "dietary": "Dietary restrictions",
+      "drugAllergy": "Drug allergies",
+      "chronicDisease": "Chronic conditions"
+    },
+    "travel": {
+      "title": "Travel Information",
+      "residence": "Residence",
+      "legsIntro": "Travel to the event",
+      "legLabel": "Leg {index}",
+      "vehicle": "Vehicle",
+      "origin": "Origin",
+      "destination": "Destination"
+    }
+  },
+  "welcome": {
+    "title": "{appName}",
+    "description": "Astro, React, and TypeScript are ready for the team to start building product screens.",
+    "button": {
+      "checkReact": "Check React",
+      "ready": "Ready"
+    }
+  },
+  "landing": {
+    "eyebrow": "Event",
+    "titleLine1": "Welcoming New Students",
+    "titleLine2": "on First Date",
+    "date": "July 18, 2026",
+    "cta": "Log in"
+  },
+  "login": {
+    "heading": "Log in",
+    "googleButton": "Sign in with Google",
+    "error": "Sign-in failed. Please try again.",
+    "retry": "Try again"
+  },
+  "notEligible": {
+    "title": "Only 1st-year students and event staff are allowed to use this.",
+    "button": "Back to landing"
+  },
+  "home": {
+    "idCard": {
+      "welcome": "Welcome to CU Firstdate",
+      "registered": "Registered",
+      "notRegistered": "Not yet registered",
+      "tapToZoom": "Tap to zoom",
+      "loading": "Loading..."
+    },
+    "information": {
+      "heading": "Event Information",
+      "comingSoon": "Coming Soon",
+      "rpkmButton": "Go to RPKM website"
+    }
+  },
+  "map": {
+    "title": "Map"
+  },
+  "nav": {
+    "home": "Home",
+    "scanRegister": "Scan to Register",
+    "qrCode": "QR Code",
+    "editInfo": "Edit Information",
+    "calendar": "Event Calendar",
+    "logout": "Log out"
+  },
+  "emergency": {
+    "title": "Emergency Contact"
+  },
+  "redirect": {
+    "title": "First Date has ended!\nSee you at",
+    "button": "Go to website",
+    "dateRange": "July 31 to August 2"
+  },
+  "register": {
+    "heading": "Register",
+    "back": "Back",
+    "next": "Next",
+    "error": {
+      "badRequest": "Invalid information. Please check and try again.",
+      "forbidden": "This account can't register.",
+      "alreadyRegistered": "This account has already registered.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "common": {
+      "no": "No",
+      "yes": "Yes",
+      "noResults": "No results found"
+    },
+    "personal": {
+      "heading": "Personal Information",
+      "firstNameLabel": "First name",
+      "prefixPlaceholder": "Prefix",
+      "firstNamePlaceholder": "Enter your first name...",
+      "lastNameLabel": "Last name",
+      "lastNamePlaceholder": "Enter your last name...",
+      "nicknameLabel": "Nickname",
+      "nicknamePlaceholder": "Enter your nickname...",
+      "facultyLabel": "Faculty",
+      "facultyPlaceholder": "Search faculty...",
+      "studentIdLabel": "Student ID",
+      "studentIdPlaceholder": "Enter your student ID...",
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "Enter your phone number...",
+      "guardianHeading": "Guardian Information",
+      "guardianPhoneLabel": "Guardian's phone number",
+      "guardianPhonePlaceholder": "Enter guardian's phone number...",
+      "guardianRelationLabel": "Relationship",
+      "guardianRelationPlaceholder": "Relationship"
+    },
+    "health": {
+      "heading": "Health Information",
+      "foodAllergyTitle": "Food allergies",
+      "foodAllergyNone": "No food allergies",
+      "foodAllergyOtherPlaceholder": "Enter food allergies...",
+      "dietaryTitle": "Dietary restrictions",
+      "dietaryNone": "No dietary restrictions",
+      "dietaryOtherPlaceholder": "Enter other dietary restrictions...",
+      "drugAllergyTitle": "Drug allergies",
+      "drugAllergyNone": "No drug allergies",
+      "drugAllergyYes": "Has drug allergies",
+      "drugAllergyPlaceholder": "Enter drug allergies...",
+      "chronicDiseaseTitle": "Chronic conditions",
+      "chronicDiseaseNone": "No chronic conditions",
+      "chronicDiseaseYes": "Has chronic conditions",
+      "chronicDiseasePlaceholder": "Enter chronic conditions...",
+      "selectedCount": "{count} selected"
+    },
+    "other": {
+      "heading": "Other Information",
+      "sgcuQuestion": "Are you familiar with the Chula Student Government (SGCU)?",
+      "prChannelQuestion": "Where did you see the most publicity for this project?"
+    },
+    "travel": {
+      "heading": "Travel Information",
+      "residenceIntro": "The district and province where you usually live",
+      "provinceLabel": "Province",
+      "districtLabel": "District",
+      "provincePlaceholder": "Select a province",
+      "districtPlaceholder": "Select a district",
+      "legsIntro": "How you'll travel to the event",
+      "addLeg": "Add another leg",
+      "legLabel": "Leg {index}",
+      "removeLeg": "Remove this leg",
+      "vehicleLabel": "Vehicle type",
+      "vehiclePlaceholder": "Select a vehicle",
+      "originLabel": "Origin",
+      "destinationLabel": "Destination"
+    },
+    "validation": {
+      "prefixRequired": "Please select a prefix",
+      "firstNameRequired": "Please enter your first name",
+      "lastNameRequired": "Please enter your last name",
+      "nicknameRequired": "Please enter your nickname",
+      "facultyRequired": "Please select a faculty",
+      "studentIdInvalid": "Student ID must start with 69 and be 10 digits long",
+      "phoneInvalid": "Phone number must be 10 digits and start with 0",
+      "guardianRelationRequired": "Please select a relationship",
+      "choiceRequired": "Please select an answer",
+      "provinceRequired": "Please select a province",
+      "districtRequired": "Please select a district",
+      "vehicleRequired": "Please select a vehicle",
+      "atLeastOne": "Please select at least 1 item",
+      "specifyMore": "Please specify",
+      "drugAllergyRequired": "Please enter your drug allergies",
+      "chronicDiseaseRequired": "Please enter your chronic conditions"
+    }
+  },
+  "staff": {
+    "register": {
+      "refresh": "Refresh",
+      "heading": "Event Registration",
+      "tabScanner": "Scan QR code",
+      "tabManual": "Use student ID",
+      "studentIdPlaceholder": "Enter student ID",
+      "submit": "Register",
+      "refreshReminderLine1": "Once check-in is complete,",
+      "refreshReminderLine2": "remind them to refresh their screen.",
+      "invalidStudentId": "Please enter a valid 10-digit student ID.",
+      "checkIn": {
+        "confirm": "OK",
+        "successTitle": "Check-in successful",
+        "successDescription": "You're all set. Remind them to refresh their screen.",
+        "alreadyCheckedInTitle": "Already checked in",
+        "errorTitle": "Check-in failed",
+        "errorDescription": "Something went wrong. Please have them try again.",
+        "studentNotFoundDescription": "Student ID not found in the system.",
+        "notStaffDescription": "This account doesn't have staff permission for this event."
+      },
+      "qrScannerError": {
+        "permissionDenied": "We need permission to use the camera. Please allow camera access, then try again.",
+        "noCamera": "We couldn't find a camera on this device. Try another device.",
+        "inUse": "The camera is being used by another app or tab. Close it and try again.",
+        "overconstrained": "We couldn't start the camera on this device. Please try another one.",
+        "insecureContext": "The camera only works on a secure (https) connection. Please open this page over https.",
+        "unsupported": "This browser doesn't support the camera. Try a different browser.",
+        "aborted": "Starting the camera was interrupted. Please try again.",
+        "security": "Your browser blocked camera access. Check your browser settings and try again.",
+        "typeError": "Something went wrong while starting the camera. Please try again.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    }
+  },
+  "qrcode": {
+    "troubleshoot": {
+      "link": "Camera not working?",
+      "title": "Camera Troubleshooting",
+      "intro": "If the camera doesn't start or the screen stays black, follow the steps for your browser.",
+      "chromeTitle": "Chrome / Edge (Android)",
+      "chromeSteps": "1. Tap the lock or settings icon next to the address bar\n2. Open Permissions\n3. Allow Camera\n4. Refresh this page",
+      "safariTitle": "Safari (iPhone / iPad)",
+      "safariSteps": "1. Tap the \"AA\" or settings button in the address bar\n2. Open Website Settings\n3. Set Camera to Allow\n4. Reload this page\n\nOr go to Settings > Safari > Camera and choose Allow.",
+      "genericTitle": "Other tips",
+      "genericSteps": "• Close other apps or tabs using the camera, then retry\n• Refresh this page\n• If it still fails, try another browser or device"
+    }
+  }
+}
