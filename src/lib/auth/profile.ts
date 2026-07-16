@@ -29,6 +29,10 @@ export function refreshProfile(): Promise<void> {
 
       try {
         const me = await getMe();
+        if (!me) {
+          $profile.set({ status: "unauthenticated" });
+          return;
+        }
         $profile.set({ status: "ready", me });
       } catch (err) {
         if (err instanceof APIError && err.status === 403) {
