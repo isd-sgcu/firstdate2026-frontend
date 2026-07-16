@@ -21,7 +21,7 @@ const RedirectPanel = () => {
           alt="RPKM Logo"
           className="w-[80%] max-w-62.5"
         />
-        {/* TODO: redirect path in appConfig */}
+
         <a
           href={appConfig.redirectTo}
           className={cn(

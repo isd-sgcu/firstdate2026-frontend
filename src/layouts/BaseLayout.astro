@@ -38,6 +38,8 @@ const { title, description = "firstdate 2026 frontend application" } =
         location.pathname.replace(/\/+$/, "") === "/redirect";
       if (Date.now() >= redirectAt && !isRedirectPage) {
         location.replace("/redirect");
+      } else if (Date.now() < redirectAt && isRedirectPage) {
+        location.replace("/");
       }
     </script>
   </body>
