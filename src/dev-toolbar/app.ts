@@ -347,6 +347,7 @@ export default defineToolbarApp({
         loadedOnce = true;
       } catch (cause) {
         if (cause instanceof DevApiError && cause.status === 401) {
+          devKey = "";
           status = "Dev key rejected. Check DEV_API_KEY on the backend.";
         } else {
           status = cause instanceof Error ? cause.message : String(cause);
@@ -362,7 +363,12 @@ export default defineToolbarApp({
       try {
         await action();
       } catch (cause) {
-        status = cause instanceof Error ? cause.message : String(cause);
+        if (cause instanceof DevApiError && cause.status === 401) {
+          devKey = "";
+          status = "Dev key rejected. Check DEV_API_KEY on the backend.";
+        } else {
+          status = cause instanceof Error ? cause.message : String(cause);
+        }
       } finally {
         busy = false;
         render();
@@ -537,7 +543,12 @@ export default defineToolbarApp({
           );
 
           const identity = document.createElement("span");
-          identity.innerHTML = `<strong>${user.studentId}</strong> ${user.firstName} ${user.lastName}`;
+          const studentIdStrong = document.createElement("strong");
+          studentIdStrong.textContent = user.studentId;
+          identity.append(
+            studentIdStrong,
+            ` ${user.firstName} ${user.lastName}`,
+          );
           const meta = document.createElement("span");
           meta.className = "muted";
           meta.textContent =
