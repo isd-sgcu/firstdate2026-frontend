@@ -23,9 +23,7 @@ const { title, description = "firstdate 2026 frontend application" } =
   <body class="min-h-screen bg-primary text-foreground font-sans">
     <AuthGuard client:load pathname={Astro.url.pathname} />
     <Toaster client:load />
-    <main
-      class="min-h-screen xs:max-w-md xs:mx-auto xs:py-6 grid place-items-center"
-    >
+    <main class="min-h-screen xs:max-w-md xs:mx-auto grid place-items-center">
       <slot />
     </main>
     <script is:inline define:vars={{ redirectAt: appConfig.redirectAt }}>
