@@ -88,7 +88,7 @@ function checkInErrorToResult(
       case "STUDENT_NOT_FOUND":
         return {
           variant: "error",
-          title: null,
+          title: t("staff.register.checkIn.studentNotFoundTitle"),
           description: t("staff.register.checkIn.studentNotFoundDescription"),
         };
       case "FORBIDDEN_NOT_STAFF":

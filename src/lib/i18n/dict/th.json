@@ -202,7 +202,8 @@
         "alreadyCheckedInTitle": "บันทึกข้อมูลสำเร็จ",
         "errorTitle": "ลงทะเบียนไม่สำเร็จ",
         "errorDescription": "เกิดข้อผิดพลาด กรุณาให้น้องลองใหม่อีกครั้ง",
-        "studentNotFoundDescription": "ไม่พบรหัสนิสิตนี้ในระบบ",
+        "studentNotFoundTitle": "ยังไม่ได้ลงทะเบียน",
+        "studentNotFoundDescription": "ให้ลงทะเบียนให้เสร็จก่อน แล้วสแกนใหม่อีกครั้ง",
         "notStaffDescription": "บัญชีนี้ไม่มีสิทธิ์สตาฟสำหรับงานนี้"
       },
       "qrScannerError": {

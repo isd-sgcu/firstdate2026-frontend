@@ -202,7 +202,8 @@
         "alreadyCheckedInTitle": "Already checked in",
         "errorTitle": "Check-in failed",
         "errorDescription": "Something went wrong. Please have them try again.",
-        "studentNotFoundDescription": "Student ID not found in the system.",
+        "studentNotFoundTitle": "Not registered yet",
+        "studentNotFoundDescription": "Complete registration first, then scan again.",
         "notStaffDescription": "This account doesn't have staff permission for this event."
       },
       "qrScannerError": {
