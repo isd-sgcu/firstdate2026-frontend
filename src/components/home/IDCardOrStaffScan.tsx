@@ -60,7 +60,12 @@ export function IDCardOrStaffScan() {
         <div className="flex gap-y-4 gap-x-1 mt-4 flex-wrap justify-around">
           <div className="flex gap-2">
             {profileImage ? (
-              <img className="size-20 rounded" src={profileImage} />
+              <img
+                className="size-20 rounded object-cover"
+                src={profileImage}
+                alt=""
+                referrerPolicy="no-referrer"
+              />
             ) : (
               <div className="size-20 rounded bg-neutral-200 items-center justify-center flex">
                 <User className="text-neutral-400 size-8" />
