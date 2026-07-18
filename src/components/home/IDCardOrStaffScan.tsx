@@ -1,10 +1,12 @@
 import { QrCode, QrCodeDialog } from "@components/shared/QrCode";
 import { Button, buttonVariants } from "@components/ui/button";
 import { useProfile } from "@lib/auth/useProfile";
+import { refreshProfile } from "@lib/auth/profile";
 import { useSession } from "@lib/auth/useSession";
 import { useT } from "@lib/i18n/useT";
 import { cn } from "@lib/utils";
-import { Edit2, RotateCw, Search, User, UserPlus } from "lucide-react";
+import { Check, Edit2, RotateCw, Search, User, UserPlus } from "lucide-react";
+import { useState } from "react";
 
 export function IDCardOrStaffScan() {
   const t = useT();
@@ -14,6 +16,7 @@ export function IDCardOrStaffScan() {
     session.status === "authenticated" ? session.user.image : null;
   const me = profile.status === "ready" ? profile.me : undefined;
   const isStaff = profile.status === "ready" && profile.me.role === "staff";
+  const [refreshing, setRefreshing] = useState(false);
 
   if (isStaff) {
     return (
@@ -82,10 +85,26 @@ export function IDCardOrStaffScan() {
                   {me?.studentId ?? t("home.idCard.loading")}
                 </span>
               </div>
-              <div className="flex items-center text-xs">
-                <span>{t("home.idCard.notRegistered")} </span>
-                <Button size="icon-xs">
-                  <RotateCw />
+              <div className="flex items-center gap-1 text-xs">
+                {me?.registered && <Check className="size-3.5" />}
+                <span>
+                  {t(
+                    me?.registered
+                      ? "home.idCard.registered"
+                      : "home.idCard.notRegistered",
+                  )}
+                </span>
+                <Button
+                  size="icon-xs"
+                  disabled={refreshing}
+                  onClick={() => {
+                    setRefreshing(true);
+                    refreshProfile({ soft: true }).finally(() =>
+                      setRefreshing(false),
+                    );
+                  }}
+                >
+                  <RotateCw className={refreshing ? "animate-spin" : ""} />
                 </Button>
               </div>
             </div>
